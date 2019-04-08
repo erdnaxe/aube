@@ -1,4 +1,7 @@
-from django.forms.widgets import Input 
+# -*- mode: python; coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+from django.forms.widgets import Input
 from django.forms.utils import flatatt 
 from django.utils.safestring import mark_safe 
 from django.template import Context, Template 

@@ -1,3 +1,6 @@
+# -*- mode: python; coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 from django.forms import ValidationError
 from django.utils.translation import ugettext as _
 

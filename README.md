@@ -25,6 +25,7 @@ Re2o had been developed with the idea of simple migrations, but the base structu
 What have been done so far in Aube that is not in Re2o :
 
   * Dropped all dead branches ;
+  * Switched to SPDX license identifiers to have lighter source files ;
   * More coming soon…
 
 ## How to migrate from Re2o to Aube

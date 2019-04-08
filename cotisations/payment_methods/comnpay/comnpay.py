@@ -1,3 +1,6 @@
+# -*- mode: python; coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 """cotisations.payment_utils.comnpay
 The module in charge of handling the negociation with Comnpay
 for online payment

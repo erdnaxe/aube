@@ -1,3 +1,6 @@
+# -*- mode: python; coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 from django.core.management.base import BaseCommand, CommandError
 
 from datetime import datetime, timedelta

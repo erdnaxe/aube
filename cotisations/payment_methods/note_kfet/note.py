@@ -1,7 +1,7 @@
-#!/usr/bin/python3
-# -*- coding:utf-8 -*-
-
-# Codé par PAC , forké de 20-100
+# -*- mode: python; coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Copyright © 2018  Pierre-Antoine Comby
 
 """ Module pour dialoguer avec la NoteKfet2015 """
 
