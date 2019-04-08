@@ -4,9 +4,7 @@ Re2o est un logiciel d'administration développé initiallement au rezometz. Il
 se veut agnostique au réseau considéré, de manière à être installable en
 quelques clics.
 
-Copyright © 2017  Gabriel Détraz
-Copyright © 2017  Goulven Kermarec
-Copyright © 2017  Augustin Lemesle
+Copyright © 2019  Alexandre Iooss
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,28 +21,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load i18n %}
 
-{% block title %}{% trans "Log in" %}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <p class="errornote">
-            {% blocktrans trimmed %}
-                You are authenticated as {{ username }}, but are not authorized to
-                access this page. Would you like to login to a different account?
-            {% endblocktrans %}
-        </p>
-    {% endif %}
-
-    <form method="post" action="">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button class="btn btn-success" type="submit">
-            <i class="fa fa-sign-in"></i> {% trans "Log in" %}
-        </button>
-    </form>
-    <p><a class="btn btn-warning btn-sm" role="button"
-          href="{% url 'users:reset-password' %}"> {% trans "Forgotten password?" %}</a></p>
+    <h2>{{ title }}</h2>
+    <p class="alert alert-info">{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+    <p><a href="{% url 'login' %}" class="btn btn-primary">{% trans 'Log in again' %}</a></p>
 {% endblock %}
