@@ -5,34 +5,20 @@
 # Copyright © 2017  Goulven Kermarec
 # Copyright © 2017  Augustin Lemesle
 
-"""re2o URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home)
-    3. Optional: Add a custom name for this URL:
-         url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view())
-    3. Optional: Add a custom name for this URL:
-         url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-    2. Optional: Add a custom namespace for all URL using this urlpatterns:
-         url(r'^blog/', include('blog.urls'), namespace='blog')
-"""
-from __future__ import unicode_literals
+"""URL Router"""
 
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.utils.translation import gettext_lazy as _
 
 from .views import index, about_page, contact_page
+
+# Admin site configuration
+admin.site.site_header = _('Aube')
+admin.site.site_title = _('Aube')
+admin.site.index_title = _('Module Index')
 
 handler500 = 're2o.views.handler500'
 handler404 = 're2o.views.handler404'
@@ -43,7 +29,7 @@ urlpatterns = [
     url(r'^contact/$', contact_page, name='contact'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^manage/', include(admin.site.urls)),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^search/', include('search.urls', namespace='search')),
     url(
