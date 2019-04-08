@@ -1,75 +1,34 @@
-# Re2o
+# Aube
 
-GNU public license v2.0
+Aube stands for AUtonomous Blissful rEgistration.
 
-## Avant propos 
+## About Aube
 
-Re2o est un logiciel d'administration développé initialement au rezometz. Il
-se veut agnostique au réseau considéré, de manière à être installable en 
-quelques clics.
+Aube is a network managing software forked from [Re2o](http://gitlab.federez.net/federez/re2o) developed initially by [Rézo Metz](https://rezometz.org/) and [other FedeRez volunteers](https://federez.net/).
+It enables people to subscribe to a membership and to manage their network devices.
 
-Il utilise le framework django avec python3. Il permet de gérer les adhérents, 
-les machines, les factures, les droits d'accès, les switchs et la topologie du 
-réseau.
-De cette manière, il est possible de pluguer très facilement des services 
-dessus, qui accèdent à la base de donnée en passant par django (ex : dhcp), en 
-chargeant la liste de toutes les mac-ip, ou la liste des mac-ip autorisées sur 
-le réseau (adhérent à jour de cotisation).
+This software is licensed under the *GNU public license v2.0*.
 
-# Installation
+## Philosophy
 
-Un tutoriel pour installer le projet est disponible [sur le wiki](https://gitlab.federez.net/federez/re2o/wikis/User%20Documentation/Quick%20Start).
+This software targets student networks that needs to manage a large amount of
+members and devices.
 
-# Installations Optionnelles
-## Générer le schéma des dépendances
+Although it has not been the case from the start, we try to follow as much as possible principles such as [KISS](https://en.wikipedia.org/wiki/KISS_principle) and [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
 
-Pour cela : 
- * apt install python3-django-extensions
- * python3 manage.py graph_models -a -g -o re2o.png
+We chose the **Django Framework** with a **Python 3** environment because it follows these principles without having a steep learning curve.
 
-# Fonctionnement interne
+## How Aube is different from Re2o
 
-## Fonctionnement général
+Re2o had been developed with the idea of simple migrations, but the base structure make is untenable in the long term. So there was a need to fork and break things a bit to switch to a cleaner structure. **So do expect some bug if you upgrade from Re2o to Aube!**
 
-Re2o est séparé entre les models, qui sont visibles sur le schéma des
-dépendances. Il s'agit en réalité des tables sql, et les fields étant les
-colonnes.
-Ceci dit il n'est jamais nécessaire de toucher directement au sql, django 
-procédant automatiquement à tout cela. 
-On crée donc différents models (user, right pour les droits des users, 
-interfaces, IpList pour l'ensemble des adresses ip, etc)
+What have been done so far in Aube that is not in Re2o :
 
-Du coté des forms, il s'agit des formulaires d'édition des models. Il
-s'agit de ModelForms django, qui héritent des models très simplement, voir la 
-documentation django models forms.
+  * Dropped all dead branches ;
+  * More coming soon…
 
-Enfin les views, générent les pages web à partir des forms et des templates.
+## How to migrate from Re2o to Aube
 
-## Fonctionnement avec les services
-
-Les services dhcp.py, dns.py etc accèdent aux données via des vues rest.
-Celles-ci se trouvent dans machines/views.py. Elles sont générées via 
-machines/serializers.py qui génère les vues. IL s'agit de vues en json utilisées
-par re2o-tools pour récupérer les données.
-Il est nécessaire de créer un user dans re2o avec le droit serveur qui permet 
-d'accéder à ces vues, utilisé par re2o-tools.
-
-# Requète en base de donnée
-
-Pour avoir un shell, lancer :
-```.bash
-python3 manage.py shell
-```
-
-Pour charger des objets (exemple avec User), faire :
-```.python
-from users.models import User
-```
-
-Pour charger les objets django, il suffit de faire `User.objects.all()`
-pour tous les users par exemple.
-Il est ensuite aisé de faire des requêtes, par exemple
-`User.objects.filter(pseudo='test')`
-
-Des exemples et la documentation complète sur les requêtes django sont
-disponible sur le site officiel.
+To migrate from Re2o, please go to commit
+`f69c88d8fe14546f33ceb1e4e2adbea85a0b5de3` on Re2o dev branche,
+migrate data, then switch to Aube.
