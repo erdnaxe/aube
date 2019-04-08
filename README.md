@@ -26,7 +26,7 @@ What have been done so far in Aube that is not in Re2o :
 
   * Dropped all dead branches ;
   * Switched to SPDX license identifiers to have lighter source files ;
-  * Squashed Re2o migrations ;
+  * Reset Re2o migrations ;
   * Update to Django 1.11 LTS ;
   * More coming soon…
 
@@ -34,4 +34,4 @@ What have been done so far in Aube that is not in Re2o :
 
 To migrate from Re2o, please go to commit
 `f69c88d8fe14546f33ceb1e4e2adbea85a0b5de3` on Re2o dev branche,
-migrate data, then switch to Aube.
+make new migrations, migrate data, then switch to Aube.

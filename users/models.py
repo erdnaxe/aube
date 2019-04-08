@@ -1683,8 +1683,7 @@ class LdapUser(ldapdb.models.Model):
     gid = ldapdb.models.fields.IntegerField(db_column='gidNumber')
     name = ldapdb.models.fields.CharField(
         db_column='cn',
-        max_length=200,
-        primary_key=True
+        max_length=200
     )
     uid = ldapdb.models.fields.CharField(db_column='uid', max_length=200)
     uidNumber = ldapdb.models.fields.IntegerField(
@@ -1774,7 +1773,6 @@ class LdapUserGroup(ldapdb.models.Model):
     name = ldapdb.models.fields.CharField(
         db_column='cn',
         max_length=200,
-        primary_key=True
     )
 
     def __str__(self):
@@ -1794,8 +1792,7 @@ class LdapServiceUser(ldapdb.models.Model):
     # attributes
     name = ldapdb.models.fields.CharField(
         db_column='cn',
-        max_length=200,
-        primary_key=True
+        max_length=200
     )
     user_password = ldapdb.models.fields.CharField(
         db_column='userPassword',
@@ -1822,8 +1819,7 @@ class LdapServiceUserGroup(ldapdb.models.Model):
     # attributes
     name = ldapdb.models.fields.CharField(
         db_column='cn',
-        max_length=200,
-        primary_key=True
+        max_length=200
     )
     members = ldapdb.models.fields.ListField(
         db_column='member',
