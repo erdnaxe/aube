@@ -802,8 +802,8 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         """ A utiliser de préférence, set le password en hash courrant et
         dans la version ntlm"""
         super().set_password(password)
-        from re2o.login import hashNT
-        self.pwd_ntlm = hashNT(password)
+        from re2o.login import hash_nt
+        self.pwd_ntlm = hash_nt(password)
         return
 
     @cached_property

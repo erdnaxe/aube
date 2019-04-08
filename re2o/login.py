@@ -14,35 +14,34 @@ import binascii
 import crypt
 import hashlib
 import os
-from base64 import encodestring, decodestring, b64encode, b64decode
+from base64 import encodebytes, decodebytes, b64encode, b64decode
 from collections import OrderedDict
-from django.contrib.auth import hashers
-from django.contrib.auth.backends import ModelBackend
 from hmac import compare_digest as constant_time_compare
 
+from django.contrib.auth import hashers
+from django.contrib.auth.backends import ModelBackend
 
-ALGO_NAME = "{SSHA}"
-ALGO_LEN = len(ALGO_NAME + "$")
+ALGO_LEN = len("{SSHA}$")
 DIGEST_LEN = 20
 
 
-def makeSecret(password):
+def make_secret(password):
     """ Build a hashed and salted version of the password """
     salt = os.urandom(4)
     h = hashlib.sha1(password.encode())
     h.update(salt)
-    return ALGO_NAME + "$" + encodestring(h.digest() + salt).decode()[:-1]
+    return "{SSHA}$" + encodebytes(h.digest() + salt).decode()[:-1]
 
 
-def hashNT(password):
+def hash_nt(password):
     """ Build a md4 hash of the password to use as the NT-password """
     hash_str = hashlib.new('md4', password.encode('utf-16le')).digest()
     return binascii.hexlify(hash_str).upper()
 
 
-def checkPassword(challenge_password, password):
+def check_password(challenge_password, password):
     """ Check if a given password match the hash of a stored password """
-    challenge_bytes = decodestring(challenge_password[ALGO_LEN:].encode())
+    challenge_bytes = decodebytes(challenge_password[ALGO_LEN:].encode())
     digest = challenge_bytes[:DIGEST_LEN]
     salt = challenge_bytes[DIGEST_LEN:]
     hr = hashlib.sha1(password.encode())
@@ -75,8 +74,8 @@ def hash_password_salt(hashed_password):
             raise ValueError("`hashed_password` too short")
         return digest[16:]
     else:
-        raise ValueError("`hashed_password` should start with '{SSHA}' or '{CRYPT}' or '{SMD5}'")
-
+        raise ValueError("`hashed_password` should start with '{SSHA}' "
+                         "or '{CRYPT}' or '{SMD5}'")
 
 
 class CryptPasswordHasher(hashers.BasePasswordHasher):
@@ -106,12 +105,12 @@ class CryptPasswordHasher(hashers.BasePasswordHasher):
         """
         assert encoded.startswith(self.algorithm)
         hash_str = encoded[7:]
-        hash_str = binascii.hexlify(decodestring(hash_str.encode())).decode()
+        hash_str = binascii.hexlify(decodebytes(hash_str.encode())).decode()
         return OrderedDict([
             ('algorithm', self.algorithm),
             ('iterations', 0),
-            ('salt', hashers.mask_hash(hash_str[2*DIGEST_LEN:], show=2)),
-            ('hash', hashers.mask_hash(hash_str[:2*DIGEST_LEN])),
+            ('salt', hashers.mask_hash(hash_str[2 * DIGEST_LEN:], show=2)),
+            ('hash', hashers.mask_hash(hash_str[:2 * DIGEST_LEN])),
         ])
 
     def harden_runtime(self, password, encoded):
@@ -121,6 +120,7 @@ class CryptPasswordHasher(hashers.BasePasswordHasher):
         As we are not using multiple iterations the method is pretty useless
         """
         pass
+
 
 class MD5PasswordHasher(hashers.BasePasswordHasher):
     """
@@ -149,12 +149,12 @@ class MD5PasswordHasher(hashers.BasePasswordHasher):
         """
         assert encoded.startswith(self.algorithm)
         hash_str = encoded[7:]
-        hash_str = binascii.hexlify(decodestring(hash_str.encode())).decode()
+        hash_str = binascii.hexlify(decodebytes(hash_str.encode())).decode()
         return OrderedDict([
             ('algorithm', self.algorithm),
             ('iterations', 0),
-            ('salt', hashers.mask_hash(hash_str[2*DIGEST_LEN:], show=2)),
-            ('hash', hashers.mask_hash(hash_str[:2*DIGEST_LEN])),
+            ('salt', hashers.mask_hash(hash_str[2 * DIGEST_LEN:], show=2)),
+            ('hash', hashers.mask_hash(hash_str[:2 * DIGEST_LEN])),
         ])
 
     def harden_runtime(self, password, encoded):
@@ -165,12 +165,13 @@ class MD5PasswordHasher(hashers.BasePasswordHasher):
         """
         pass
 
+
 class SSHAPasswordHasher(hashers.BasePasswordHasher):
     """
     Salted SHA-1 password hashing to allow for LDAP auth compatibility
     """
 
-    algorithm = ALGO_NAME
+    algorithm = "{SSHA}"
 
     def encode(self, password, salt):
         """
@@ -179,14 +180,14 @@ class SSHAPasswordHasher(hashers.BasePasswordHasher):
         salt is overridden
         """
         assert password is not None
-        return makeSecret(password)
+        return make_secret(password)
 
     def verify(self, password, encoded):
         """
         Check password against encoded using SSHA algorithm
         """
         assert encoded.startswith(self.algorithm)
-        return checkPassword(encoded, password)
+        return check_password(encoded, password)
 
     def safe_summary(self, encoded):
         """
@@ -194,12 +195,12 @@ class SSHAPasswordHasher(hashers.BasePasswordHasher):
         """
         assert encoded.startswith(self.algorithm)
         hash_str = encoded[ALGO_LEN:]
-        hash_str = binascii.hexlify(decodestring(hash_str.encode())).decode()
+        hash_str = binascii.hexlify(decodebytes(hash_str.encode())).decode()
         return OrderedDict([
             ('algorithm', self.algorithm),
             ('iterations', 0),
-            ('salt', hashers.mask_hash(hash_str[2*DIGEST_LEN:], show=2)),
-            ('hash', hashers.mask_hash(hash_str[:2*DIGEST_LEN])),
+            ('salt', hashers.mask_hash(hash_str[2 * DIGEST_LEN:], show=2)),
+            ('hash', hashers.mask_hash(hash_str[:2 * DIGEST_LEN])),
         ])
 
     def harden_runtime(self, password, encoded):
@@ -212,16 +213,16 @@ class SSHAPasswordHasher(hashers.BasePasswordHasher):
 
 
 class RecryptBackend(ModelBackend):
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None, **kwargs):
         # we obtain from the classical auth backend the user
-        user = super(RecryptBackend, self).authenticate(username, password)
+        user = super().authenticate(request, username, password, **kwargs)
         if user:
-            if not(user.pwd_ntlm):
+            if not user.pwd_ntlm:
                 # if we dont have NT hash, we create it
-                user.pwd_ntlm = hashNT(password)
+                user.pwd_ntlm = hash_nt(password)
                 user.save()
-            if not("SSHA" in user.password):
+            if not ("SSHA" in user.password):
                 # if the hash is too old, we update it
-                user.password = makeSecret(password)
+                user.password = make_secret(password)
                 user.save()
         return user

@@ -9,7 +9,7 @@ from django.db.models import F, Value
 from django.db.models import Q
 from django.db.models.functions import Concat
 
-from re2o.login import hashNT, makeSecret
+from re2o.login import hash_nt, make_secret
 
 import os, random, string
 from random import randint
@@ -87,8 +87,8 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.HTTP_NOT_MODIFIED('The password will be: {}'.format(password)))
 
-            u.update(pwd_ntlm = hashNT(password))
-            u.update(password = makeSecret(password))
+            u.update(pwd_ntlm = hash_nt(password))
+            u.update(password = make_secret(password))
             self.stdout.write(self.style.SUCCESS('done...'))
 
             self.stdout.write('Suppression de l\'historique (This may take some time)')
