@@ -110,9 +110,6 @@ class OptionalUser(AclMixin, PreferencesModel):
     )
 
     class Meta:
-        permissions = (
-            ("view_optionaluser", _("Can view the user options")),
-        )
         verbose_name = _("user options")
 
     def clean(self):
@@ -161,9 +158,6 @@ class OptionalMachine(AclMixin, PreferencesModel):
         return not self.get_cached_value('ipv6_mode') == 'DISABLED'
 
     class Meta:
-        permissions = (
-            ("view_optionalmachine", _("Can view the machine options")),
-        )
         verbose_name = _("machine options")
 
 
@@ -285,9 +279,6 @@ class OptionalTopologie(AclMixin, PreferencesModel):
         ip_type"""
         return bool(self.provisioned_switchs and self.switchs_ip_type and SwitchManagementCred.objects.filter(default_switch=True).exists() and self.switchs_management_interface_ip and bool(self.switchs_provision != 'sftp'  or self.switchs_management_sftp_creds))
     class Meta:
-        permissions = (
-            ("view_optionaltopologie", _("Can view the topology options")),
-        )
         verbose_name = _("topology options")
 
 
@@ -317,9 +308,6 @@ class RadiusKey(AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_radiuskey", _("Can view a RADIUS key object")),
-        )
         verbose_name = _("RADIUS key")
         verbose_name_plural = _("RADIUS keys")
 
@@ -344,10 +332,6 @@ class SwitchManagementCred(AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_switchmanagementcred", _("Can view a switch management"
-                                            " credentials object")),
-        )
         verbose_name = _("switch management credentials")
 
     def __str__(self):
@@ -374,9 +358,6 @@ class Reminder(AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_reminder", _("Can view a reminder object")),
-        )
         verbose_name = _("reminder")
         verbose_name_plural = _("reminders")
 
@@ -423,9 +404,6 @@ class GeneralOption(AclMixin, PreferencesModel):
     )
 
     class Meta:
-        permissions = (
-            ("view_generaloption", _("Can view the general options")),
-        )
         verbose_name = _("general options")
 
 
@@ -445,9 +423,6 @@ class Service(AclMixin, models.Model):
     image = models.ImageField(upload_to='logo', blank=True)
 
     class Meta:
-        permissions = (
-            ("view_service", _("Can view the service options")),
-        )
         verbose_name = _("service")
         verbose_name_plural =_("services")
 
@@ -474,9 +449,6 @@ class MailContact(AclMixin, models.Model):
         return self.address.split("@")[0]
 
     class Meta:
-        permissions = (
-            ("view_mailcontact", _("Can view a contact email address object")),
-        )
         verbose_name = _("contact email address")
         verbose_name_plural = _("contact email addresses")
 
@@ -515,9 +487,6 @@ class AssoOption(AclMixin, PreferencesModel):
     )
 
     class Meta:
-        permissions = (
-            ("view_assooption", _("Can view the organisation options")),
-        )
         verbose_name = _("organisation options")
 
 
@@ -546,9 +515,6 @@ class HomeOption(AclMixin, PreferencesModel):
     )
 
     class Meta:
-        permissions = (
-            ("view_homeoption", _("Can view the homepage options")),
-        )
         verbose_name = _("homepage options")
 
 
@@ -566,10 +532,6 @@ class MailMessageOption(AclMixin, models.Model):
     welcome_mail_en = models.TextField(default="", help_text=_("Welcome email in English"))
 
     class Meta:
-        permissions = (
-            ("view_mailmessageoption", _("Can view the email message"
-                                         " options")),
-        )
         verbose_name = _("email message options")
 
 

@@ -250,8 +250,6 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
                " permission)")),
             ("change_all_users",
              _("Can edit all users, including those with rights.")),
-            ("view_user",
-             _("Can view a user object")),
         )
         verbose_name = _("user (member or club)")
         verbose_name_plural = _("users (members or clubs)")
@@ -1310,9 +1308,6 @@ class ServiceUser(RevMixin, AclMixin, AbstractBaseUser):
     objects = UserManager()
 
     class Meta:
-        permissions = (
-            ("view_serviceuser", _("Can view a service user object")),
-        )
         verbose_name = _("service user")
         verbose_name_plural = _("service users")
 
@@ -1379,9 +1374,6 @@ class School(RevMixin, AclMixin, models.Model):
     name = models.CharField(max_length=255)
 
     class Meta:
-        permissions = (
-            ("view_school", _("Can view a school object")),
-        )
         verbose_name = _("school")
         verbose_name_plural = _("schools")
 
@@ -1413,9 +1405,6 @@ class ListRight(RevMixin, AclMixin, Group):
     )
 
     class Meta:
-        permissions = (
-            ("view_listright", _("Can view a group of rights object")),
-        )
         verbose_name = _("group of rights")
         verbose_name_plural = _("groups of rights")
 
@@ -1463,9 +1452,6 @@ class ListShell(RevMixin, AclMixin, models.Model):
     shell = models.CharField(max_length=255, unique=True)
 
     class Meta:
-        permissions = (
-            ("view_listshell", _("Can view a shell object")),
-        )
         verbose_name = _("shell")
         verbose_name_plural = _("shells")
 
@@ -1498,9 +1484,6 @@ class Ban(RevMixin, AclMixin, models.Model):
     state = models.IntegerField(choices=STATES, default=STATE_HARD)
 
     class Meta:
-        permissions = (
-            ("view_ban", _("Can view a ban object")),
-        )
         verbose_name = _("ban")
         verbose_name_plural = _("bans")
 
@@ -1583,9 +1566,6 @@ class Whitelist(RevMixin, AclMixin, models.Model):
     date_end = models.DateTimeField()
 
     class Meta:
-        permissions = (
-            ("view_whitelist", _("Can view a whitelist object")),
-        )
         verbose_name = _("whitelist (free of charge access)")
         verbose_name_plural = _("whitelists (free of charge access)")
 
@@ -1845,9 +1825,6 @@ class EMailAddress(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_emailaddress", _("Can view a local email account object")),
-        )
         verbose_name = _("local email account")
         verbose_name_plural = _("local email accounts")
 

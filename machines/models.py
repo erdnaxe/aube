@@ -53,7 +53,6 @@ class Machine(RevMixin, FieldPermissionModelMixin, models.Model):
 
     class Meta:
         permissions = (
-            ("view_machine", _("Can view a machine object")),
             ("change_machine_user",
              _("Can change the user of a machine")),
         )
@@ -248,7 +247,6 @@ class MachineType(RevMixin, AclMixin, models.Model):
 
     class Meta:
         permissions = (
-            ("view_machinetype", _("Can view a machine type object")),
             ("use_all_machinetype", _("Can use all machine types")),
         )
         verbose_name = _("machine type")
@@ -333,7 +331,6 @@ class IpType(RevMixin, AclMixin, models.Model):
 
     class Meta:
         permissions = (
-            ("view_iptype", _("Can view an IP type object")),
             ("use_all_iptype", _("Can use all IP types")),
         )
         verbose_name = _("IP type")
@@ -539,9 +536,6 @@ class Vlan(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_vlan", _("Can view a VLAN object")),
-        )
         verbose_name = _("VLAN")
         verbose_name_plural = _("VLANs")
 
@@ -578,9 +572,6 @@ class Nas(RevMixin, AclMixin, models.Model):
     autocapture_mac = models.BooleanField(default=False)
 
     class Meta:
-        permissions = (
-            ("view_nas", _("Can view a NAS device object")),
-        )
         verbose_name = _("NAS device")
         verbose_name_plural = _("NAS devices")
 
@@ -619,9 +610,6 @@ class SOA(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_soa", _("Can view an SOA record object")),
-        )
         verbose_name = _("SOA record")
         verbose_name_plural = _("SOA records")
 
@@ -700,7 +688,6 @@ class Extension(RevMixin, AclMixin, models.Model):
 
     class Meta:
         permissions = (
-            ("view_extension", _("Can view an extension object")),
             ("use_all_extension", _("Can use all extensions")),
         )
         verbose_name = _("DNS extension")
@@ -771,9 +758,6 @@ class Mx(RevMixin, AclMixin, models.Model):
     name = models.ForeignKey('Domain', on_delete=models.PROTECT)
 
     class Meta:
-        permissions = (
-            ("view_mx", _("Can view an MX record object")),
-        )
         verbose_name = _("MX record")
         verbose_name_plural = _("MX records")
 
@@ -796,9 +780,6 @@ class Ns(RevMixin, AclMixin, models.Model):
     ns = models.ForeignKey('Domain', on_delete=models.PROTECT)
 
     class Meta:
-        permissions = (
-            ("view_ns", _("Can view an NS record object")),
-        )
         verbose_name = _("NS record")
         verbose_name_plural = _("NS records")
 
@@ -818,9 +799,6 @@ class Txt(RevMixin, AclMixin, models.Model):
     field2 = models.TextField(max_length=2047)
 
     class Meta:
-        permissions = (
-            ("view_txt", _("Can view a TXT record object")),
-        )
         verbose_name = _("TXT record")
         verbose_name_plural = _("TXT records")
 
@@ -840,9 +818,6 @@ class DName(RevMixin, AclMixin, models.Model):
     alias = models.CharField(max_length=255)
 
     class Meta:
-        permissions = (
-            ("view_dname", _("Can view a DNAME record object")),
-        )
         verbose_name = _("DNAME record")
         verbose_name_plural = _("DNAME records")
 
@@ -898,9 +873,6 @@ class Srv(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_srv", _("Can view an SRV record object")),
-        )
         verbose_name = _("SRV record")
         verbose_name_plural = _("SRV records")
 
@@ -965,9 +937,6 @@ class SshFp(RevMixin, AclMixin, models.Model):
         }
 
     class Meta:
-        permissions = (
-            ("view_sshfp", _("Can view an SSHFP record object")),
-        )
         verbose_name = _("SSHFP record")
         verbose_name_plural = _("SSHFP records")
 
@@ -1006,7 +975,6 @@ class Interface(RevMixin, AclMixin, FieldPermissionModelMixin, models.Model):
 
     class Meta:
         permissions = (
-            ("view_interface", _("Can view an interface object")),
             ("change_interface_machine",
              _("Can change the owner of an interface")),
         )
@@ -1308,7 +1276,6 @@ class Ipv6List(RevMixin, AclMixin, FieldPermissionModelMixin, models.Model):
 
     class Meta:
         permissions = (
-            ("view_ipv6list", _("Can view an IPv6 addresses list object")),
             ("change_ipv6list_slaac_ip", _("Can change the SLAAC value of an"
                                            " IPv6 addresses list")),
         )
@@ -1455,9 +1422,6 @@ class Domain(RevMixin, AclMixin, models.Model):
 
     class Meta:
         unique_together = (("name", "extension"),)
-        permissions = (
-            ("view_domain", _("Can view a domain object")),
-        )
         verbose_name = _("domain")
         verbose_name_plural = _("domains")
 
@@ -1606,9 +1570,6 @@ class IpList(RevMixin, AclMixin, models.Model):
     ip_type = models.ForeignKey('IpType', on_delete=models.CASCADE)
 
     class Meta:
-        permissions = (
-            ("view_iplist", _("Can view an IPv4 addresses list object")),
-        )
         verbose_name = _("IPv4 addresses list")
         verbose_name_plural = _("IPv4 addresses lists")
 
@@ -1664,9 +1625,6 @@ class Role(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_role", _("Can view a role object")),
-        )
         verbose_name = _("server role")
         verbose_name_plural = _("server roles")
 
@@ -1711,9 +1669,6 @@ class Service(RevMixin, AclMixin, models.Model):
     servers = models.ManyToManyField('Interface', through='Service_link')
 
     class Meta:
-        permissions = (
-            ("view_service", _("Can view a service object")),
-        )
         verbose_name = _("service to generate (DHCP, DNS, ...)")
         verbose_name_plural = _("services to generate (DHCP, DNS, ...)")
 
@@ -1760,9 +1715,6 @@ class Service_link(RevMixin, AclMixin, models.Model):
     asked_regen = models.BooleanField(default=False)
 
     class Meta:
-        permissions = (
-            ("view_service_link", _("Can view a service server link object")),
-        )
         verbose_name = _("link between service and server")
         verbose_name_plural = _("links between service and server")
 
@@ -1811,10 +1763,6 @@ class OuverturePortList(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        permissions = (
-            ("view_ouvertureportlist", _("Can view a ports opening list"
-                                         " object")),
-        )
         verbose_name = _("ports opening list")
         verbose_name_plural = _("ports opening lists")
 
