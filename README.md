@@ -1,6 +1,6 @@
 # Aube
 
-Aube stands for AUtonomous Blissful rEgistration.
+Aube stands for *Autonomous Universal Blissful rEgistration*.
 
 ## About Aube
 
