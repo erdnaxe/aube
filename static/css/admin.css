@@ -6,6 +6,7 @@
  * This is the custom style for Django Contrib Admin
  */
 
+/* Colors */
 #header {
     background-color: #222;
     border-bottom: solid 3px #f9a01b;
@@ -47,7 +48,26 @@ input[type=button]:focus, .button:hover, input[type=submit]:hover, input[type=bu
     background: #a7752b;
 }
 
+/* Image in branding */
 img.banding-logo {
     margin-top: -3px;
     height: 32px;
+}
+
+/* Navbar menu */
+#nav {
+    padding: 0;
+    margin: 0 0 0 20px;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+#nav a {
+    border-bottom: none;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 6px;
 }

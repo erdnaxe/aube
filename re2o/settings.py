@@ -52,6 +52,7 @@ EXTERNAL_CONTRIB_APPS = (
     'bootstrap3',
     'rest_framework',
     'reversion',
+    'django_navtag',
 )
 LOCAL_APPS = (
     'users',

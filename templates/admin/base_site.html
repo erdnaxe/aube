@@ -5,7 +5,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 Copyright © 2019  Alexandre Iooss
 {% endcomment %}
 
-{% load staticfiles %}
+{% load navtag i18n staticfiles %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
@@ -20,7 +20,33 @@ Copyright © 2019  Alexandre Iooss
     </h1>
 {% endblock %}
 
-{% block nav-global %}{% endblock %}
+{% block nav-global %}
+    {% nav text ' class="selected"' %}
+    <div id="nav">
+        {% block nav %}
+            {# For the moment site nav is hardcoded here but we should make it dynamic #}
+            <a{{ nav.users }} href="{% url 'admin:app_list' app_label="users" %}">
+                <i class="fa fa-users"></i> {% trans "Users" %}
+            </a>
+            /
+            <a{{ nav.machines }} href="{% url 'admin:app_list' app_label="machines" %}">
+                <i class="fa fa-desktop"></i> {% trans "Machines" %}
+            </a>
+            /
+            <a{{ nav.cotisations }} href="{% url 'admin:app_list' app_label="cotisations" %}">
+                <i class="fa fa-eur"></i> {% trans "Cotisations" %}
+            </a>
+            /
+            <a{{ nav.topologie }} href="{% url 'admin:app_list' app_label="topologie" %}">
+                <i class="fa fa-sitemap"></i> {% trans "Topology" %}
+            </a>
+            /
+            <a{{ nav.preferences }} href="{% url 'admin:app_list' app_label="preferences" %}">
+                <i class="fa fa-cogs"></i> {% trans "Settings" %}
+            </a>
+        {% endblock %}
+    </div>
+{% endblock %}
 
 {% block extrahead %}
     {# Favicon with iOS, Android, touchbar support #}
