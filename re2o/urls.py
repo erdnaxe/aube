@@ -18,7 +18,8 @@ from .views import index, about_page, contact_page
 # Admin site configuration
 admin.site.site_header = _('Aube')
 admin.site.site_title = _('Aube')
-admin.site.index_title = _('Module Index')
+admin.site.index_title = _('Homepage')
+admin.site.index_template = 'index.html'
 
 handler500 = 're2o.views.handler500'
 handler404 = 're2o.views.handler404'

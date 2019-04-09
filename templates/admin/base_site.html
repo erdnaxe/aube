@@ -44,6 +44,38 @@ Copyright © 2019  Alexandre Iooss
             <a{{ nav.preferences }} href="{% url 'admin:app_list' app_label="preferences" %}">
                 <i class="fa fa-cogs"></i> {% trans "Settings" %}
             </a>
+
+            <!-- Dynamic menu WIP: need to figure out how to have list of all apps
+            {% if app_list %}
+                {% for app in app_list %}
+                    <a href="{{ app.app_url }}" class="section">{{ app.name }}</a>
+                    {% comment %}
+                    {% for model in app.models %}
+                        <tr class="model-{{ model.object_name|lower }}">
+                            {% if model.admin_url %}
+                                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                            {% else %}
+                                <th scope="row">{{ model.name }}</th>
+                            {% endif %}
+
+                            {% if model.add_url %}
+                                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+                            {% else %}
+                                <td>&nbsp;</td>
+                            {% endif %}
+
+                            {% if model.admin_url %}
+                                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a>
+                                </td>
+                            {% else %}
+                                <td>&nbsp;</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    {% endcomment %}
+                {% endfor %}
+            {% endif %}
+            -->
         {% endblock %}
     </div>
 {% endblock %}
