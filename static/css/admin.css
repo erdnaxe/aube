@@ -71,3 +71,9 @@ img.banding-logo {
     display: inline-block;
     margin: 0 6px;
 }
+
+/* Footer */
+#footer {
+    margin: auto;
+    max-width: 80em;
+}
