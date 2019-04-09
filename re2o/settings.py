@@ -40,6 +40,7 @@ LOGIN_REDIRECT_URL = '/'        # The URL for redirecting after login
 
 # Application definition
 DJANGO_CONTRIB_APPS = (
+    'model_view_permission',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
