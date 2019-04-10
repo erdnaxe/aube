@@ -9,16 +9,17 @@ WORKDIR /var/www/aube
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+COPY apt_requirements.txt ./
 RUN apt update \
-    && apt install -y TODO \
+    && apt install -y $(cat ./apt_requirements.txt) \
     && rm -rf /var/lib/apt/lists/*
 
 # Pass only port 8080
 EXPOSE 8080
 
 # Set entrypoint : make migrations and collect statics
-COPY update.sh ./
+COPY . ./
 ENTRYPOINT [ "./update.sh" ]
 
 # Start Django app
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8080"]

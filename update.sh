@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # Migrate database
-python manage.py migrate --noinput
+python3 manage.py migrate --noinput
 
 # Collect statics
-python manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
 
 # Compile messages
-python manage.py compilemessages --noinput
+python3 manage.py compilemessages --noinput
 
 exec "$@"
