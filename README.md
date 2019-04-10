@@ -35,3 +35,23 @@ What have been done so far in Aube that is not in Re2o :
 To migrate from Re2o, please go to commit
 `f69c88d8fe14546f33ceb1e4e2adbea85a0b5de3` on Re2o dev branche,
 make new migrations, migrate data, then switch to Aube.
+
+## How to develop
+
+## With Docker
+
+There is a Dockerfile to contain Aube. You can build it and run it with :
+
+```bash
+docker build -t aube .
+docker run -d -p 8080:8080 -v /absolute/path/to/aube:/var/www/aube --restart=always aube
+```
+
+To stop it :
+
+```bash
+docker ps
+docker stop container_name
+docker container prune
+```
+

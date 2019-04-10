@@ -3,10 +3,13 @@ python3-dateutil
 texlive-latex-base
 texlive-fonts-recommended
 python3-djangorestframework
-python3-django-reversion
+python3-django-ldapdb
+python3-django-macaddress
 python3-django-navtag
+python3-django-reversion
 python3-pip
-libsasl2-dev libldap2-dev
+libsasl2-dev
+libldap2-dev
 libssl-dev
 python3-crypto
 python3-git
