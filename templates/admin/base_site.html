@@ -5,7 +5,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 Copyright © 2019  Alexandre Iooss
 {% endcomment %}
 
-{% load navtag i18n staticfiles %}
+{% load i18n staticfiles %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
@@ -21,62 +21,24 @@ Copyright © 2019  Alexandre Iooss
 {% endblock %}
 
 {% block nav-global %}
-    {% nav text ' class="selected"' %}
     <div id="nav">
-        {% block nav %}
-            {# For the moment site nav is hardcoded here but we should make it dynamic #}
-            <a{{ nav.users }} href="{% url 'admin:app_list' app_label="users" %}">
-                <i class="fa fa-users"></i> {% trans "Users" %}
-            </a>
-            /
-            <a{{ nav.machines }} href="{% url 'admin:app_list' app_label="machines" %}">
-                <i class="fa fa-desktop"></i> {% trans "Machines" %}
-            </a>
-            /
-            <a{{ nav.cotisations }} href="{% url 'admin:app_list' app_label="cotisations" %}">
-                <i class="fa fa-eur"></i> {% trans "Cotisations" %}
-            </a>
-            /
-            <a{{ nav.topologie }} href="{% url 'admin:app_list' app_label="topologie" %}">
-                <i class="fa fa-sitemap"></i> {% trans "Topology" %}
-            </a>
-            /
-            <a{{ nav.preferences }} href="{% url 'admin:app_list' app_label="preferences" %}">
-                <i class="fa fa-cogs"></i> {% trans "Settings" %}
-            </a>
-
-            <!-- Dynamic menu WIP: need to figure out how to have list of all apps
-            {% if app_list %}
-                {% for app in app_list %}
-                    <a href="{{ app.app_url }}" class="section">{{ app.name }}</a>
-                    {% comment %}
+        {% if available_apps %}
+            {% for app in available_apps %}
+                {% if app_list|length == 1 and app.name == app_list.0.name %}
+                    <a href="{{ app.app_url }}" style="text-decoration:underline">{{ app.name }}</a>
+                {% else %}
+                    <a href="{{ app.app_url }}">{{ app.name }}</a>
+                {% endif %}
+                {% comment %}
                     {% for model in app.models %}
-                        <tr class="model-{{ model.object_name|lower }}">
-                            {% if model.admin_url %}
-                                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
-                            {% else %}
-                                <th scope="row">{{ model.name }}</th>
-                            {% endif %}
-
-                            {% if model.add_url %}
-                                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
-                            {% else %}
-                                <td>&nbsp;</td>
-                            {% endif %}
-
-                            {% if model.admin_url %}
-                                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a>
-                                </td>
-                            {% else %}
-                                <td>&nbsp;</td>
-                            {% endif %}
-                        </tr>
+                        {% if model.admin_url %}
+                            <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                        {% endif %}
                     {% endfor %}
-                    {% endcomment %}
-                {% endfor %}
-            {% endif %}
-            -->
-        {% endblock %}
+                {% endcomment %}
+                {% if not forloop.last %}/{% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
 

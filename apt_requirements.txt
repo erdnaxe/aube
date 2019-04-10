@@ -5,7 +5,6 @@ texlive-fonts-recommended
 python3-djangorestframework
 python3-django-ldapdb
 python3-django-macaddress
-python3-django-navtag
 python3-django-reversion
 python3-pip
 libsasl2-dev
