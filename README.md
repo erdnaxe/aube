@@ -28,6 +28,8 @@ What have been done so far in Aube that is not in Re2o :
   * Switched to SPDX license identifiers to have lighter source files ;
   * Reset Re2o migrations ;
   * Update to Django 1.11 LTS ;
+  * Port to Debian Buster dependencies ;
+  * Create Docker container configuration ;
   * More coming soon…
 
 ## How to migrate from Re2o to Aube
