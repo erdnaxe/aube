@@ -27,7 +27,7 @@ a.section:link, a.section:visited {
 }
 
 div.breadcrumbs {
-    background: #483b28;
+    background: #8e8a83;
 }
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
@@ -70,6 +70,11 @@ img.banding-logo {
     font-weight: bold;
     display: inline-block;
     margin: 0 6px;
+}
+
+#nav a:hover, #nav a:focus {
+    text-decoration: none;
+    color: #79aec8;
 }
 
 /* Footer */
