@@ -30,6 +30,7 @@ What have been done so far in Aube that is not in Re2o :
   * Update to Django 1.11 LTS ;
   * Port to Debian Buster dependencies ;
   * Create Docker container configuration ;
+  * Dynamic menu, automatically populated depending on permissions and activated apps ;
   * More coming soon…
 
 ## How to migrate from Re2o to Aube
