@@ -121,6 +121,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                             </a>
                         </li>
                         {% acl_end %}
+                        {% if request.user.is_active and request.user.is_staff %}
+                        <li>
+                            <a href="{% url 'admin:index' %}">
+                                <i class="fa fa-cogs"></i> {% trans "Manage" %}
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
