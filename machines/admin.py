@@ -49,9 +49,10 @@ class IpTypeAdmin(VersionAdmin):
     pass
 
 
+@admin.register(MachineType)
 class MachineTypeAdmin(VersionAdmin):
-    """ Admin view of a MachineType object """
-    pass
+    """Admin view of a MachineType object"""
+    list_display = ('name', 'ip_type')
 
 
 class VlanAdmin(VersionAdmin):
@@ -99,9 +100,14 @@ class SshFpAdmin(VersionAdmin):
     pass
 
 
+@admin.register(Nas)
 class NasAdmin(VersionAdmin):
-    """ Admin view of a Nas object """
-    pass
+    """Admin view of a Nas object"""
+    list_display = ('name', 'nas_type', 'machine_type', 'port_access_mode',
+                    'autocapture_mac')
+    list_filter = ('port_access_mode', 'autocapture_mac', 'nas_type',
+                   'machine_type')
+    search_fields = ('name',)
 
 
 class IpListAdmin(VersionAdmin):
@@ -140,7 +146,6 @@ class RoleAdmin(VersionAdmin):
 
 
 admin.site.register(Machine, MachineAdmin)
-admin.site.register(MachineType, MachineTypeAdmin)
 admin.site.register(IpType, IpTypeAdmin)
 admin.site.register(Extension, ExtensionAdmin)
 admin.site.register(SOA, SOAAdmin)
@@ -157,6 +162,5 @@ admin.site.register(Service, ServiceAdmin)
 admin.site.register(Role, RoleAdmin)
 admin.site.register(Vlan, VlanAdmin)
 admin.site.register(Ipv6List, Ipv6ListAdmin)
-admin.site.register(Nas, NasAdmin)
 admin.site.register(OuverturePort, OuverturePortAdmin)
 admin.site.register(OuverturePortList, OuverturePortListAdmin)

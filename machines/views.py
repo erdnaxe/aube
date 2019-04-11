@@ -577,68 +577,6 @@ def del_iptype(request, instances):
 
 
 @login_required
-@can_create(MachineType)
-def add_machinetype(request):
-    """ View used to add a Machinetype object """
-    machinetype = MachineTypeForm(request.POST or None)
-    if machinetype.is_valid():
-        machinetype.save()
-        messages.success(request, _("The machine type was created."))
-        return redirect(reverse('machines:index-machinetype'))
-    return form(
-        {'machinetypeform': machinetype, 'action_name': _("Create a machine"
-                                                          " type")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(MachineType)
-def edit_machinetype(request, machinetype_instance, **_kwargs):
-    """ View used to edit a MachineType object """
-    machinetype = MachineTypeForm(
-        request.POST or None,
-        instance=machinetype_instance
-    )
-    if machinetype.is_valid():
-        if machinetype.changed_data:
-            machinetype.save()
-            messages.success(request, _("The machine type was edited."))
-        return redirect(reverse('machines:index-machinetype'))
-    return form(
-        {'machinetypeform': machinetype, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(MachineType)
-def del_machinetype(request, instances):
-    """ View used to delete a MachineType object """
-    machinetype = DelMachineTypeForm(request.POST or None, instances=instances)
-    if machinetype.is_valid():
-        machinetype_dels = machinetype.cleaned_data['machinetypes']
-        for machinetype_del in machinetype_dels:
-            try:
-                machinetype_del.delete()
-                messages.success(request, _("The machine type was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("The machine type %s is assigned to at least one"
-                       " machine, you can't delete it.") % machinetype_del)
-                )
-        return redirect(reverse('machines:index-machinetype'))
-    return form(
-        {'machinetypeform': machinetype, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
 @can_create(Extension)
 def add_extension(request):
     """ View used to add an Extension object """
@@ -1301,63 +1239,6 @@ def del_vlan(request, instances):
 
 
 @login_required
-@can_create(Nas)
-def add_nas(request):
-    """ View used to add a NAS object """
-    nas = NasForm(request.POST or None)
-    if nas.is_valid():
-        nas.save()
-        messages.success(request, _("The NAS device was created."))
-        return redirect(reverse('machines:index-nas'))
-    return form(
-        {'nasform': nas, 'action_name': _("Create a NAS device")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Nas)
-def edit_nas(request, nas_instance, **_kwargs):
-    """ View used to edit a NAS object """
-    nas = NasForm(request.POST or None, instance=nas_instance)
-    if nas.is_valid():
-        if nas.changed_data:
-            nas.save()
-            messages.success(request, _("The NAS device was edited."))
-        return redirect(reverse('machines:index-nas'))
-    return form(
-        {'nasform': nas, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Nas)
-def del_nas(request, instances):
-    """ View used to delete a NAS object """
-    nas = DelNasForm(request.POST or None, instances=instances)
-    if nas.is_valid():
-        nas_dels = nas.cleaned_data['nas']
-        for nas_del in nas_dels:
-            try:
-                nas_del.delete()
-                messages.success(request, _("The NAS device was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the NAS device %s can't be deleted.") % nas_del)
-                )
-        return redirect(reverse('machines:index-nas'))
-    return form(
-        {'nasform': nas, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
 @can_view_all(Machine)
 def index(request):
     """ The home view for this app. Displays the list of registered
@@ -1416,31 +1297,6 @@ def index_vlan(request):
         'machines/index_vlan.html',
         {'vlan_list': vlan_list}
     )
-
-
-@login_required
-@can_view_all(MachineType)
-def index_machinetype(request):
-    """ View displaying the list of existing types of machines """
-    machinetype_list = (MachineType.objects
-                        .select_related('ip_type')
-                        .order_by('name'))
-    return render(
-        request,
-        'machines/index_machinetype.html',
-        {'machinetype_list': machinetype_list}
-    )
-
-
-@login_required
-@can_view_all(Nas)
-def index_nas(request):
-    """ View displaying the list of existing NAS """
-    nas_list = (Nas.objects
-                .select_related('machine_type')
-                .select_related('nas_type')
-                .order_by('name'))
-    return render(request, 'machines/index_nas.html', {'nas_list': nas_list})
 
 
 @login_required

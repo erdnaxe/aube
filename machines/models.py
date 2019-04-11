@@ -237,12 +237,17 @@ class Machine(RevMixin, FieldPermissionModelMixin, models.Model):
 
 class MachineType(RevMixin, AclMixin, models.Model):
     """ Type de machine, relié à un type d'ip, affecté aux interfaces"""
-    name = models.CharField(max_length=255)
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
     ip_type = models.ForeignKey(
         'IpType',
         on_delete=models.PROTECT,
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_('IP type'),
+        help_text=_('This type of machine will use that type of IPs.'),
     )
 
     class Meta:
@@ -544,36 +549,47 @@ class Vlan(RevMixin, AclMixin, models.Model):
 
 
 class Nas(RevMixin, AclMixin, models.Model):
-    """ Les nas. Associé à un machine_type.
-    Permet aussi de régler le port_access_mode (802.1X ou mac-address) pour
-    le radius. Champ autocapture de la mac à true ou false"""
-    default_mode = '802.1X'
+    """Network access server"""
     AUTH = (
         ('802.1X', '802.1X'),
         ('Mac-address', _("MAC-address")),
     )
+    default_mode = AUTH[0][0]
 
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+        unique=True,
+    )
     nas_type = models.ForeignKey(
         'MachineType',
         on_delete=models.PROTECT,
-        related_name='nas_type'
+        related_name='nas_type',
+        verbose_name=_('type of network access server'),
     )
     machine_type = models.ForeignKey(
         'MachineType',
         on_delete=models.PROTECT,
-        related_name='machinetype_on_nas'
+        related_name='machinetype_on_nas',
+        verbose_name=_('type of machine'),
+        help_text=_('Defines the type of machine that will authenticate.'),
     )
     port_access_mode = models.CharField(
+        verbose_name=_('authentication mechanism'),
         choices=AUTH,
         default=default_mode,
-        max_length=32
+        max_length=32,
     )
-    autocapture_mac = models.BooleanField(default=False)
+    autocapture_mac = models.BooleanField(
+        verbose_name=_('MAC autocapture'),
+        default=False,
+        help_text=_('When MAC autocapture is active, new machines will be '
+                    'automatically registered with the given machine type.'),
+    )
 
     class Meta:
-        verbose_name = _("NAS device")
-        verbose_name_plural = _("NAS devices")
+        verbose_name = _("Network access server")
+        verbose_name_plural = _("Network access servers")
 
     def __str__(self):
         return self.name
