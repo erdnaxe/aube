@@ -13,10 +13,16 @@ où on fait appel à UserChange et ServiceUserChange, forms custom
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import Group
 from reversion.admin import VersionAdmin
 
+from .forms import (
+    UserChangeForm,
+    UserCreationForm,
+    ServiceUserChangeForm,
+    ServiceUserCreationForm
+)
 from .models import (
     User,
     EMailAddress,
@@ -33,12 +39,6 @@ from .models import (
     LdapServiceUser,
     LdapServiceUserGroup,
     LdapUserGroup
-)
-from .forms import (
-    UserChangeForm,
-    UserCreationForm,
-    ServiceUserChangeForm,
-    ServiceUserCreationForm
 )
 
 
@@ -93,9 +93,11 @@ class RequestAdmin(admin.ModelAdmin):
     list_display = ('user', 'type', 'created_at', 'expires_at')
 
 
+@admin.register(Ban)
 class BanAdmin(VersionAdmin):
-    """Gestion des bannissements"""
-    pass
+    """Manage blacklist in admin"""
+    list_display = ('user', 'state', 'raison', 'date_start', 'date_end')
+    list_filter = ('state', 'date_start', 'date_end')
 
 
 class EMailAddressAdmin(VersionAdmin):
@@ -103,9 +105,11 @@ class EMailAddressAdmin(VersionAdmin):
     pass
 
 
+@admin.register(Whitelist)
 class WhitelistAdmin(VersionAdmin):
-    """Gestion des whitelist"""
-    pass
+    """Manage whitelist in admin"""
+    list_display = ('user', 'raison', 'date_start', 'date_end')
+    list_filter = ('date_start', 'date_end')
 
 
 class UserAdmin(VersionAdmin, BaseUserAdmin):
@@ -136,10 +140,10 @@ class UserAdmin(VersionAdmin, BaseUserAdmin):
             'Personal info',
             {
                 'fields':
-                ('surname', 'email', 'school', 'shell', 'uid_number')
+                    ('surname', 'email', 'school', 'shell', 'uid_number')
             }
         ),
-        ('Permissions', {'fields': ('is_admin', )}),
+        ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -156,7 +160,7 @@ class UserAdmin(VersionAdmin, BaseUserAdmin):
                     'is_admin',
                     'password1',
                     'password2'
-                    )
+                )
             }
         ),
     )
@@ -205,9 +209,7 @@ admin.site.register(LdapUserGroup, LdapUserGroupAdmin)
 admin.site.register(LdapServiceUser, LdapServiceUserAdmin)
 admin.site.register(LdapServiceUserGroup, LdapServiceUserGroupAdmin)
 admin.site.register(ListRight, ListRightAdmin)
-admin.site.register(Ban, BanAdmin)
 admin.site.register(EMailAddress, EMailAddressAdmin)
-admin.site.register(Whitelist, WhitelistAdmin)
 admin.site.register(Request, RequestAdmin)
 # Now register the new UserAdmin...
 admin.site.unregister(User)
