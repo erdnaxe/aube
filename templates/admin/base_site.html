@@ -7,7 +7,7 @@ Copyright © 2019  Alexandre Iooss
 
 {% load i18n staticfiles %}
 
-{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block title %}{{ title }} | {{ site_title }}{% endblock %}
 
 {% block branding %}
     <h1 id="site-name">
@@ -15,7 +15,7 @@ Copyright © 2019  Alexandre Iooss
             <img class="banding-logo" src="{% static 'images/logo_navbar.svg' %}" alt="Aube"/>
         </a>
         <a href="{% url 'admin:index' %}">
-            {{ site_header|default:_('Django administration') }}
+            {{ site_header }}
         </a>
     </h1>
 {% endblock %}

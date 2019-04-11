@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-12 08:58+0100\n"
+"POT-Creation-Date: 2019-04-11 16:09+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -29,6 +29,45 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: model_view_permission/admin.py:63
+#, python-format
+msgid "Select %s"
+msgstr ""
+
+#: model_view_permission/admin.py:65
+#, python-format
+msgid "Select %s to view"
+msgstr ""
+
+#: model_view_permission/admin.py:309
+#, python-format
+msgid "View %s"
+msgstr ""
+
+#: model_view_permission/admin.py:364
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's password."
+msgstr ""
+
+#: model_view_permission/admin.py:369
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"../password/"
+"\">this form</a>."
+msgstr ""
+
+#: templates/admin/base_site.html:63 templates/base.html:268
+msgid "powered by"
+msgstr "propulsé par"
+
+#: templates/admin/base_site.html:65 templates/base.html:276
+msgid ""
+"This software is under the terms of the <a href=\"http://www.gnu.org/"
+"licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a> License."
+msgstr ""
+"Ce logiciel est sous les termes de la licence <a href=\"http://www.gnu.org/"
+"licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a>."
 
 #: templates/base.html:43 templates/errors/404.html:35
 msgid "Networking managing website endorsed by FedeRez."
@@ -66,131 +105,111 @@ msgstr "Topologie"
 msgid "Switches"
 msgstr "Commutateurs réseau"
 
-#: templates/base.html:111
-msgid "Access points"
-msgstr "Points d'accès sans fil"
-
-#: templates/base.html:112
-msgid "Rooms"
-msgstr "Chambres"
-
-#: templates/base.html:117
+#: templates/base.html:115
 msgid "Statistics"
 msgstr "Statistiques"
 
-#: templates/base.html:122
+#: templates/base.html:120
 msgid "Administration"
 msgstr "Administration"
 
-#: templates/base.html:129
+#: templates/base.html:127
 msgid "More information"
 msgstr "Plus d'informations"
 
-#: templates/base.html:131
+#: templates/base.html:129
 msgid "About"
 msgstr "À propos"
 
-#: templates/base.html:132
+#: templates/base.html:130
 msgid "Contact"
 msgstr "Contact"
 
-#: templates/base.html:139
+#: templates/base.html:137 templates/index.html:31
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: templates/base.html:145 templates/registration/login.html:29
-#: templates/registration/login.html:36
+#: templates/base.html:143 templates/index.html:38
+#: templates/registration/login.html:29 templates/registration/login.html:45
 msgid "Log in"
 msgstr "Se connecter"
 
-#: templates/base.html:153
+#: templates/base.html:151
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/base.html:167
+#: templates/base.html:165 templates/index.html:41
 msgid "My profile"
 msgstr "Mon profil"
 
-#: templates/base.html:168
+#: templates/base.html:166
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: templates/base.html:203
+#: templates/base.html:201
 msgid "Username"
 msgstr "Pseudo"
 
-#: templates/base.html:207
+#: templates/base.html:205
 msgid "Room"
 msgstr "Chambre"
 
-#: templates/base.html:211
+#: templates/base.html:209
 msgid "Internet access"
 msgstr "Accès Internet"
 
-#: templates/base.html:214
+#: templates/base.html:212
 #, python-format
 msgid "Until %(end_access_date)s"
 msgstr "Jusqu'au %(end_access_date)s"
 
-#: templates/base.html:216
+#: templates/base.html:214
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: templates/base.html:221
+#: templates/base.html:219
 msgid "Membership"
 msgstr "Adhésion"
 
-#: templates/base.html:224
+#: templates/base.html:222
 #, python-format
 msgid "Until %(end_adhesion_date)s"
 msgstr "Jusqu'au %(end_adhesion_date)s"
 
-#: templates/base.html:226
+#: templates/base.html:224
 msgid "Non member"
 msgstr "Non adhérent"
 
-#: templates/base.html:234
+#: templates/base.html:232
 msgid "View my profile"
 msgstr "Voir mon profil"
 
-#: templates/base.html:239
+#: templates/base.html:237
 msgid "You are not logged in."
 msgstr "Vous n'êtes pas connecté."
 
-#: templates/base.html:246
+#: templates/base.html:244
 #, python-format
 msgid "%(nb)s active machine"
 msgid_plural "%(nb)s active machines"
 msgstr[0] "%(nb)s machine active"
 msgstr[1] "%(nb)s machines actives"
 
-#: templates/base.html:255
+#: templates/base.html:253
 msgid "View my machines"
 msgstr "Voir mes machines"
 
-#: templates/base.html:268
+#: templates/base.html:266
 msgid "Back to top"
 msgstr "Retour en haut"
 
 #: templates/base.html:270
-msgid "powered by"
-msgstr "propulsé par"
-
-#: templates/base.html:272
 msgid "Brought to you with <i class=\"fa fa-heart text-danger\"></i>."
 msgstr "Codé avec <i class=\"fa fa-heart text-danger\"></i>."
 
-#: templates/base.html:275
+#: templates/base.html:273
 msgid "About this website"
 msgstr "À propos de ce site"
-
-#: templates/base.html:278
-msgid ""
-"This software is under the terms of the <a href=\"http://www.gnu.org/"
-"licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a> License."
-msgstr ""
-"Ce logiciel est sous les termes de la licence <a href=\"http://www.gnu.org/"
-"licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a>."
 
 #: templates/buttons/add.html:27
 msgid "Add"
@@ -299,6 +318,65 @@ msgstr "Si vous n'avez aucune idée de ce que vous avez fait :"
 msgid "Go back to a safe page"
 msgstr "Retourner à une page sécurisée"
 
+#: templates/index.html:20
+#, python-format
+msgid "Welcome to %(site_title)s"
+msgstr "Bienvenue sur %(site_title)s"
+
+#: templates/index.html:27
+msgid "Registration"
+msgstr "Création de compte"
+
+#: templates/index.html:28
+msgid ""
+"If you don't have an account yet and you want to access the Internet and the "
+"organisation's services, create your own personal account."
+msgstr ""
+
+#: templates/index.html:34
+msgid "Logging in"
+msgstr "Se connecter"
+
+#: templates/index.html:35
+msgid ""
+"If you already have an account, log in. You can manage your subscriptions to "
+"the organisation, your machines and all your services."
+msgstr ""
+
+#: templates/index.html:42
+msgid ""
+"To manage your subscriptions, your machines and all your services, access "
+"your profile."
+msgstr ""
+
+#: templates/index.html:44
+msgid "Access my profile"
+msgstr "Voir mon profil"
+
+#: templates/index.html:47
+msgid "Services of the organisation"
+msgstr ""
+
+#: templates/index.html:56
+msgid "Go there"
+msgstr ""
+
+#: templates/index.html:65
+msgid "My account"
+msgstr "Mon compte"
+
+#: templates/index.html:66
+msgid "My recent actions"
+msgstr "Mes actions récentes"
+
+#: templates/index.html:70
+msgid "None available"
+msgstr ""
+
+#: templates/index.html:85
+msgid "Unknown content"
+msgstr ""
+
 #: templates/pagination.html:34
 msgid "First"
 msgstr "Première page"
@@ -315,6 +393,13 @@ msgstr "Suivant"
 msgid "Last"
 msgstr "Dernière page"
 
-#: templates/registration/login.html:40
+#: templates/registration/login.html:34
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+
+#: templates/registration/login.html:49
 msgid "Forgotten password?"
 msgstr "Mot de passe oublié ?"

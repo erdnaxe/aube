@@ -566,7 +566,7 @@ class Nas(RevMixin, AclMixin, models.Model):
         'MachineType',
         on_delete=models.PROTECT,
         related_name='nas_type',
-        verbose_name=_('type of network access server'),
+        verbose_name=_('network access server type'),
     )
     machine_type = models.ForeignKey(
         'MachineType',

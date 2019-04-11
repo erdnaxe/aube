@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-12 08:58+0100\n"
+"POT-Creation-Date: 2019-04-11 16:09+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -15,56 +15,56 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: re2o/acl.py:142
+#: re2o/acl.py:126
 msgid "Nonexistent entry."
 msgstr "Entrée inexistante."
 
-#: re2o/acl.py:159 re2o/acl.py:224
+#: re2o/acl.py:143 re2o/acl.py:208
 msgid "You don't have the right to access this menu."
 msgstr "Vous n'avez pas le droit d'accéder à ce menu."
 
-#: re2o/acl.py:274
+#: re2o/acl.py:258
 msgid "You don't have the right to edit the history."
 msgstr "Vous n'avez pas le droit de modifier l'historique."
 
-#: re2o/base.py:76
+#: re2o/base.py:59
 msgid "This domain is already taken."
 msgstr "Ce domaine est déjà pris."
 
-#: re2o/base.py:78
+#: re2o/base.py:61
 msgid "SMTP unreachable."
 msgstr "SMTP injoignable."
 
-#: re2o/mixins.py:111
+#: re2o/mixins.py:96
 #, python-format
 msgid "You don't have the right to create a %s object."
 msgstr "Vous n'avez pas le droit de créer un objet %s."
 
-#: re2o/mixins.py:125
+#: re2o/mixins.py:110
 #, python-format
 msgid "You don't have the right to edit a %s object."
 msgstr "Vous n'avez pas le droit de modifier un objet %s."
 
-#: re2o/mixins.py:139
+#: re2o/mixins.py:124
 #, python-format
 msgid "You don't have the right to delete a %s object."
 msgstr "Vous n'avez pas le droit de supprimer un objet %s."
 
-#: re2o/mixins.py:153
+#: re2o/mixins.py:138
 #, python-format
 msgid "You don't have the right to view every %s object."
 msgstr "Vous n'avez pas le droit de voir tous les objets %s."
 
-#: re2o/mixins.py:167
+#: re2o/mixins.py:152
 #, python-format
 msgid "You don't have the right to view a %s object."
 msgstr "Vous n'avez pas le droit de voir un objet %s."
 
-#: re2o/settings.py:156
+#: re2o/settings.py:144
 msgid "English"
 msgstr "Anglais"
 
-#: re2o/settings.py:157
+#: re2o/settings.py:145
 msgid "French"
 msgstr "Français"
 
@@ -249,6 +249,14 @@ msgstr "Tweets de @%(twitter_account_name)s"
 msgid "Follow @%(twitter_account_name)s"
 msgstr "Suivre @%(twitter_account_name)s"
 
-#: re2o/views.py:87
+#: re2o/urls.py:19 re2o/urls.py:20
+msgid "Aube"
+msgstr ""
+
+#: re2o/urls.py:21
+msgid "Homepage"
+msgstr "Accueil"
+
+#: re2o/views.py:72
 msgid "Unable to get the information."
 msgstr "Impossible d'obtenir l'information."

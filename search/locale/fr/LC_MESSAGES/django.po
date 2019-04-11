@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-12 08:58+0100\n"
+"POT-Creation-Date: 2019-04-11 16:09+0200\n"
 "PO-Revision-Date: 2018-06-24 20:10+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -15,60 +15,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: search/forms.py:33
+#: search/forms.py:18
 msgid "Active"
 msgstr "Actifs"
 
-#: search/forms.py:34
+#: search/forms.py:19
 msgid "Disabled"
 msgstr "Désactivés"
 
-#: search/forms.py:35
+#: search/forms.py:20
 msgid "Archived"
 msgstr "Archivés"
 
-#: search/forms.py:36
+#: search/forms.py:21
 msgid "Not yet active"
 msgstr "Pas encore adhéré"
 
-#: search/forms.py:40
+#: search/forms.py:22
+msgid "Full archived"
+msgstr "Entièrement Archivés"
+
+#: search/forms.py:26
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: search/forms.py:41
+#: search/forms.py:27
 msgid "Machines"
 msgstr "Machines"
 
-#: search/forms.py:42
+#: search/forms.py:28
 msgid "Invoices"
 msgstr "Factures"
 
-#: search/forms.py:43
+#: search/forms.py:29
 msgid "Bans"
 msgstr "Bannissements"
 
-#: search/forms.py:44
+#: search/forms.py:30
 msgid "Whitelists"
 msgstr "Accès gracieux"
 
-#: search/forms.py:45
+#: search/forms.py:31
 msgid "Rooms"
 msgstr "Chambres"
 
-#: search/forms.py:46
+#: search/forms.py:32
 msgid "Ports"
 msgstr "Ports"
 
-#: search/forms.py:47
+#: search/forms.py:33
 msgid "Switches"
 msgstr "Commutateurs réseau"
 
-#: search/forms.py:60 search/forms.py:72 search/templates/search/search.html:29
+#: search/forms.py:46 search/forms.py:58 search/templates/search/search.html:29
 #: search/templates/search/search.html:48
 msgid "Search"
 msgstr "Rechercher"
 
-#: search/forms.py:62 search/forms.py:74
+#: search/forms.py:48 search/forms.py:60
 msgid ""
 "Use « » and «,» to specify distinct words, «\"query\"» for an exact search "
 "and «\\» to escape a character."
@@ -76,19 +80,19 @@ msgstr ""
 "Utilisez « » et «,» pour spécifier différents mots, «\"query\"» pour une "
 "recherche exacte et «\\» pour échapper un caractère."
 
-#: search/forms.py:81
+#: search/forms.py:67
 msgid "Users filter"
 msgstr "Filtre utilisateurs"
 
-#: search/forms.py:88
+#: search/forms.py:74
 msgid "Display filter"
 msgstr "Filtre affichage"
 
-#: search/forms.py:96
+#: search/forms.py:82
 msgid "Start date"
 msgstr "Date de début"
 
-#: search/forms.py:100
+#: search/forms.py:86
 msgid "End date"
 msgstr "Date de fin"
 
