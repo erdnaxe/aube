@@ -31,6 +31,7 @@ urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^manage/', include(admin.site.urls)),
+    url(r'^doc/', include('django.contrib.admindocs.urls')),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^search/', include('search.urls', namespace='search')),
     url(

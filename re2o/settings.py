@@ -42,6 +42,7 @@ LOGIN_REDIRECT_URL = '/'        # The URL for redirecting after login
 DJANGO_CONTRIB_APPS = (
     'model_view_permission',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -80,6 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
     'reversion.middleware.RevisionMiddleware',
 )
 

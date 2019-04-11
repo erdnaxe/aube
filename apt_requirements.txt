@@ -2,6 +2,7 @@ python3-django
 python3-dateutil
 texlive-latex-base
 texlive-fonts-recommended
+python3-docutils
 python3-djangorestframework
 python3-django-ldapdb
 python3-django-macaddress
