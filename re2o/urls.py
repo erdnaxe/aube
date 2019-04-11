@@ -10,14 +10,11 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 from django.utils.translation import gettext_lazy as _
 
 from .views import index, about_page, contact_page
 
 # Admin site configuration
-admin.site.site_header = _('Aube')
-admin.site.site_title = _('Aube')
 admin.site.index_title = _('Homepage')
 admin.site.index_template = 'index.html'
 
@@ -28,7 +25,7 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^about/$', about_page, name='about'),
     url(r'^contact/$', contact_page, name='contact'),
-    url('^', include('django.contrib.auth.urls')),
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^manage/', include(admin.site.urls)),
     url(r'^doc/', include('django.contrib.admindocs.urls')),
@@ -49,6 +46,7 @@ urlpatterns = [
 # Add debug_toolbar URLs if activated
 if 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
+
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ]

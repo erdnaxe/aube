@@ -7,7 +7,7 @@ Copyright © 2019  Alexandre Iooss
 
 {% load i18n staticfiles %}
 
-{% block title %}{{ title }} | {{ site_title }}{% endblock %}
+{% block title %}{{ title }} | {{ name_website }}{% endblock %}
 
 {% block branding %}
     <h1 id="site-name">
@@ -15,7 +15,7 @@ Copyright © 2019  Alexandre Iooss
             <img class="banding-logo" src="{% static 'images/logo_navbar.svg' %}" alt="Aube"/>
         </a>
         <a href="{% url 'admin:index' %}">
-            {{ site_header }}
+            {{ name_website }}
         </a>
     </h1>
 {% endblock %}
@@ -59,7 +59,7 @@ Copyright © 2019  Alexandre Iooss
 
 {% block footer %}
     <div id="footer">
-        <p>{{ site_title }} {% trans "powered by" %} Aube 2016&ndash;2019</p>
+        <p>{{ name_website }} {% trans "powered by" %} Aube 2016&ndash;2019</p>
         <p>
             {% blocktrans trimmed %}
                 This software is under the terms of the
