@@ -10,23 +10,18 @@ Module in charge of rendering some LaTex templates.
 Used to generated PDF invoice.
 """
 
-
-import tempfile
-from subprocess import Popen, PIPE
 import os
+import tempfile
 from datetime import datetime
+from subprocess import Popen, PIPE
 
-from django.db import models
-from django.template.loader import get_template
-from django.template import Context
-from django.http import HttpResponse
 from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import get_template
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
 
-from re2o.mixins import AclMixin, RevMixin
 from preferences.models import CotisationsOption
-
+from re2o.settings import BASE_DIR
 
 TEMP_PREFIX = getattr(settings, 'TEX_TEMP_PREFIX', 'render_tex-')
 CACHE_PREFIX = getattr(settings, 'TEX_CACHE_PREFIX', 'render-tex')
@@ -95,7 +90,7 @@ def create_pdf(template, ctx={}):
 
     with tempfile.TemporaryDirectory() as tempdir:
         for _ in range(2):
-            with open("/var/www/re2o/out.log", "w") as f:
+            with open(BASE_DIR + "/out.log", "w") as f:
                 process = Popen(
                     ['pdflatex', '-output-directory', tempdir],
                     stdin=PIPE,
