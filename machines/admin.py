@@ -103,7 +103,7 @@ class SshFpAdmin(VersionAdmin):
 @admin.register(Nas)
 class NasAdmin(VersionAdmin):
     """Admin view of a Nas object"""
-    list_display = ('name', 'nas_type', 'machine_type', 'port_access_mode',
+    list_display = ('nas_type', 'machine_type', 'port_access_mode',
                     'autocapture_mac')
     list_filter = ('port_access_mode', 'autocapture_mac', 'nas_type',
                    'machine_type')

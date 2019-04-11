@@ -556,6 +556,7 @@ class Nas(RevMixin, AclMixin, models.Model):
     )
     default_mode = AUTH[0][0]
 
+    # TODO(erdnaxe) : name is useless, remove ?
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
