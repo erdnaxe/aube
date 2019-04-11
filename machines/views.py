@@ -1182,63 +1182,6 @@ def regen_service(request, service, **_kwargs):
 
 
 @login_required
-@can_create(Vlan)
-def add_vlan(request):
-    """ View used to add a VLAN object """
-    vlan = VlanForm(request.POST or None)
-    if vlan.is_valid():
-        vlan.save()
-        messages.success(request, _("The VLAN was created."))
-        return redirect(reverse('machines:index-vlan'))
-    return form(
-        {'vlanform': vlan, 'action_name': _("Create a VLAN")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Vlan)
-def edit_vlan(request, vlan_instance, **_kwargs):
-    """ View used to edit a VLAN object """
-    vlan = VlanForm(request.POST or None, instance=vlan_instance)
-    if vlan.is_valid():
-        if vlan.changed_data:
-            vlan.save()
-            messages.success(request, _("The VLAN was edited."))
-        return redirect(reverse('machines:index-vlan'))
-    return form(
-        {'vlanform': vlan, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Vlan)
-def del_vlan(request, instances):
-    """ View used to delete a VLAN object """
-    vlan = DelVlanForm(request.POST or None, instances=instances)
-    if vlan.is_valid():
-        vlan_dels = vlan.cleaned_data['vlan']
-        for vlan_del in vlan_dels:
-            try:
-                vlan_del.delete()
-                messages.success(request, _("The VLAN was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the VLAN %s can't be deleted.") % vlan_del)
-                )
-        return redirect(reverse('machines:index-vlan'))
-    return form(
-        {'vlanform': vlan, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
 @can_view_all(Machine)
 def index(request):
     """ The home view for this app. Displays the list of registered
@@ -1284,18 +1227,6 @@ def index_iptype(request):
         request,
         'machines/index_iptype.html',
         {'iptype_list': iptype_list}
-    )
-
-
-@login_required
-@can_view_all(Vlan)
-def index_vlan(request):
-    """ View displaying the list of existing VLANs """
-    vlan_list = Vlan.objects.prefetch_related('iptype_set').order_by('vlan_id')
-    return render(
-        request,
-        'machines/index_vlan.html',
-        {'vlan_list': vlan_list}
     )
 
 

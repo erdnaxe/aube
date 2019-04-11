@@ -522,22 +522,48 @@ class IpType(RevMixin, AclMixin, models.Model):
 
 
 class Vlan(RevMixin, AclMixin, models.Model):
-    """ Un vlan : vlan_id et nom
-    On limite le vlan id entre 0 et 4096, comme défini par la norme"""
-    vlan_id = models.PositiveIntegerField(validators=[MaxValueValidator(4095)])
-    name = models.CharField(max_length=256)
-    comment = models.CharField(max_length=256, blank=True)
-    #Réglages supplémentaires
-    arp_protect = models.BooleanField(default=False)
-    dhcp_snooping = models.BooleanField(default=False)
-    dhcpv6_snooping = models.BooleanField(default=False)
-    igmp = models.BooleanField(
+    """A VLAN
+
+    We limit VLAN from 0 to 4096, as the standard defines
+    """
+    vlan_id = models.PositiveIntegerField(
+        verbose_name=_('identifier'),
+        validators=[MaxValueValidator(4095)],
+    )
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=256,
+    )
+    comment = models.CharField(
+        verbose_name=_('comment'),
+        max_length=256,
+        blank=True,
+    )
+    # Réglages supplémentaires
+    arp_protect = models.BooleanField(
+        verbose_name=_('ARP protection'),
         default=False,
-        help_text=_("v4 multicast management")
+        help_text=_('Prevent ARP Poisonning (man in the middle attacks…).'),
+    )
+    dhcp_snooping = models.BooleanField(
+        verbose_name=_('DHCP snooping'),
+        default=False,
+        help_text=_('Drop DHCPv4 traffic determined to be unacceptable.'),
+    )
+    dhcpv6_snooping = models.BooleanField(
+        verbose_name=_('DHCPv6 snooping'),
+        default=False,
+        help_text=_('Drop DHCPv6 traffic determined to be unacceptable.'),
+    )
+    igmp = models.BooleanField(
+        verbose_name=_('Internet Group Management Protocol (IGMP)'),
+        default=False,
+        help_text=_("IPv4 multicast management")
     )
     mld = models.BooleanField(
+        verbose_name=_('Multicast Listener Discovery (MLD)'),
         default=False,
-        help_text=_("v6 multicast management")
+        help_text=_("IPv6 multicast management")
     )
 
     class Meta:

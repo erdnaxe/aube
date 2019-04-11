@@ -15,9 +15,10 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from reversion.admin import VersionAdmin
 
-from .models import MachineType
 from .models import (
+    MachineType,
     Nas,
+    Vlan,
 )
 
 
@@ -33,3 +34,10 @@ class NasAdmin(VersionAdmin):
     list_display = ('nas_type', 'machine_type', 'port_access_mode',
                     'autocapture_mac')
     list_filter = ('port_access_mode', 'autocapture_mac')
+
+
+@admin.register(Vlan)
+class VlanAdmin(VersionAdmin):
+    """Admin view of a VLAN object"""
+    list_display = ('vlan_id', 'name', 'comment')
+    list_filter = ('dhcp_snooping', 'dhcpv6_snooping', 'igmp', 'mld')
