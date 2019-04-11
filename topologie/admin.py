@@ -12,38 +12,10 @@ from django.contrib import admin
 from reversion.admin import VersionAdmin
 
 from .models import (
-    Port,
     Room,
-    Switch,
-    Stack,
-    ModelSwitch,
-    ConstructorSwitch,
-    AccessPoint,
-    SwitchBay,
     Building,
     Dormitory,
-    PortProfile,
 )
-
-
-class StackAdmin(VersionAdmin):
-    """Administration d'une stack de switches (inclus des switches)"""
-    pass
-
-
-class SwitchAdmin(VersionAdmin):
-    """Administration d'un switch"""
-    pass
-
-
-class PortAdmin(VersionAdmin):
-    """Administration d'un port de switches"""
-    pass
-
-
-class AccessPointAdmin(VersionAdmin):
-    """Administration d'une borne"""
-    pass
 
 
 @admin.register(Room)
@@ -53,21 +25,6 @@ class RoomAdmin(VersionAdmin):
     list_filter = ('building', 'building__dormitory')
     search_fields = ('name', 'building__name', 'building__dormitory__name',
                      'details')
-
-
-class ModelSwitchAdmin(VersionAdmin):
-    """Administration d'un modèle de switch"""
-    pass
-
-
-class ConstructorSwitchAdmin(VersionAdmin):
-    """Administration d'un constructeur d'un switch"""
-    pass
-
-
-class SwitchBayAdmin(VersionAdmin):
-    """Administration d'une baie de brassage"""
-    pass
 
 
 @admin.register(Building)
@@ -83,18 +40,3 @@ class DormitoryAdmin(VersionAdmin):
     """Register Dormitory object in admin"""
     list_display = ('name',)
     search_fields = ('name',)
-
-
-class PortProfileAdmin(VersionAdmin):
-    """Administration of a port profile"""
-    pass
-
-
-admin.site.register(Port, PortAdmin)
-admin.site.register(AccessPoint, AccessPointAdmin)
-admin.site.register(Switch, SwitchAdmin)
-admin.site.register(Stack, StackAdmin)
-admin.site.register(ModelSwitch, ModelSwitchAdmin)
-admin.site.register(ConstructorSwitch, ConstructorSwitchAdmin)
-admin.site.register(SwitchBay, SwitchBayAdmin)
-admin.site.register(PortProfile, PortProfileAdmin)
