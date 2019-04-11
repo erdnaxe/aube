@@ -68,9 +68,11 @@ class LdapServiceUserGroupAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+@admin.register(School)
 class SchoolAdmin(VersionAdmin):
-    """Administration, gestion des écoles"""
-    pass
+    """Manage all schools in admin"""
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 class ListRightAdmin(VersionAdmin):
@@ -79,9 +81,11 @@ class ListRightAdmin(VersionAdmin):
     list_display = ('unix_name',)
 
 
+@admin.register(ListShell)
 class ListShellAdmin(VersionAdmin):
-    """Gestion de la liste des shells coté admin"""
-    pass
+    """Manage available shells in admin"""
+    list_display = ('shell',)
+    search_fields = ('shell',)
 
 
 class RequestAdmin(admin.ModelAdmin):
@@ -200,9 +204,7 @@ admin.site.register(LdapUser, LdapUserAdmin)
 admin.site.register(LdapUserGroup, LdapUserGroupAdmin)
 admin.site.register(LdapServiceUser, LdapServiceUserAdmin)
 admin.site.register(LdapServiceUserGroup, LdapServiceUserGroupAdmin)
-admin.site.register(School, SchoolAdmin)
 admin.site.register(ListRight, ListRightAdmin)
-admin.site.register(ListShell, ListShellAdmin)
 admin.site.register(Ban, BanAdmin)
 admin.site.register(EMailAddress, EMailAddressAdmin)
 admin.site.register(Whitelist, WhitelistAdmin)

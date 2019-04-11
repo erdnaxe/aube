@@ -64,18 +64,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 	    {% trans "Whitelists" %}
         </a>
     {% acl_end %}
-    {% can_view_all School %}
-        <a class="list-group-item list-group-item-info" href="{% url 'users:index-school' %}">
-            <i class="fa fa-list-ul"></i>
-	    {% trans "Schools" %}
-        </a>
-    {% acl_end %}
-    {% can_view_all ListShell %}
-        <a class="list-group-item list-group-item-info" href="{% url 'users:index-shell' %}">
-            <i class="fa fa-list-ul"></i>
-	    {% trans "Shells" %}
-        </a>
-    {% acl_end %}
     {% can_view_all ListRight %}
         <a class="list-group-item list-group-item-info" href="{% url 'users:index-listright' %}">
             <i class="fa fa-list-ul"></i>
