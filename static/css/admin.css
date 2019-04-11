@@ -82,3 +82,17 @@ img.banding-logo {
     margin: auto;
     max-width: 80em;
 }
+
+#footer select {
+    height: 24px;
+    padding: 0;
+}
+
+/* Pull footer to bottom */
+#content {
+    min-height: 70vh;
+}
+
+.login #content {
+    min-height: 0;
+}

@@ -66,5 +66,18 @@ Copyright © 2019  Alexandre Iooss
                 <a href="http://www.gnu.org/licenses/gpl-2.0.txt" target="_blank" rel="nofollow">GPLv2</a> License.
             {% endblocktrans %}
         </p>
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <select title="language" name="language" onchange="this.form.submit()">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                        {{ language.name_local }} ({{ language.code }})
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
     </div>
 {% endblock %}
