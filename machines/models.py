@@ -589,8 +589,8 @@ class Nas(RevMixin, AclMixin, models.Model):
     )
 
     class Meta:
-        verbose_name = _("Network access server")
-        verbose_name_plural = _("Network access servers")
+        verbose_name = _("Network access server type")
+        verbose_name_plural = _("Network access server types")
 
     def __str__(self):
         return self.name

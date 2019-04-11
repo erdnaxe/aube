@@ -105,9 +105,7 @@ class NasAdmin(VersionAdmin):
     """Admin view of a Nas object"""
     list_display = ('nas_type', 'machine_type', 'port_access_mode',
                     'autocapture_mac')
-    list_filter = ('port_access_mode', 'autocapture_mac', 'nas_type',
-                   'machine_type')
-    search_fields = ('name',)
+    list_filter = ('port_access_mode', 'autocapture_mac')
 
 
 class IpListAdmin(VersionAdmin):
