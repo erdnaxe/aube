@@ -108,8 +108,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sitemap"></i> {% trans "Topology" %}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'topologie:index' %}"><i class="fa fa-microchip"></i> {% trans "Switches" %}</a></li>
-                                <li><a href="{% url 'topologie:index-ap' %}"><i class="fa fa-wifi"></i> {% trans "Access points" %}</a></li>
-                                <li><a href="{% url 'topologie:index-room' %}"><i class="fa fa-home"></i> {% trans "Rooms" %}</a></li>
                             </ul>
                         </li>
                         {% acl_end %}

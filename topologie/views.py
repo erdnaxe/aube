@@ -196,26 +196,6 @@ def index_port(request, switch, switchid):
 
 
 @login_required
-@can_view_all(Room)
-def index_room(request):
-    """ Affichage de l'ensemble des chambres"""
-    room_list = Room.objects
-    room_list = SortTable.sort(
-        room_list,
-        request.GET.get('col'),
-        request.GET.get('order'),
-        SortTable.TOPOLOGIE_INDEX_ROOM
-    )
-    pagination_number = GeneralOption.get_cached_value('pagination_number')
-    room_list = re2o_paginator(request, room_list, pagination_number)
-    return render(
-        request,
-        'topologie/index_room.html',
-        {'room_list': room_list}
-    )
-
-
-@login_required
 @can_view_all(AccessPoint)
 def index_ap(request):
     """ Affichage de l'ensemble des bornes"""
@@ -724,61 +704,6 @@ def edit_ap(request, ap, **_kwargs):
             'device': 'wifi ap',
         },
         'topologie/topo_more.html',
-        request
-    )
-
-
-@login_required
-@can_create(Room)
-def new_room(request):
-    """Nouvelle chambre """
-    room = EditRoomForm(request.POST or None)
-    if room.is_valid():
-        room.save()
-        messages.success(request, _("The room was created."))
-        return redirect(reverse('topologie:index-room'))
-    return form(
-        {'topoform': room, 'action_name': _("Create")},
-        'topologie/topo.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Room)
-def edit_room(request, room, **_kwargs):
-    """ Edition numero et details de la chambre"""
-    room = EditRoomForm(request.POST or None, instance=room)
-    if room.is_valid():
-        if room.changed_data:
-            room.save()
-            messages.success(request, _("The room was edited."))
-        return redirect(reverse('topologie:index-room'))
-    return form(
-        {'topoform': room, 'action_name': _("Edit")},
-        'topologie/topo.html',
-        request
-    )
-
-
-@login_required
-@can_delete(Room)
-def del_room(request, room, **_kwargs):
-    """ Suppression d'un chambre"""
-    if request.method == "POST":
-        try:
-            room.delete()
-            messages.success(request, _("The room was deleted."))
-        except ProtectedError:
-            messages.error(
-                request,
-                (_("The room %s is used by another object, impossible to"
-                   " deleted it.") % room)
-            )
-        return redirect(reverse('topologie:index-room'))
-    return form(
-        {'objet': room, 'objet_name': _("Room")},
-        'topologie/delete.html',
         request
     )
 

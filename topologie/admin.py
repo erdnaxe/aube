@@ -1,15 +1,12 @@
 # -*- mode: python; coding: utf-8 -*-
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
+# Copyright © 2019  Alexandre Iooss
 # Copyright © 2017  Gabriel Détraz
 # Copyright © 2017  Goulven Kermarec
 # Copyright © 2017  Augustin Lemesle
 
-"""
-Fichier définissant les administration des models dans l'interface admin
-"""
-
-from __future__ import unicode_literals
+"""Defines models in admin interface"""
 
 from django.contrib import admin
 from reversion.admin import VersionAdmin
@@ -49,9 +46,13 @@ class AccessPointAdmin(VersionAdmin):
     pass
 
 
+@admin.register(Room)
 class RoomAdmin(VersionAdmin):
-    """Administration d'un chambre"""
-    pass
+    """Register Room object in admin"""
+    list_display = ('name', 'building', 'details')
+    list_filter = ('building', 'building__dormitory')
+    search_fields = ('name', 'building__name', 'building__dormitory__name',
+                     'details')
 
 
 class ModelSwitchAdmin(VersionAdmin):
@@ -69,28 +70,31 @@ class SwitchBayAdmin(VersionAdmin):
     pass
 
 
+@admin.register(Building)
 class BuildingAdmin(VersionAdmin):
-    """Administration d'un batiment"""
-    pass
+    """Register Dormitory object in admin"""
+    list_display = ('name', 'dormitory')
+    search_fields = ('name', 'dormitory__name')
+    list_filter = ('dormitory',)
 
 
+@admin.register(Dormitory)
 class DormitoryAdmin(VersionAdmin):
-    """Administration d'une residence"""
-    pass
+    """Register Dormitory object in admin"""
+    list_display = ('name',)
+    search_fields = ('name',)
 
 
 class PortProfileAdmin(VersionAdmin):
     """Administration of a port profile"""
     pass
 
+
 admin.site.register(Port, PortAdmin)
 admin.site.register(AccessPoint, AccessPointAdmin)
-admin.site.register(Room, RoomAdmin)
 admin.site.register(Switch, SwitchAdmin)
 admin.site.register(Stack, StackAdmin)
 admin.site.register(ModelSwitch, ModelSwitchAdmin)
 admin.site.register(ConstructorSwitch, ConstructorSwitchAdmin)
-admin.site.register(Building, BuildingAdmin)
-admin.site.register(Dormitory, DormitoryAdmin)
 admin.site.register(SwitchBay, SwitchBayAdmin)
 admin.site.register(PortProfile, PortProfileAdmin)
