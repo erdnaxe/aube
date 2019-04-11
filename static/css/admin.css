@@ -81,6 +81,11 @@ img.banding-logo {
 #footer {
     margin: auto;
     max-width: 80em;
+    color: #999;
+}
+
+#footer a {
+    color: #777;
 }
 
 #footer select {
