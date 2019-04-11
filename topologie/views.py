@@ -229,26 +229,12 @@ def index_physical_grouping(request):
                   .prefetch_related(
                       'switch_set__interface_set__domain__extension'
                   ))
-    building_list = Building.objects.all()
-    dormitory_list = Dormitory.objects.all()
     switch_bay_list = SwitchBay.objects.select_related('building')
     stack_list = SortTable.sort(
         stack_list,
         request.GET.get('col'),
         request.GET.get('order'),
         SortTable.TOPOLOGIE_INDEX_STACK
-    )
-    building_list = SortTable.sort(
-        building_list,
-        request.GET.get('col'),
-        request.GET.get('order'),
-        SortTable.TOPOLOGIE_INDEX_BUILDING
-    )
-    dormitory_list = SortTable.sort(
-        dormitory_list,
-        request.GET.get('col'),
-        request.GET.get('order'),
-        SortTable.TOPOLOGIE_INDEX_DORMITORY
     )
     switch_bay_list = SortTable.sort(
         switch_bay_list,
@@ -262,8 +248,6 @@ def index_physical_grouping(request):
         {
             'stack_list': stack_list,
             'switch_bay_list': switch_bay_list,
-            'building_list': building_list,
-            'dormitory_list': dormitory_list,
         }
     )
 
