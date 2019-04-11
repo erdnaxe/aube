@@ -61,8 +61,6 @@ urlpatterns = [
         views.index_serviceusers,
         name='index-serviceusers'),
     url(r'^mon_profil/$', views.mon_profil, name='mon-profil'),
-    url(r'^process/(?P<token>[a-z0-9]{32})/$', views.process, name='process'),
-    url(r'^reset_password/$', views.reset_password, name='reset-password'),
     url(r'^mass_archive/$', views.mass_archive, name='mass-archive'),
     url(r'^$', views.index, name='index'),
     url(r'^index_clubs/$', views.index_clubs, name='index-clubs'),

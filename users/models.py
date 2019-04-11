@@ -232,6 +232,13 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         blank=True,
         null=True
     )
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_(
+            'This is updated depending on the state of the user.'
+        ),
+    )
 
     USERNAME_FIELD = 'pseudo'
     REQUIRED_FIELDS = ['surname', 'email']
@@ -312,11 +319,6 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         """ Returns True if the object is a Adherent (subclassing User) """
         # TODO : change to isinstance (cleaner)
         return hasattr(self, 'adherent')
-
-    @property
-    def is_active(self):
-        """ Renvoie si l'user est à l'état actif"""
-        return self.state == self.STATE_ACTIVE or self.state == self.STATE_NOT_YET_ACTIVE
 
     def set_active(self):
         """Enable this user if he subscribed successfully one time before
@@ -713,36 +715,6 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         )
         return
 
-    def reset_passwd_mail(self, request):
-        """ Prend en argument un request, envoie un mail de
-        réinitialisation de mot de pass """
-        req = Request()
-        req.type = Request.PASSWD
-        req.user = self
-        req.save()
-        template = loader.get_template('users/email_passwd_request')
-        context = {
-            'name': req.user.get_full_name(),
-            'asso': AssoOption.get_cached_value('name'),
-            'asso_mail': AssoOption.get_cached_value('contact'),
-            'site_name': GeneralOption.get_cached_value('site_name'),
-            'url': request.build_absolute_uri(
-                reverse('users:process', kwargs={'token': req.token})
-            ),
-            'expire_in': str(
-                GeneralOption.get_cached_value('req_expire_hrs')
-            ) + ' hours',
-        }
-        send_mail(
-            'Changement de mot de passe du %(name)s / Password renewal for '
-            '%(name)s' % {'name': AssoOption.get_cached_value('name')},
-            template.render(context),
-            GeneralOption.get_cached_value('email_from'),
-            [req.user.email],
-            fail_silently=False
-        )
-        return
-
     def autoregister_machine(self, mac_address, nas_type):
         """ Fonction appellée par freeradius. Enregistre la mac pour
         une machine inconnue sur le compte de l'user"""
@@ -1084,6 +1056,11 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
             raise ValidationError(_("You can't redirect your local emails if no external email"
                   " address has been set.")
             )
+
+    def save(self, *args, **kwargs):
+        self.is_active = (self.state == self.STATE_ACTIVE
+                          or self.state == self.STATE_NOT_YET_ACTIVE)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.pseudo

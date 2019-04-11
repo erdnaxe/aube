@@ -696,63 +696,6 @@ def profil(request, users, **_kwargs):
     )
 
 
-def reset_password(request):
-    """ Reintialisation du mot de passe si mdp oublié """
-    userform = ResetPasswordForm(request.POST or None)
-    if userform.is_valid():
-        try:
-            user = User.objects.get(
-                pseudo=userform.cleaned_data['pseudo'],
-                email=userform.cleaned_data['email'],
-                state__in=[User.STATE_ACTIVE, User.STATE_NOT_YET_ACTIVE],
-            )
-        except User.DoesNotExist:
-            messages.error(request, _("The user doesn't exist."))
-            return form(
-                {'userform': userform, 'action_name': _("Reset")},
-                'users/user.html',
-                request
-            )
-        user.reset_passwd_mail(request)
-        messages.success(request, _("An email to reset the password was sent."))
-        redirect(reverse('index'))
-    return form(
-        {'userform': userform, 'action_name': _("Reset")},
-        'users/user.html',
-        request
-    )
-
-
-def process(request, token):
-    """Process, lien pour la reinitialisation du mot de passe"""
-    valid_reqs = Request.objects.filter(expires_at__gt=timezone.now())
-    req = get_object_or_404(valid_reqs, token=token)
-
-    if req.type == Request.PASSWD:
-        return process_passwd(request, req)
-    else:
-        messages.error(request, _("Error: please contact an admin."))
-        redirect(reverse('index'))
-
-
-def process_passwd(request, req):
-    """Process le changeemnt de mot de passe, renvoie le formulaire
-    demandant le nouveau password"""
-    user = req.user
-    u_form = PassForm(request.POST or None, instance=user, user=request.user)
-    if u_form.is_valid():
-        with transaction.atomic(), reversion.create_revision():
-            u_form.save()
-            reversion.set_comment(_("Password reset"))
-        req.delete()
-        messages.success(request, _("The password was changed."))
-        return redirect(reverse('index'))
-    return form(
-        {'userform': u_form, 'action_name': _("Change the password")},
-        'users/user.html',
-        request
-    )
-
 @login_required
 def initial_register(request):
     switch_ip = request.GET.get('switch_ip', None)
