@@ -1256,7 +1256,7 @@ def generate_dot(data, template):
        not (hasattr(t, 'template') and isinstance(t.template, Template)):
         raise Exception(_("The default Django template isn't used. This can"
                           " lead to rendering errors. Check the parameters."))
-    c = Context(data).flatten()
+    c = data
     dot = t.render(c)
     return(dot)
 

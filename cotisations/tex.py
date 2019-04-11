@@ -90,9 +90,8 @@ def create_pdf(template, ctx={}):
     Returns:
         The content of the temporary PDF file generated.
     """
-    context = Context(ctx)
     template = get_template(template)
-    rendered_tpl = template.render(context).encode('utf-8')
+    rendered_tpl = template.render(ctx).encode('utf-8')
 
     with tempfile.TemporaryDirectory() as tempdir:
         for _ in range(2):

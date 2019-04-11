@@ -31,7 +31,7 @@ class DateTimePicker(Input):
     def render(self, name, value, attrs=None): 
         super().render(name, value, attrs) 
         flat_attrs = flatatt(attrs)
-        context = Context({
+        context = {
             'name': name,
             'attrs': flat_attrs, 
             'id': attrs['id'], 
@@ -47,7 +47,7 @@ class DateTimePicker(Input):
             'nextText': mark_safe('"' + str(_('Next')) + '"'), 
             'prevText': mark_safe('"' + str(_('Previous')) + '"'), 
             'weekHeader': mark_safe('"' + str(_('Wk')) + '"' ),
-        }) 
+        }
         template = get_template('users/datetimepicker.html')
         return template.render(context) 
 
