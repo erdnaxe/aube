@@ -476,10 +476,11 @@ class SwitchBay(AclMixin, RevMixin, models.Model):
 
 
 class Dormitory(AclMixin, RevMixin, models.Model):
-    """A student accomodation/dormitory
-    Une résidence universitaire"""
-
-    name = models.CharField(max_length=255)
+    """A student accomodation/dormitory"""
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
 
     class Meta:
         verbose_name = _("dormitory")
@@ -494,13 +495,15 @@ class Dormitory(AclMixin, RevMixin, models.Model):
 
 
 class Building(AclMixin, RevMixin, models.Model):
-    """A building of a dormitory
-    Un batiment"""
-
-    name = models.CharField(max_length=255)
+    """A building of a dormitory"""
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
     dormitory = models.ForeignKey(
         'Dormitory',
         on_delete=models.PROTECT,
+        verbose_name=_('dormitory'),
     )
 
     class Meta:
@@ -685,12 +688,19 @@ class Port(AclMixin, RevMixin, models.Model):
 
 class Room(AclMixin, RevMixin, models.Model):
     """Une chambre/local contenant une prise murale"""
-
-    name = models.CharField(max_length=255)
-    details = models.CharField(max_length=255, blank=True)
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
+    details = models.CharField(
+        verbose_name=_('details'),
+        max_length=255,
+        blank=True,
+    )
     building = models.ForeignKey(
         'Building',
         on_delete=models.PROTECT,
+        verbose_name=_('building'),
     )
 
     class Meta:

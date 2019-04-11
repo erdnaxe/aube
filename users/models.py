@@ -1369,9 +1369,11 @@ def service_user_post_delete(**kwargs):
 
 
 class School(RevMixin, AclMixin, models.Model):
-    """ Etablissement d'enseignement"""
-
-    name = models.CharField(max_length=255)
+    """A institute in which students study"""
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
 
     class Meta:
         verbose_name = _("school")
@@ -1446,15 +1448,16 @@ def listright_post_delete(**kwargs):
 
 
 class ListShell(RevMixin, AclMixin, models.Model):
-    """Un shell possible. Pas de check si ce shell existe, les
-    admin sont des grands"""
-
-    shell = models.CharField(max_length=255, unique=True)
+    """A linux shell that members can use"""
+    shell = models.CharField(
+        verbose_name=_('path'),
+        max_length=255,
+        unique=True,
+    )
 
     class Meta:
         verbose_name = _("shell")
         verbose_name_plural = _("shells")
-
 
     def get_pretty_name(self):
         """Return the canonical name of the shell"""
@@ -1465,8 +1468,7 @@ class ListShell(RevMixin, AclMixin, models.Model):
 
 
 class Ban(RevMixin, AclMixin, models.Model):
-    """ Bannissement. Actuellement a un effet tout ou rien.
-    Gagnerait à être granulaire"""
+    """A ban"""
 
     STATE_HARD = 0
     STATE_SOFT = 1
@@ -1477,11 +1479,27 @@ class Ban(RevMixin, AclMixin, models.Model):
         (2, _("RESTRICTED (speed limitation)")),
     )
 
-    user = models.ForeignKey('User', on_delete=models.PROTECT)
-    raison = models.CharField(max_length=255)
-    date_start = models.DateTimeField(auto_now_add=True)
-    date_end = models.DateTimeField()
-    state = models.IntegerField(choices=STATES, default=STATE_HARD)
+    user = models.ForeignKey(
+        'User',
+        on_delete=models.PROTECT,
+        verbose_name=_('user'),
+    )
+    raison = models.CharField(
+        verbose_name=_('cause'),
+        max_length=255,
+    )
+    date_start = models.DateTimeField(
+        verbose_name=_('start date'),
+        auto_now_add=True,
+    )
+    date_end = models.DateTimeField(
+        verbose_name=_('end date'),
+    )
+    state = models.IntegerField(
+        verbose_name=_('state'),
+        choices=STATES,
+        default=STATE_HARD,
+    )
 
     class Meta:
         verbose_name = _("ban")
@@ -1556,14 +1574,27 @@ def ban_post_delete(**kwargs):
 
 
 class Whitelist(RevMixin, AclMixin, models.Model):
-    """Accès à titre gracieux. L'utilisateur ne paye pas; se voit
-    accorder un accès internet pour une durée défini. Moins
-    fort qu'un ban quel qu'il soit"""
+    """A whitelist item
 
-    user = models.ForeignKey('User', on_delete=models.PROTECT)
-    raison = models.CharField(max_length=255)
-    date_start = models.DateTimeField(auto_now_add=True)
-    date_end = models.DateTimeField()
+    The member doesn't pay but get internet access.
+    Less powerful than a ban.
+    """
+    user = models.ForeignKey(
+        'User',
+        on_delete=models.PROTECT,
+        verbose_name=_('user'),
+    )
+    raison = models.CharField(
+        verbose_name=_('cause'),
+        max_length=255,
+    )
+    date_start = models.DateTimeField(
+        verbose_name=_('start date'),
+        auto_now_add=True,
+    )
+    date_end = models.DateTimeField(
+        verbose_name=_('end date'),
+    )
 
     class Meta:
         verbose_name = _("whitelist (free of charge access)")
