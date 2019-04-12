@@ -11,6 +11,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from django.views.generic import RedirectView
 
 from .views import index, about_page, contact_page
 
@@ -25,10 +26,7 @@ urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^about/$', about_page, name='about'),
     url(r'^contact/$', contact_page, name='contact'),
-    url(r'^', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^manage/', include(admin.site.urls)),
-    url(r'^doc/', include('django.contrib.admindocs.urls')),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'^search/', include('search.urls', namespace='search')),
     url(
@@ -42,6 +40,13 @@ urlpatterns = [
         r'^preferences/',
         include('preferences.urls', namespace='preferences')
     ),
+
+    # Include contrib auth, contrib admin and contrib admindocs
+    # manage/login/ is redirected to the non-admin login page
+    url(r'^', include('django.contrib.auth.urls')),
+    url(r'^manage/login/$', RedirectView.as_view(pattern_name='login')),
+    url(r'^manage/', include(admin.site.urls)),
+    url(r'^doc/', include('django.contrib.admindocs.urls')),
 ]
 # Add debug_toolbar URLs if activated
 if 'debug_toolbar' in settings.INSTALLED_APPS:
