@@ -28,7 +28,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import ProtectedError, Prefetch
 from django.core.exceptions import ValidationError
-from django.template import Context, Template, loader
+from django.template import Template, loader
 from django.utils.translation import ugettext as _
 
 import tempfile
@@ -63,7 +63,6 @@ from preferences.models import AssoOption, GeneralOption
 from .models import (
     Switch,
     Port,
-    Room,
     Stack,
     ModelSwitch,
     ConstructorSwitch,
@@ -81,7 +80,6 @@ from .forms import (
     NewSwitchForm,
     EditSwitchForm,
     AddPortForm,
-    EditRoomForm,
     StackForm,
     EditModelSwitchForm,
     EditConstructorSwitchForm,
@@ -89,8 +87,6 @@ from .forms import (
     AddAccessPointForm,
     EditAccessPointForm,
     EditSwitchBayForm,
-    EditBuildingForm,
-    EditDormitoryForm,
     EditPortProfileForm,
     EditModuleForm,
     EditSwitchModuleForm,
@@ -801,122 +797,6 @@ def del_switch_bay(request, switch_bay, **_kwargs):
         return redirect(reverse('topologie:index-physical-grouping'))
     return form(
         {'objet': switch_bay, 'objet_name': _("Switch bay")},
-        'topologie/delete.html',
-        request
-    )
-
-
-@login_required
-@can_create(Building)
-def new_building(request):
-    """New Building of a dorm
-    Nouveau batiment"""
-    building = EditBuildingForm(request.POST or None)
-    if building.is_valid():
-        building.save()
-        messages.success(request, _("The building was created."))
-        return redirect(reverse('topologie:index-physical-grouping'))
-    return form(
-        {'topoform': building, 'action_name': _("Create")},
-        'topologie/topo.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Building)
-def edit_building(request, building, **_kwargs):
-    """Edit a building
-    Edition d'un batiment"""
-    building = EditBuildingForm(request.POST or None, instance=building)
-    if building.is_valid():
-        if building.changed_data:
-            building.save()
-            messages.success(request, _("The building was edited."))
-        return redirect(reverse('topologie:index-physical-grouping'))
-    return form(
-        {'topoform': building, 'action_name': _("Edit")},
-        'topologie/topo.html',
-        request
-    )
-
-
-@login_required
-@can_delete(Building)
-def del_building(request, building, **_kwargs):
-    """Delete a building
-    Suppression d'un batiment"""
-    if request.method == "POST":
-        try:
-            building.delete()
-            messages.success(request, _("The building was deleted."))
-        except ProtectedError:
-            messages.error(
-                request,
-                (_("The building %s is used by another object, impossible"
-                   " to delete it.") % building)
-            )
-        return redirect(reverse('topologie:index-physical-grouping'))
-    return form(
-        {'objet': building, 'objet_name': _("Building")},
-        'topologie/delete.html',
-        request
-    )
-
-
-@login_required
-@can_create(Dormitory)
-def new_dormitory(request):
-    """A new dormitory
-    Nouvelle residence"""
-    dormitory = EditDormitoryForm(request.POST or None)
-    if dormitory.is_valid():
-        dormitory.save()
-        messages.success(request, _("The dormitory was created."))
-        return redirect(reverse('topologie:index-physical-grouping'))
-    return form(
-        {'topoform': dormitory, 'action_name': _("Create")},
-        'topologie/topo.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Dormitory)
-def edit_dormitory(request, dormitory, **_kwargs):
-    """Edit a dormitory
-    Edition d'une residence"""
-    dormitory = EditDormitoryForm(request.POST or None, instance=dormitory)
-    if dormitory.is_valid():
-        if dormitory.changed_data:
-            dormitory.save()
-            messages.success(request, _("The dormitory was edited."))
-        return redirect(reverse('topologie:index-physical-grouping'))
-    return form(
-        {'topoform': dormitory, 'action_name': _("Edit")},
-        'topologie/topo.html',
-        request
-    )
-
-
-@login_required
-@can_delete(Dormitory)
-def del_dormitory(request, dormitory, **_kwargs):
-    """Delete a dormitory
-    Suppression d'une residence"""
-    if request.method == "POST":
-        try:
-            dormitory.delete()
-            messages.success(request, _("The dormitory was deleted."))
-        except ProtectedError:
-            messages.error(
-                request,
-                (_("The dormitory %s is used by another object, impossible"
-                   " to delete it.") % dormitory)
-            )
-        return redirect(reverse('topologie:index-physical-grouping'))
-    return form(
-        {'objet': dormitory, 'objet_name': _("Dormitory")},
         'topologie/delete.html',
         request
     )

@@ -152,17 +152,6 @@ class NewSwitchForm(NewMachineForm):
         fields = ['name', 'switchbay', 'number', 'stack', 'stack_member_id']
 
 
-class EditRoomForm(FormRevMixin, ModelForm):
-    """Permet d'éediter le nom et commentaire d'une prise murale"""
-    class Meta:
-        model = Room
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(EditRoomForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
 class CreatePortsForm(forms.Form):
     """Permet de créer une liste de ports pour un switch."""
     begin = forms.IntegerField(label=_("Start:"), min_value=0)
@@ -234,28 +223,6 @@ class EditSwitchBayForm(FormRevMixin, ModelForm):
         instance = super().save(commit)
         instance.switch_set = self.cleaned_data['members']
         return instance
-
-
-class EditBuildingForm(FormRevMixin, ModelForm):
-    """Permet d'éditer le batiment"""
-    class Meta:
-        model = Building
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(EditBuildingForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class EditDormitoryForm(FormRevMixin, ModelForm):
-    """Enable dormitory edition"""
-    class Meta:
-        model = Dormitory
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(EditDormitoryForm, self).__init__(*args, prefix=prefix, **kwargs)
 
 
 class EditPortProfileForm(FormRevMixin, ModelForm):

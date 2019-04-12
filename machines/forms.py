@@ -171,37 +171,6 @@ class DelAliasForm(FormRevMixin, Form):
         )
 
 
-class MachineTypeForm(FormRevMixin, ModelForm):
-    """Ajout et edition d'un machinetype, relié à un iptype"""
-
-    class Meta:
-        model = MachineType
-        fields = ['name', 'ip_type']
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(MachineTypeForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['name'].label = _("Machine type to add")
-        self.fields['ip_type'].label = _("Related IP type")
-
-
-class DelMachineTypeForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs machinetype"""
-    machinetypes = forms.ModelMultipleChoiceField(
-        queryset=MachineType.objects.none(),
-        label=_("Current machine types"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelMachineTypeForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['machinetypes'].queryset = instances
-        else:
-            self.fields['machinetypes'].queryset = MachineType.objects.all()
-
-
 class IpTypeForm(FormRevMixin, ModelForm):
     """Formulaire d'ajout d'un iptype. Pas d'edition de l'ip de start et de
     stop après creation"""
@@ -472,36 +441,6 @@ class DelSrvForm(FormRevMixin, Form):
             self.fields['srv'].queryset = Srv.objects.all()
 
 
-class NasForm(FormRevMixin, ModelForm):
-    """Ajout d'un type de nas (machine d'authentification,
-    swicths, bornes...)"""
-
-    class Meta:
-        model = Nas
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(NasForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class DelNasForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs nas"""
-    nas = forms.ModelMultipleChoiceField(
-        queryset=Nas.objects.none(),
-        label=_("Current NAS devices"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelNasForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['nas'].queryset = instances
-        else:
-            self.fields['nas'].queryset = Nas.objects.all()
-
-
 class RoleForm(FormRevMixin, ModelForm):
     """Add and edit role."""
 
@@ -577,18 +516,6 @@ class DelServiceForm(FormRevMixin, Form):
             self.fields['service'].queryset = Service.objects.all()
 
 
-class VlanForm(FormRevMixin, ModelForm):
-    """Ajout d'un vlan : id, nom"""
-
-    class Meta:
-        model = Vlan
-        fields = ['vlan_id', 'name', 'comment']
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(VlanForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
 class EditOptionVlanForm(FormRevMixin, ModelForm):
     """Ajout d'un vlan : id, nom"""
     class Meta:
@@ -598,23 +525,6 @@ class EditOptionVlanForm(FormRevMixin, ModelForm):
     def __init__(self, *args, **kwargs):
         prefix = kwargs.pop('prefix', self.Meta.model.__name__)
         super(EditOptionVlanForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class DelVlanForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs vlans"""
-    vlan = forms.ModelMultipleChoiceField(
-        queryset=Vlan.objects.none(),
-        label=_("Current VLANs"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelVlanForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['vlan'].queryset = instances
-        else:
-            self.fields['vlan'].queryset = Vlan.objects.all()
 
 
 class EditOuverturePortConfigForm(FormRevMixin, ModelForm):
