@@ -48,8 +48,6 @@ from .forms import (
     EditMachineForm,
     EditInterfaceForm,
     AddInterfaceForm,
-    ExtensionForm,
-    DelExtensionForm,
     EditIpTypeForm,
     IpTypeForm,
     DelIpTypeForm,
@@ -556,67 +554,6 @@ def del_iptype(request, instances):
 
 
 @login_required
-@can_create(Extension)
-def add_extension(request):
-    """ View used to add an Extension object """
-    extension = ExtensionForm(request.POST or None)
-    if extension.is_valid():
-        extension.save()
-        messages.success(request, _("The extension was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'extensionform': extension, 'action_name': _("Create an extension")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Extension)
-def edit_extension(request, extension_instance, **_kwargs):
-    """ View used to edit an Extension object """
-    extension = ExtensionForm(
-        request.POST or None,
-        instance=extension_instance
-    )
-    if extension.is_valid():
-        if extension.changed_data:
-            extension.save()
-            messages.success(request, _("The extension was edited."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'extensionform': extension, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Extension)
-def del_extension(request, instances):
-    """ View used to delete an Extension object """
-    extension = DelExtensionForm(request.POST or None, instances=instances)
-    if extension.is_valid():
-        extension_dels = extension.cleaned_data['extensions']
-        for extension_del in extension_dels:
-            try:
-                extension_del.delete()
-                messages.success(request, _("The extension was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("The extension %s is assigned to at least one machine"
-                       " type, you can't delete it." % extension_del))
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'extensionform': extension, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
 @can_create(Domain)
 @can_edit(Interface)
 def add_alias(request, interface, interfaceid):
@@ -863,47 +800,6 @@ def index_iptype(request):
         request,
         'machines/index_iptype.html',
         {'iptype_list': iptype_list}
-    )
-
-
-@login_required
-@can_view_all(SOA, Mx, Ns, Txt, DName, Srv, Extension)
-def index_extension(request):
-    """ View displaying the list of existing extensions, the list of
-    existing SOA records, the list of existing MX records , the list of
-    existing NS records, the list of existing TXT records and the list of
-    existing SRV records """
-    extension_list = (Extension.objects
-                      .select_related('origin')
-                      .select_related('soa')
-                      .order_by('name'))
-    soa_list = SOA.objects.order_by('name')
-    mx_list = (Mx.objects
-               .order_by('zone')
-               .select_related('zone')
-               .select_related('name__extension'))
-    ns_list = (Ns.objects
-               .order_by('zone')
-               .select_related('zone')
-               .select_related('ns__extension'))
-    txt_list = Txt.objects.all().select_related('zone')
-    dname_list = DName.objects.all().select_related('zone')
-    srv_list = (Srv.objects
-                .all()
-                .select_related('extension')
-                .select_related('target__extension'))
-    return render(
-        request,
-        'machines/index_extension.html',
-        {
-            'extension_list': extension_list,
-            'soa_list': soa_list,
-            'mx_list': mx_list,
-            'ns_list': ns_list,
-            'txt_list': txt_list,
-            'dname_list': dname_list,
-            'srv_list': srv_list
-        }
     )
 
 

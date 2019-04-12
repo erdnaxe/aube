@@ -14,6 +14,7 @@ from django.contrib import admin
 from reversion.admin import VersionAdmin
 
 from .models import (
+    Extension,
     DName,
     MachineType,
     Mx,
@@ -24,6 +25,12 @@ from .models import (
     Txt,
     Vlan,
 )
+
+
+@admin.register(Extension)
+class ExtensionAdmin(VersionAdmin):
+    """Admin view of a Extension object"""
+    list_display = ('name', 'need_infra', 'origin', 'soa', 'dnssec')
 
 
 @admin.register(DName)

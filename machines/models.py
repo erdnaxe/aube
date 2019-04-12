@@ -706,34 +706,47 @@ class SOA(RevMixin, AclMixin, models.Model):
 
 
 class Extension(RevMixin, AclMixin, models.Model):
-    """ Extension dns type example.org. Précise si tout le monde peut
-    l'utiliser, associé à un origin (ip d'origine)"""
+    """Extension dns type .example.org
+
+    Précise si tout le monde peut l'utiliser,
+    associé à un origin (ip d'origine)
+    """
     name = models.CharField(
         max_length=255,
         unique=True,
-        help_text=_("Zone name, must begin with a dot (.example.org)")
+        verbose_name=_("extension to add"),
+        help_text=_("Zone name, must begin with a dot (.example.org)."),
     )
-    need_infra = models.BooleanField(default=False)
+    need_infra = models.BooleanField(
+        default=False,
+        verbose_name=_("need infra role"),
+        help_text=_("When active, only users with the \"use_all_extension\" "
+                    "permission will be able to use this extension."),
+    )
     origin = models.ForeignKey(
         'IpList',
         on_delete=models.PROTECT,
         blank=True,
         null=True,
-        help_text=_("A record associated with the zone")
+        verbose_name=_("A record origin"),
+        help_text=_("A record associated with this zone."),
     )
     origin_v6 = models.GenericIPAddressField(
         protocol='IPv6',
         null=True,
         blank=True,
-        help_text=_("AAAA record associated with the zone")
+        verbose_name=_("AAAA record origin"),
+        help_text=_("AAAA record associated with this zone."),
     )
     soa = models.ForeignKey(
         'SOA',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name=_("SOA record to use"),
     )
     dnssec = models.BooleanField(
         default=False,
-        help_text=_("Should the zone be signed with DNSSEC")
+        verbose_name=_("DNSSEC"),
+        help_text=_("Should this zone be signed with DNSSEC."),
     )
 
     class Meta:
@@ -780,7 +793,7 @@ class Extension(RevMixin, AclMixin, models.Model):
                 .prefetch_related('cname'))
 
     def get_associated_dname_records(self):
-        return (DName.objects.filter(alias=self))
+        return DName.objects.filter(alias=self)
 
     @staticmethod
     def can_use_all(user_request, *_args, **_kwargs):

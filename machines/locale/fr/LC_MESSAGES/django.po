@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 18:51+0200\n"
+"POT-Creation-Date: 2019-04-12 19:09+0200\n"
 "PO-Revision-Date: 2018-06-23 16:35+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -51,35 +51,11 @@ msgstr "Type d'IP à ajouter"
 msgid "Current IP types"
 msgstr "Types d'IP actuels"
 
-#: machines/forms.py:218
-msgid "Extension to add"
-msgstr "Extension à ajouter"
-
-#: machines/forms.py:219 machines/templates/machines/aff_extension.html:37
-msgid "A record origin"
-msgstr "Enregistrement A origin"
-
-#: machines/forms.py:220 machines/templates/machines/aff_extension.html:39
-msgid "AAAA record origin"
-msgstr "Enregistrement AAAA origin"
-
-#: machines/forms.py:221
-msgid "SOA record to use"
-msgstr "Enregistrement SOA à utiliser"
-
-#: machines/forms.py:222
-msgid "Sign with DNSSEC"
-msgstr "Signer avec DNSSEC"
-
-#: machines/forms.py:229
-msgid "Current extensions"
-msgstr "Extensions actuelles"
-
-#: machines/forms.py:274
+#: machines/forms.py:240
 msgid "Current roles"
 msgstr "Rôles actuels"
 
-#: machines/forms.py:316
+#: machines/forms.py:282
 msgid "Current services"
 msgstr "Services actuels"
 
@@ -119,7 +95,7 @@ msgstr "Vous n'avez pas le droit d'ajouter une machine."
 msgid "You don't have the right to add a machine to another user."
 msgstr "Vous n'avez pas le droit d'ajouter une machine à un autre utilisateur."
 
-#: machines/models.py:129 machines/models.py:1288
+#: machines/models.py:129 machines/models.py:1301
 #, python-format
 msgid ""
 "You reached the maximum number of interfaces that you are allowed to create "
@@ -128,8 +104,8 @@ msgstr ""
 "Vous avez atteint le nombre maximal d'interfaces que vous pouvez créer vous-"
 "même (%s)."
 
-#: machines/models.py:148 machines/models.py:1313 machines/models.py:1330
-#: machines/models.py:1418 machines/models.py:1435
+#: machines/models.py:148 machines/models.py:1326 machines/models.py:1343
+#: machines/models.py:1431 machines/models.py:1448
 msgid "You don't have the right to edit a machine of another user."
 msgstr ""
 "Vous n'avez pas le droit de modifier une machine d'un autre utilisateur."
@@ -372,12 +348,11 @@ msgstr ""
 "Secondes avant que le DNS secondaire arrête de répondre aux requêtes dans le "
 "cas d'un délai d'attente du DNS primaire."
 
-#: machines/models.py:659 machines/models.py:944
+#: machines/models.py:659 machines/models.py:957
 msgid "time to live"
 msgstr "temps de vie"
 
-#: machines/models.py:663 machines/templates/machines/aff_extension.html:36
-#: machines/templates/machines/machine.html:120
+#: machines/models.py:663 machines/templates/machines/machine.html:120
 msgid "SOA record"
 msgstr "enregistrement SOA"
 
@@ -389,115 +364,147 @@ msgstr "enregistrements SOA"
 msgid "SOA to edit"
 msgstr "SOA à modifier"
 
-#: machines/models.py:714
-msgid "Zone name, must begin with a dot (.example.org)"
-msgstr "Nom de zone, doit commencer par un point (.example.org)"
+#: machines/models.py:717
+msgid "extension to add"
+msgstr "extension à ajouter"
+
+#: machines/models.py:718
+msgid "Zone name, must begin with a dot (.example.org)."
+msgstr "Nom de zone, doit commencer par un point (.example.org)."
 
 #: machines/models.py:722
-msgid "A record associated with the zone"
-msgstr "Enregistrement A associé à la zone"
+msgid "need infra role"
+msgstr "besoin du droit infra"
 
-#: machines/models.py:728
-msgid "AAAA record associated with the zone"
-msgstr "Enregristrement AAAA associé avec la zone"
+#: machines/models.py:723
+msgid ""
+"When active, only users with the \"use_all_extension\" permission will be "
+"able to use this extension."
+msgstr ""
+"Quand cette option est activée, seulement les utilisateurs avec la "
+"permission « use_all_extension » pourront utiliser cette extension."
 
-#: machines/models.py:736
-msgid "Should the zone be signed with DNSSEC"
-msgstr "La zone doit-elle être signée avec DNSSEC"
+#: machines/models.py:731
+msgid "A record origin"
+msgstr "Enregistrement A origin"
 
-#: machines/models.py:741
+#: machines/models.py:732
+msgid "A record associated with this zone."
+msgstr "Enregistrement A associé à la zone."
+
+#: machines/models.py:738
+msgid "AAAA record origin"
+msgstr "Enregistrement AAAA origin"
+
+#: machines/models.py:739
+msgid "AAAA record associated with this zone."
+msgstr "Enregristrement AAAA associé avec la zone."
+
+#: machines/models.py:744
+msgid "SOA record to use"
+msgstr "Enregistrement SOA à utiliser"
+
+#: machines/models.py:748
+msgid "DNSSEC"
+msgstr "DNSSEC"
+
+#: machines/models.py:749
+msgid "Should this zone be signed with DNSSEC."
+msgstr "La zone doit-elle être signée avec DNSSEC."
+
+#: machines/models.py:754
 msgid "Can use all extensions"
 msgstr "Peut utiliser toutes les extensions"
 
-#: machines/models.py:743
+#: machines/models.py:756
 msgid "DNS extension"
 msgstr "extension DNS"
 
-#: machines/models.py:744
+#: machines/models.py:757
 msgid "DNS extensions"
 msgstr "extensions DNS"
 
-#: machines/models.py:798
+#: machines/models.py:811
 msgid "An extension must begin with a dot."
 msgstr "Une extension doit commencer par un point."
 
-#: machines/models.py:809 machines/models.py:899
+#: machines/models.py:822 machines/models.py:912
 msgid "zone"
-msgstr ""
+msgstr "zone"
 
-#: machines/models.py:812 machines/models.py:949
+#: machines/models.py:825 machines/models.py:962
 msgid "priority"
 msgstr "priorité"
 
-#: machines/models.py:817 machines/models.py:903
+#: machines/models.py:830 machines/models.py:916
 msgid "record"
 msgstr "enregistrement"
 
-#: machines/models.py:821 machines/templates/machines/machine.html:124
+#: machines/models.py:834 machines/templates/machines/machine.html:124
 msgid "MX record"
 msgstr "enregistrement MX"
 
-#: machines/models.py:822
+#: machines/models.py:835
 msgid "MX records"
 msgstr "enregistrements MX"
 
-#: machines/models.py:842 machines/models.py:869
+#: machines/models.py:855 machines/models.py:882
 msgid "concerned zone"
 msgstr "zone concernée"
 
-#: machines/models.py:847
+#: machines/models.py:860
 msgid "name server"
 msgstr "serveur cible"
 
-#: machines/models.py:848
+#: machines/models.py:861
 msgid "Authoritative interface for the zone."
 msgstr "Interface authoritaire pour la zone concernée."
 
-#: machines/models.py:852 machines/templates/machines/machine.html:128
+#: machines/models.py:865 machines/templates/machines/machine.html:128
 msgid "NS record"
 msgstr "enregistrement NS"
 
-#: machines/models.py:853
+#: machines/models.py:866
 msgid "NS records"
 msgstr "enregistrements NS"
 
-#: machines/models.py:873
+#: machines/models.py:886
 msgid "first part of record"
 msgstr "première partie de l'enregistrement"
 
-#: machines/models.py:877
+#: machines/models.py:890
 msgid "second part of record"
 msgstr "seconde partie de l'enregistrement"
 
-#: machines/models.py:881 machines/templates/machines/machine.html:132
+#: machines/models.py:894 machines/templates/machines/machine.html:132
 msgid "TXT record"
 msgstr "enregistrement TXT"
 
-#: machines/models.py:882
+#: machines/models.py:895
 msgid "TXT records"
 msgstr "enregistrements TXT"
 
-#: machines/models.py:907 machines/templates/machines/machine.html:136
+#: machines/models.py:920 machines/templates/machines/machine.html:136
 msgid "DNAME record"
 msgstr "enregistrement DNAME"
 
-#: machines/models.py:908
+#: machines/models.py:921
 msgid "DNAME records"
 msgstr "enregistrements DNAME"
 
-#: machines/models.py:926
+#: machines/models.py:939
 msgid "service"
 msgstr "service"
 
-#: machines/models.py:935
+#: machines/models.py:948
 msgid "protocole"
 msgstr "protocole"
 
-#: machines/models.py:940
+#: machines/models.py:953
 msgid "extension"
 msgstr "extension"
 
-#: machines/models.py:950
+#: machines/models.py:963
 msgid ""
 "Priority of the target server (positive integer value, the lower it is, the "
 "more the server will be used if available)."
@@ -505,11 +512,11 @@ msgstr ""
 "Priorité du serveur cible (entier positif, plus il est bas, plus le serveur "
 "sera utilisé si disponible)."
 
-#: machines/models.py:957
+#: machines/models.py:970
 msgid "weight"
 msgstr "poids"
 
-#: machines/models.py:958
+#: machines/models.py:971
 msgid ""
 "Relative weight for records with the same priority (integer value between 0 "
 "and 65535)."
@@ -517,132 +524,132 @@ msgstr ""
 "Poids relatif des enregistrements avec la même priorité (entier entre 0 et "
 "65535)."
 
-#: machines/models.py:963
+#: machines/models.py:976
 msgid "TCP/UDP port"
 msgstr "Port TCP/UDP"
 
-#: machines/models.py:968
+#: machines/models.py:981
 msgid "target server"
 msgstr "serveur cible"
 
-#: machines/models.py:972 machines/templates/machines/machine.html:140
+#: machines/models.py:985 machines/templates/machines/machine.html:140
 msgid "SRV record"
 msgstr "enregistrement SRV"
 
-#: machines/models.py:973
+#: machines/models.py:986
 msgid "SRV records"
 msgstr "enregistrements SRV"
 
-#: machines/models.py:1002 machines/templates/machines/aff_sshfp.html:31
+#: machines/models.py:1015 machines/templates/machines/aff_sshfp.html:31
 msgid "SSH public key"
 msgstr "Clé publique SSH"
 
-#: machines/models.py:1010 machines/templates/machines/aff_sshfp.html:33
+#: machines/models.py:1023 machines/templates/machines/aff_sshfp.html:33
 msgid "Comment"
 msgstr "Commentaire"
 
-#: machines/models.py:1036 machines/templates/machines/machine.html:144
+#: machines/models.py:1049 machines/templates/machines/machine.html:144
 msgid "SSHFP record"
 msgstr "enregistrement SSHFP"
 
-#: machines/models.py:1037
+#: machines/models.py:1050
 msgid "SSHFP records"
 msgstr "enregistrements SSHFP"
 
-#: machines/models.py:1075
+#: machines/models.py:1088
 msgid "Can change the owner of an interface"
 msgstr "Peut changer l'utilisateur d'une interface"
 
-#: machines/models.py:1077
+#: machines/models.py:1090
 msgid "interface"
 msgstr "interface"
 
-#: machines/models.py:1078
+#: machines/models.py:1091
 msgid "interfaces"
 msgstr "interfaces"
 
-#: machines/models.py:1182
+#: machines/models.py:1195
 msgid "The given MAC address is invalid."
 msgstr "L'adresse MAC indiquée est invalide."
 
-#: machines/models.py:1190
+#: machines/models.py:1203
 msgid "There is no IP address available in the slash."
 msgstr "Il n'y a pas d'adresse IP disponible dans le slash."
 
-#: machines/models.py:1203
+#: machines/models.py:1216
 msgid "IPv4 unassigning"
 msgstr "IPv4 non assignées"
 
-#: machines/models.py:1211
+#: machines/models.py:1224
 msgid "IPv4 assigning"
 msgstr "IPv4 assignées"
 
-#: machines/models.py:1242
+#: machines/models.py:1255
 msgid "The selected IP type is invalid."
 msgstr "Le type d'IP sélectionné est invalide."
 
-#: machines/models.py:1252
+#: machines/models.py:1265
 msgid "Mac address already registered in this Machine Type/Subnet"
 msgstr ""
 
-#: machines/models.py:1259
+#: machines/models.py:1272
 msgid "The IPv4 address and the machine type don't match."
 msgstr "L'adresse IPv4 et le type de machine ne correspondent pas."
 
-#: machines/models.py:1274
+#: machines/models.py:1287
 msgid "Nonexistent machine."
 msgstr "Machine inexistante."
 
-#: machines/models.py:1278
+#: machines/models.py:1291
 msgid "You can't add a machine."
 msgstr "Vous ne pouvez pas ajouter une machine."
 
-#: machines/models.py:1284
+#: machines/models.py:1297
 msgid ""
 "You don't have the right to add an interface to a machine of another user."
 msgstr ""
 "Vous n'avez pas le droit d'ajouter une interface à une machine d'un autre "
 "utilisateur."
 
-#: machines/models.py:1298
+#: machines/models.py:1311
 msgid "Permission required to edit the machine."
 msgstr "Permission requise pour modifier la machine."
 
-#: machines/models.py:1342 machines/models.py:1447 machines/models.py:1654
+#: machines/models.py:1355 machines/models.py:1460 machines/models.py:1667
 msgid "You don't have the right to view machines other than yours."
 msgstr "Vous n'avez pas le droit de voir d'autres machines que les vôtres."
 
-#: machines/models.py:1375
+#: machines/models.py:1388
 msgid "Can change the SLAAC value of an IPv6 addresses list"
 msgstr "Peut modifier la valeur SLAAC d'une liste d'adresses IPv6"
 
-#: machines/models.py:1378
+#: machines/models.py:1391
 msgid "IPv6 addresses list"
 msgstr "Liste d'adresses IPv6"
 
-#: machines/models.py:1379
+#: machines/models.py:1392
 msgid "IPv6 addresses lists"
 msgstr "Listes d'adresses IPv6"
 
-#: machines/models.py:1391 machines/models.py:1602
+#: machines/models.py:1404 machines/models.py:1615
 msgid "Nonexistent interface."
 msgstr "Interface inexistante."
 
-#: machines/models.py:1394 machines/models.py:1609
+#: machines/models.py:1407 machines/models.py:1622
 msgid "You don't have the right to add an alias to a machine of another user."
 msgstr ""
 "Vous n'avez pas le droit d'ajouter un alias à une machine d'un autre "
 "utilisateur."
 
-#: machines/models.py:1402
+#: machines/models.py:1415
 msgid "Permission required to change the SLAAC value of an IPv6 address"
 msgstr "Permission requise pour changer la valeur SLAAC d'une adresse IPv6."
 
-#: machines/models.py:1474
+#: machines/models.py:1487
 msgid "A SLAAC IP address is already registered."
 msgstr "Une adresse IP SLAAC est déjà enregistrée."
 
-#: machines/models.py:1482
+#: machines/models.py:1495
 msgid ""
 "The v6 prefix is incorrect and doesn't match the type associated with the "
 "machine."
@@ -650,41 +657,41 @@ msgstr ""
 "Le préfixe v6 est incorrect et ne correspond pas au type associé à la "
 "machine."
 
-#: machines/models.py:1508
+#: machines/models.py:1521
 msgid "Mandatory and unique, must not contain dots."
 msgstr "Obligatoire et unique, ne doit pas contenir de points."
 
-#: machines/models.py:1521
+#: machines/models.py:1534
 msgid "domain"
 msgstr "domaine"
 
-#: machines/models.py:1522
+#: machines/models.py:1535
 msgid "domains"
 msgstr "domaines"
 
-#: machines/models.py:1544
+#: machines/models.py:1557
 msgid "You can't create a both A and CNAME record."
 msgstr "Vous ne pouvez pas créer un enregistrement à la fois A et CNAME."
 
-#: machines/models.py:1547
+#: machines/models.py:1560
 msgid "You can't create a CNAME record pointing to itself."
 msgstr "Vous ne pouvez pas créer un enregistrement CNAME vers lui-même."
 
-#: machines/models.py:1555
+#: machines/models.py:1568
 #, python-format
 msgid "The domain name %s is too long (over 63 characters)."
 msgstr "Le nom de domaine %s est trop long (plus de 63 caractères)."
 
-#: machines/models.py:1558
+#: machines/models.py:1571
 #, python-format
 msgid "The domain name %s contains forbidden characters."
 msgstr "Le nom de domaine %s contient des caractères interdits."
 
-#: machines/models.py:1576
+#: machines/models.py:1589
 msgid "Invalid extension."
 msgstr "Extension invalide."
 
-#: machines/models.py:1617
+#: machines/models.py:1630
 #, python-format
 msgid ""
 "You reached the maximum number of alias that you are allowed to create "
@@ -693,140 +700,140 @@ msgstr ""
 "Vous avez atteint le nombre maximal d'alias que vous pouvez créer vous-même "
 "(%s)."
 
-#: machines/models.py:1630
+#: machines/models.py:1643
 msgid "You don't have the right to edit an alias of a machine of another user."
 msgstr ""
 "Vous n'avez pas le droit de modifier un alias d'une machine d'un autre "
 "utilisateur."
 
-#: machines/models.py:1642
+#: machines/models.py:1655
 msgid ""
 "You don't have the right to delete an alias of a machine of another user."
 msgstr ""
 "Vous n'avez pas le droit de supprimer un alias d'une machine d'un autre "
 "utilisateur."
 
-#: machines/models.py:1669
+#: machines/models.py:1682
 msgid "IPv4 addresses list"
 msgstr "Liste d'adresses IPv4"
 
-#: machines/models.py:1670
+#: machines/models.py:1683
 msgid "IPv4 addresses lists"
 msgstr "Listes d'adresses IPv4"
 
-#: machines/models.py:1681
+#: machines/models.py:1694
 msgid "The IPv4 address and the range of the IP type don't match."
 msgstr "L'adresse IPv4 et la plage du type d'IP ne correspondent pas."
 
-#: machines/models.py:1699
+#: machines/models.py:1712
 msgid "DHCP server"
 msgstr "Serveur DHCP"
 
-#: machines/models.py:1700
+#: machines/models.py:1713
 msgid "Switches configuration server"
 msgstr "Serveur de configuration des commutateurs réseau"
 
-#: machines/models.py:1701
+#: machines/models.py:1714
 msgid "Recursive DNS server"
 msgstr "Serveur DNS récursif"
 
-#: machines/models.py:1702
+#: machines/models.py:1715
 msgid "NTP server"
 msgstr "Serveur NTP"
 
-#: machines/models.py:1703
+#: machines/models.py:1716
 msgid "RADIUS server"
 msgstr "Serveur RADIUS"
 
-#: machines/models.py:1704
+#: machines/models.py:1717
 msgid "Log server"
 msgstr "Serveur log"
 
-#: machines/models.py:1705
+#: machines/models.py:1718
 msgid "LDAP master server"
 msgstr "Serveur LDAP maître"
 
-#: machines/models.py:1706
+#: machines/models.py:1719
 msgid "LDAP backup server"
 msgstr "Serveur LDAP de secours"
 
-#: machines/models.py:1707
+#: machines/models.py:1720
 msgid "SMTP server"
 msgstr "Serveur SMTP"
 
-#: machines/models.py:1708
+#: machines/models.py:1721
 msgid "postgreSQL server"
 msgstr "Serveur postgreSQL"
 
-#: machines/models.py:1709
+#: machines/models.py:1722
 msgid "mySQL server"
 msgstr "Serveur mySQL"
 
-#: machines/models.py:1710
+#: machines/models.py:1723
 msgid "SQL client"
 msgstr "Client SQL"
 
-#: machines/models.py:1711
+#: machines/models.py:1724
 msgid "Gateway"
 msgstr "Passerelle"
 
-#: machines/models.py:1724
+#: machines/models.py:1737
 msgid "server role"
 msgstr "rôle de serveur"
 
-#: machines/models.py:1725
+#: machines/models.py:1738
 msgid "server roles"
 msgstr "rôles de serveur"
 
-#: machines/models.py:1759
+#: machines/models.py:1772
 msgid "Minimal time before regeneration of the service."
 msgstr "Temps minimal avant régénération du service."
 
-#: machines/models.py:1763
+#: machines/models.py:1776
 msgid "Maximal time before regeneration of the service."
 msgstr "Temps maximal avant régénération du service."
 
-#: machines/models.py:1768
+#: machines/models.py:1781
 msgid "service to generate (DHCP, DNS, ...)"
 msgstr "service à générer (DHCP, DNS, ...)"
 
-#: machines/models.py:1769
+#: machines/models.py:1782
 msgid "services to generate (DHCP, DNS, ...)"
 msgstr "services à générer (DHCP, DNS, ...)"
 
-#: machines/models.py:1814
+#: machines/models.py:1827
 msgid "link between service and server"
 msgstr "lien entre service et serveur"
 
-#: machines/models.py:1815
+#: machines/models.py:1828
 msgid "links between service and server"
 msgstr "liens entre service et serveur"
 
-#: machines/models.py:1857
+#: machines/models.py:1870
 msgid "Name of the ports configuration"
 msgstr "Nom de la configuration de ports"
 
-#: machines/models.py:1862
+#: machines/models.py:1875
 msgid "ports opening list"
 msgstr "liste d'ouverture de ports"
 
-#: machines/models.py:1863
+#: machines/models.py:1876
 msgid "ports opening lists"
 msgstr "listes d'ouverture de ports"
 
-#: machines/models.py:1872
+#: machines/models.py:1885
 msgid "You don't have the right to delete a ports opening list."
 msgstr "Vous n'avez pas le droit de supprimer une liste d'ouverture de ports."
 
-#: machines/models.py:1875
+#: machines/models.py:1888
 msgid "This ports opening list is used."
 msgstr "Cette liste d'ouverture de ports est utilisée."
 
-#: machines/models.py:1948
+#: machines/models.py:1961
 msgid "ports opening"
 msgstr "ouverture de ports"
 
-#: machines/models.py:1949
+#: machines/models.py:1962
 msgid "ports openings"
 msgstr "ouvertures de ports"
 
@@ -834,20 +841,14 @@ msgstr "ouvertures de ports"
 msgid "Aliases"
 msgstr "Alias"
 
-#: machines/templates/machines/aff_extension.html:34
 #: machines/templates/machines/aff_iptype.html:36
 #: machines/templates/machines/machine.html:116
 msgid "Extension"
 msgstr "Extension"
 
-#: machines/templates/machines/aff_extension.html:35
 #: machines/templates/machines/aff_iptype.html:37
 msgid "'infra' right required"
 msgstr "droit 'infra' requis"
-
-#: machines/templates/machines/aff_extension.html:41
-msgid "DNSSEC"
-msgstr "DNSSEC"
 
 #: machines/templates/machines/aff_iptype.html:38
 msgid "IPv4 range"
@@ -901,7 +902,7 @@ msgstr "Voir le profil"
 msgid "Deactivated"
 msgstr "Désactivée"
 
-#: machines/templates/machines/aff_machines.html:67 machines/views.py:334
+#: machines/templates/machines/aff_machines.html:67 machines/views.py:332
 msgid "Create an interface"
 msgstr "Créer une interface"
 
@@ -1011,7 +1012,6 @@ msgstr "Confirmer"
 #: machines/templates/machines/index.html:29
 #: machines/templates/machines/index.html:32
 #: machines/templates/machines/index_alias.html:29
-#: machines/templates/machines/index_extension.html:30
 #: machines/templates/machines/index_iptype.html:30
 #: machines/templates/machines/index_ipv6.html:30
 #: machines/templates/machines/index_portlist.html:8
@@ -1043,18 +1043,6 @@ msgstr " Ajouter un alias"
 #: machines/templates/machines/index_alias.html:36
 msgid " Delete one or several aliases"
 msgstr " Supprimer un ou plusieurs alias"
-
-#: machines/templates/machines/index_extension.html:33
-msgid "List of extensions"
-msgstr "Liste des extensions"
-
-#: machines/templates/machines/index_extension.html:37
-msgid " Add an extension"
-msgstr " Ajouter une extension"
-
-#: machines/templates/machines/index_extension.html:40
-msgid " Delete one or several extensions"
-msgstr " Supprimer une ou plusieurs extensions"
 
 #: machines/templates/machines/index_iptype.html:33
 msgid "List of IP types"
@@ -1169,108 +1157,104 @@ msgid "IPv6 address"
 msgstr "Adresse IPv6"
 
 #: machines/templates/machines/sidebar.html:39
-msgid "Extensions and zones"
-msgstr "Extensions et zones"
-
-#: machines/templates/machines/sidebar.html:45
 msgid "IP ranges"
 msgstr "Plages d'IP"
 
-#: machines/templates/machines/sidebar.html:51
+#: machines/templates/machines/sidebar.html:45
 msgid "Services (DHCP, DNS, ...)"
 msgstr "Services (DHCP, DNS, ...)"
 
-#: machines/templates/machines/sidebar.html:57
+#: machines/templates/machines/sidebar.html:51
 msgid "Server roles"
 msgstr "Rôles de serveur"
 
-#: machines/templates/machines/sidebar.html:63
+#: machines/templates/machines/sidebar.html:57
 msgid "Ports openings"
 msgstr "Ouvertures de ports"
 
-#: machines/views.py:115
+#: machines/views.py:113
 msgid "Select a machine type first."
 msgstr "Sélectionnez un type de machine d'abord."
 
-#: machines/views.py:217
+#: machines/views.py:215
 msgid "The machine was created."
 msgstr "La machine a été créée."
 
-#: machines/views.py:229
+#: machines/views.py:227
 msgid "Create a machine"
 msgstr "Créer une machine"
 
-#: machines/views.py:269
+#: machines/views.py:267
 msgid "The machine was edited."
 msgstr "La machine a été modifiée."
 
-#: machines/views.py:281 machines/views.py:405 machines/views.py:471
-#: machines/views.py:527 machines/views.py:588 machines/views.py:661
-#: machines/views.py:724 machines/views.py:781
+#: machines/views.py:279 machines/views.py:403 machines/views.py:469
+#: machines/views.py:525 machines/views.py:598 machines/views.py:661
+#: machines/views.py:718
 msgid "Edit"
 msgstr "Modifier"
 
-#: machines/views.py:294
+#: machines/views.py:292
 msgid "The machine was deleted."
 msgstr "La machine a été supprimée."
 
-#: machines/views.py:323
+#: machines/views.py:321
 msgid "The interface was created."
 msgstr "L'interface a été créée."
 
-#: machines/views.py:350
+#: machines/views.py:348
 msgid "The interface was deleted."
 msgstr "L'interface a été supprimée."
 
-#: machines/views.py:375
+#: machines/views.py:373
 msgid "The IPv6 addresses list was created."
 msgstr "La liste d'adresses IPv6 a été créée."
 
-#: machines/views.py:381
+#: machines/views.py:379
 msgid "Create an IPv6 addresses list"
 msgstr "Créer une liste d'adresses IPv6"
 
-#: machines/views.py:399
+#: machines/views.py:397
 msgid "The IPv6 addresses list was edited."
 msgstr "La liste d'adresses IPv6 a été modifiée."
 
-#: machines/views.py:418
+#: machines/views.py:416
 msgid "The IPv6 addresses list was deleted."
 msgstr "La liste d'adresses IPv6 a été supprimée."
 
-#: machines/views.py:442
+#: machines/views.py:440
 msgid "The SSHFP record was created."
 msgstr "L'enregistrement SSHFP a été créé."
 
-#: machines/views.py:448
+#: machines/views.py:446
 msgid "Create a SSHFP record"
 msgstr "Créer un enregistrement SSHFP"
 
-#: machines/views.py:465
+#: machines/views.py:463
 msgid "The SSHFP record was edited."
 msgstr "L'enregistrement SSHFP a été modifié."
 
-#: machines/views.py:484
+#: machines/views.py:482
 msgid "The SSHFP record was deleted."
 msgstr "L'enregistrement SSHFP a été supprimé."
 
-#: machines/views.py:505
+#: machines/views.py:503
 msgid "The IP type was created."
 msgstr "Le type d'IP a été créé."
 
-#: machines/views.py:508
+#: machines/views.py:506
 msgid "Create an IP type"
 msgstr "Créer un type d'IP"
 
-#: machines/views.py:524
+#: machines/views.py:522
 msgid "The IP type was edited."
 msgstr "Le type d'IP a été modifié."
 
-#: machines/views.py:543
+#: machines/views.py:541
 msgid "The IP type was deleted."
 msgstr "Le type d'IP a été supprimé."
 
-#: machines/views.py:547
+#: machines/views.py:545
 #, python-format
 msgid ""
 "The IP type %s is assigned to at least one machine, you can't delete it."
@@ -1278,122 +1262,97 @@ msgstr ""
 "Le type d'IP %s est assigné à au moins une machine, vous ne pouvez pas le "
 "supprimer."
 
-#: machines/views.py:552 machines/views.py:613 machines/views.py:691
-#: machines/views.py:748 machines/views.py:805
+#: machines/views.py:550 machines/views.py:628 machines/views.py:685
+#: machines/views.py:742
 msgid "Delete"
 msgstr "Supprimer"
 
-#: machines/views.py:565
-msgid "The extension was created."
-msgstr "L'extension a été créée."
-
-#: machines/views.py:568
-msgid "Create an extension"
-msgstr "Créer une extension"
-
-#: machines/views.py:585
-msgid "The extension was edited."
-msgstr "L'extension a été modifiée."
-
-#: machines/views.py:604
-msgid "The extension was deleted."
-msgstr "L'extension a été supprimée."
-
-#: machines/views.py:608
-#, python-format
-msgid ""
-"The extension %s is assigned to at least one machine type, you can't delete "
-"it."
-msgstr ""
-"L'extension %s est assignée à au moins un type de machine, vous ne pouvez "
-"pas le supprimer."
-
-#: machines/views.py:629
+#: machines/views.py:566
 msgid "The alias was created."
 msgstr "L'alias a été créé."
 
-#: machines/views.py:635
+#: machines/views.py:572
 msgid "Create an alias"
 msgstr "Créer un alias"
 
-#: machines/views.py:653
+#: machines/views.py:590
 msgid "The alias was edited."
 msgstr "L'alias a été modifié."
 
-#: machines/views.py:679
+#: machines/views.py:616
 #, python-format
 msgid "The alias %s was deleted."
 msgstr "L'alias %s a été supprimé."
 
-#: machines/views.py:684
+#: machines/views.py:621
 #, python-format
 msgid "Error: the alias %s can't be deleted."
 msgstr "Erreur : l'alias %s ne peut pas être supprimé."
 
-#: machines/views.py:704
+#: machines/views.py:641
 msgid "The role was created."
 msgstr "Le rôle a été créé."
 
-#: machines/views.py:707
+#: machines/views.py:644
 msgid "Create a role"
 msgstr "Créer un rôle"
 
-#: machines/views.py:721
+#: machines/views.py:658
 msgid "The role was edited."
 msgstr "Le rôle a été modifié."
 
-#: machines/views.py:740
+#: machines/views.py:677
 msgid "The role was deleted."
 msgstr "Le rôle a été supprimé."
 
-#: machines/views.py:744
+#: machines/views.py:681
 #, python-format
 msgid "Error: the role %s can't be deleted."
 msgstr "Erreur : le rôle %s ne peut pas être supprimé."
 
-#: machines/views.py:761
+#: machines/views.py:698
 msgid "The service was created."
 msgstr "Le service a été créé."
 
-#: machines/views.py:764
+#: machines/views.py:701
 msgid "Create a service"
 msgstr "Créer un service"
 
-#: machines/views.py:778
+#: machines/views.py:715
 msgid "The service was edited."
 msgstr "Le service a été modifié."
 
-#: machines/views.py:797
+#: machines/views.py:734
 msgid "The service was deleted."
 msgstr "Le service a été supprimé."
 
-#: machines/views.py:801
+#: machines/views.py:738
 #, python-format
 msgid "Error: the service %s can't be deleted."
 msgstr "Erreur : le service %s ne peut pas être supprimé."
 
-#: machines/views.py:1029
+#: machines/views.py:925
 msgid "The ports list was edited."
 msgstr "La liste de ports a été modifiée."
 
-#: machines/views.py:1043
+#: machines/views.py:939
 msgid "The ports list was deleted."
 msgstr "La liste de ports a été supprimée."
 
-#: machines/views.py:1068
+#: machines/views.py:964
 msgid "The ports list was created."
 msgstr "La liste de ports a été créée."
 
-#: machines/views.py:1086
+#: machines/views.py:982
 msgid "Warning: the IPv4 isn't public, the opening won't have effect in v4."
 msgstr ""
 "Attention : l'adresse IPv4 n'est pas publique, l'ouverture n'aura pas "
 "d'effet en v4."
 
-#: machines/views.py:1096
+#: machines/views.py:992
 msgid "The ports configuration was edited."
 msgstr "La configuration de ports a été modifiée."
 
-#: machines/views.py:1099
+#: machines/views.py:995
 msgid "Edit the configuration"
 msgstr "Modifier la configuration"

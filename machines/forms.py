@@ -205,40 +205,6 @@ class DelIpTypeForm(FormRevMixin, Form):
             self.fields['iptypes'].queryset = IpType.objects.all()
 
 
-class ExtensionForm(FormRevMixin, ModelForm):
-    """Formulaire d'ajout et edition d'une extension"""
-
-    class Meta:
-        model = Extension
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(ExtensionForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['name'].label = _("Extension to add")
-        self.fields['origin'].label = _("A record origin")
-        self.fields['origin_v6'].label = _("AAAA record origin")
-        self.fields['soa'].label = _("SOA record to use")
-        self.fields['dnssec'].label = _("Sign with DNSSEC")
-
-
-class DelExtensionForm(FormRevMixin, Form):
-    """Suppression d'une ou plusieurs extensions"""
-    extensions = forms.ModelMultipleChoiceField(
-        queryset=Extension.objects.none(),
-        label=_("Current extensions"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelExtensionForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['extensions'].queryset = instances
-        else:
-            self.fields['extensions'].queryset = Extension.objects.all()
-
-
 class Ipv6ListForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
     """Gestion des ipv6 d'une machine"""
 
