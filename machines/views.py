@@ -56,14 +56,8 @@ from .forms import (
     DomainForm,
     AliasForm,
     DelAliasForm,
-    NsForm,
-    DelNsForm,
-    TxtForm,
-    DelTxtForm,
     DNameForm,
     DelDNameForm,
-    MxForm,
-    DelMxForm,
     RoleForm,
     DelRoleForm,
     ServiceForm,
@@ -627,120 +621,6 @@ def del_extension(request, instances):
 
 
 @login_required
-@can_create(Mx)
-def add_mx(request):
-    """ View used to add a MX object """
-    mx = MxForm(request.POST or None)
-    if mx.is_valid():
-        mx.save()
-        messages.success(request, _("The MX record was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'mxform': mx, 'action_name': _("Create an MX record")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Mx)
-def edit_mx(request, mx_instance, **_kwargs):
-    """ View used to edit a MX object """
-    mx = MxForm(request.POST or None, instance=mx_instance)
-    if mx.is_valid():
-        if mx.changed_data:
-            mx.save()
-            messages.success(request, _("The MX record was edited."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'mxform': mx, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Mx)
-def del_mx(request, instances):
-    """ View used to delete a MX object """
-    mx = DelMxForm(request.POST or None, instances=instances)
-    if mx.is_valid():
-        mx_dels = mx.cleaned_data['mx']
-        for mx_del in mx_dels:
-            try:
-                mx_del.delete()
-                messages.success(request, _("The MX record was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the MX record %s can't be deleted.") % mx_del)
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'mxform': mx, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_create(Ns)
-def add_ns(request):
-    """ View used to add a NS object """
-    ns = NsForm(request.POST or None)
-    if ns.is_valid():
-        ns.save()
-        messages.success(request, _("The NS record was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'nsform': ns, 'action_name': _("Create an NS record")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Ns)
-def edit_ns(request, ns_instance, **_kwargs):
-    """ View used to edit a NS object """
-    ns = NsForm(request.POST or None, instance=ns_instance)
-    if ns.is_valid():
-        if ns.changed_data:
-            ns.save()
-            messages.success(request, _("The NS record was edited."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'nsform': ns, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Ns)
-def del_ns(request, instances):
-    """ View used to delete a NS object """
-    ns = DelNsForm(request.POST or None, instances=instances)
-    if ns.is_valid():
-        ns_dels = ns.cleaned_data['ns']
-        for ns_del in ns_dels:
-            try:
-                ns_del.delete()
-                messages.success(request, _("The NS record was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the NS record %s can't be deleted.") % ns_del)
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'nsform': ns, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
 @can_create(DName)
 def add_dname(request):
     """ View used to add a DName object """
@@ -793,63 +673,6 @@ def del_dname(request, instances):
         return redirect(reverse('machines:index-extension'))
     return form(
         {'dnameform': dname, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_create(Txt)
-def add_txt(request):
-    """ View used to add a TXT object """
-    txt = TxtForm(request.POST or None)
-    if txt.is_valid():
-        txt.save()
-        messages.success(request, _("The TXT record was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'txtform': txt, 'action_name': _("Create a TXT record")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Txt)
-def edit_txt(request, txt_instance, **_kwargs):
-    """ View used to edit a TXT object """
-    txt = TxtForm(request.POST or None, instance=txt_instance)
-    if txt.is_valid():
-        if txt.changed_data:
-            txt.save()
-            messages.success(request, _("The TXT record was edited."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'txtform': txt, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Txt)
-def del_txt(request, instances):
-    """ View used to delete a TXT object """
-    txt = DelTxtForm(request.POST or None, instances=instances)
-    if txt.is_valid():
-        txt_dels = txt.cleaned_data['txt']
-        for txt_del in txt_dels:
-            try:
-                txt_del.delete()
-                messages.success(request, _("The TXT record was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the TXT record %s can't be deleted.") % txt_del)
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'txtform': txt, 'action_name': _("Delete")},
         'machines/machine.html',
         request
     )

@@ -17,8 +17,11 @@ from reversion.admin import VersionAdmin
 
 from .models import (
     MachineType,
+    Mx,
     Nas,
+    Ns,
     SOA,
+    Txt,
     Vlan,
 )
 
@@ -29,6 +32,12 @@ class MachineTypeAdmin(VersionAdmin):
     list_display = ('name', 'ip_type')
 
 
+@admin.register(Mx)
+class MxAdmin(VersionAdmin):
+    """Admin view of a Mx object"""
+    list_display = ('zone', 'priority', 'name')
+
+
 @admin.register(Nas)
 class NasAdmin(VersionAdmin):
     """Admin view of a Nas object"""
@@ -37,10 +46,22 @@ class NasAdmin(VersionAdmin):
     list_filter = ('port_access_mode', 'autocapture_mac')
 
 
+@admin.register(Ns)
+class NsAdmin(VersionAdmin):
+    """Admin view of a Ns object"""
+    list_display = ('zone', 'ns')
+
+
 @admin.register(SOA)
 class SOAAdmin(VersionAdmin):
     """Admin view of a SOA object"""
     list_display = ('name', 'mail', 'refresh', 'retry', 'expire', 'ttl')
+
+
+@admin.register(Txt)
+class TxtAdmin(VersionAdmin):
+    """Admin view of a Txt object"""
+    list_display = ('zone', 'field1', 'field2')
 
 
 @admin.register(Vlan)

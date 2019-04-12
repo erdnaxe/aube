@@ -803,9 +803,19 @@ class Mx(RevMixin, AclMixin, models.Model):
     """ Entrées des MX. Enregistre la zone (extension) associée et la
     priorité
     Todo : pouvoir associer un MX à une interface """
-    zone = models.ForeignKey('Extension', on_delete=models.PROTECT)
-    priority = models.PositiveIntegerField()
-    name = models.ForeignKey('Domain', on_delete=models.PROTECT)
+    zone = models.ForeignKey(
+        'Extension',
+        on_delete=models.PROTECT,
+        verbose_name=_('zone'),
+    )
+    priority = models.PositiveIntegerField(
+        verbose_name=_('priority'),
+    )
+    name = models.ForeignKey(
+        'Domain',
+        on_delete=models.PROTECT,
+        verbose_name=_('record'),
+    )
 
     class Meta:
         verbose_name = _("MX record")
@@ -826,8 +836,17 @@ class Mx(RevMixin, AclMixin, models.Model):
 
 class Ns(RevMixin, AclMixin, models.Model):
     """Liste des enregistrements name servers par zone considéérée"""
-    zone = models.ForeignKey('Extension', on_delete=models.PROTECT)
-    ns = models.ForeignKey('Domain', on_delete=models.PROTECT)
+    zone = models.ForeignKey(
+        'Extension',
+        on_delete=models.PROTECT,
+        verbose_name=_('concerned zone'),
+    )
+    ns = models.ForeignKey(
+        'Domain',
+        on_delete=models.PROTECT,
+        verbose_name=_('name server'),
+        help_text=_('Authoritative interface for the zone.'),
+    )
 
     class Meta:
         verbose_name = _("NS record")
@@ -844,9 +863,19 @@ class Ns(RevMixin, AclMixin, models.Model):
 
 class Txt(RevMixin, AclMixin, models.Model):
     """ Un enregistrement TXT associé à une extension"""
-    zone = models.ForeignKey('Extension', on_delete=models.PROTECT)
-    field1 = models.CharField(max_length=255)
-    field2 = models.TextField(max_length=2047)
+    zone = models.ForeignKey(
+        'Extension',
+        on_delete=models.PROTECT,
+        verbose_name=_('concerned zone'),
+    )
+    field1 = models.CharField(
+        max_length=255,
+        verbose_name=_('first part of record'),
+    )
+    field2 = models.TextField(
+        max_length=2047,
+        verbose_name=_('second part of record'),
+    )
 
     class Meta:
         verbose_name = _("TXT record")
