@@ -40,10 +40,8 @@ from .models import (
     Ns,
     Role,
     Service,
-    Vlan,
     Srv,
     SshFp,
-    Nas,
     IpType,
     OuverturePortList,
     Ipv6List,
@@ -514,17 +512,6 @@ class DelServiceForm(FormRevMixin, Form):
             self.fields['service'].queryset = instances
         else:
             self.fields['service'].queryset = Service.objects.all()
-
-
-class EditOptionVlanForm(FormRevMixin, ModelForm):
-    """Ajout d'un vlan : id, nom"""
-    class Meta:
-        model = Vlan
-        fields = ['dhcp_snooping', 'dhcpv6_snooping', 'arp_protect', 'igmp', 'mld']
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(EditOptionVlanForm, self).__init__(*args, prefix=prefix, **kwargs)
 
 
 class EditOuverturePortConfigForm(FormRevMixin, ModelForm):

@@ -50,7 +50,6 @@ from machines.forms import (
     DomainForm,
     EditInterfaceForm,
     AddInterfaceForm,
-    EditOptionVlanForm
 )
 from machines.views import generate_ipv4_mbf_param
 from machines.models import (
@@ -289,23 +288,6 @@ def index_module(request):
         'topologie/index_module.html',
         {'module_list': module_list,
          'modular_switchs': modular_switchs}
-    )
-
-
-@login_required
-@can_edit(Vlan)
-def edit_vlanoptions(request, vlan_instance, **_kwargs):
-    """ View used to edit options for switch of VLAN object """
-    vlan = EditOptionVlanForm(request.POST or None, instance=vlan_instance)
-    if vlan.is_valid():
-        if vlan.changed_data:
-            vlan.save()
-            messages.success(request, _("The VLAN was edited."))
-        return redirect(reverse('topologie:index-port-profile'))
-    return form(
-        {'vlanform': vlan, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
     )
 
 
