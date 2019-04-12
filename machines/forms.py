@@ -257,35 +257,6 @@ class Ipv6ListForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
         super(Ipv6ListForm, self).__init__(*args, prefix=prefix, **kwargs)
 
 
-class SOAForm(FormRevMixin, ModelForm):
-    """Ajout et edition d'un SOA"""
-
-    class Meta:
-        model = SOA
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(SOAForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class DelSOAForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs SOA"""
-    soa = forms.ModelMultipleChoiceField(
-        queryset=SOA.objects.none(),
-        label=_("Current SOA records"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelSOAForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['soa'].queryset = instances
-        else:
-            self.fields['soa'].queryset = SOA.objects.all()
-
-
 class MxForm(FormRevMixin, ModelForm):
     """Ajout et edition d'un MX"""
 

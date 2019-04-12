@@ -628,28 +628,35 @@ class SOA(RevMixin, AclMixin, models.Model):
     Les valeurs par défault viennent des recommandations RIPE :
     https://www.ripe.net/publications/docs/ripe-203
     """
-    name = models.CharField(max_length=255)
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
     mail = models.EmailField(
-        help_text=_("Contact email address for the zone")
+        verbose_name=_('mail'),
+        help_text=_("Contact email address for this zone."),
     )
     refresh = models.PositiveIntegerField(
         default=86400,  # 24 hours
+        verbose_name=_('refresh'),
         help_text=_("Seconds before the secondary DNS have to ask the primary"
-                    " DNS serial to detect a modification")
+                    " DNS serial to detect a modification."),
     )
     retry = models.PositiveIntegerField(
         default=7200,  # 2 hours
+        verbose_name=_('retry'),
         help_text=_("Seconds before the secondary DNS ask the serial again in"
-                    " case of a primary DNS timeout")
+                    " case of a primary DNS timeout."),
     )
     expire = models.PositiveIntegerField(
         default=3600000,  # 1000 hours
+        verbose_name=_('expire'),
         help_text=_("Seconds before the secondary DNS stop answering requests"
-                    " in case of primary DNS timeout")
+                    " in case of primary DNS timeout."),
     )
     ttl = models.PositiveIntegerField(
         default=172800,  # 2 days
-        help_text=_("Time to Live")
+        verbose_name=_('time to live'),
     )
 
     class Meta:

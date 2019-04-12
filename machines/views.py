@@ -56,8 +56,6 @@ from .forms import (
     DomainForm,
     AliasForm,
     DelAliasForm,
-    SOAForm,
-    DelSOAForm,
     NsForm,
     DelNsForm,
     TxtForm,
@@ -623,63 +621,6 @@ def del_extension(request, instances):
         return redirect(reverse('machines:index-extension'))
     return form(
         {'extensionform': extension, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_create(SOA)
-def add_soa(request):
-    """ View used to add a SOA object """
-    soa = SOAForm(request.POST or None)
-    if soa.is_valid():
-        soa.save()
-        messages.success(request, _("The SOA record was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'soaform': soa, 'action_name': _("Create an SOA record")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(SOA)
-def edit_soa(request, soa_instance, **_kwargs):
-    """ View used to edit a SOA object """
-    soa = SOAForm(request.POST or None, instance=soa_instance)
-    if soa.is_valid():
-        if soa.changed_data:
-            soa.save()
-            messages.success(request, _("The SOA record was edited."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'soaform': soa, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(SOA)
-def del_soa(request, instances):
-    """ View used to delete a SOA object """
-    soa = DelSOAForm(request.POST or None, instances=instances)
-    if soa.is_valid():
-        soa_dels = soa.cleaned_data['soa']
-        for soa_del in soa_dels:
-            try:
-                soa_del.delete()
-                messages.success(request, _("The SOA record was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the SOA record %s can't be deleted.") % soa_del)
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'soaform': soa, 'action_name': _("Delete")},
         'machines/machine.html',
         request
     )

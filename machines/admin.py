@@ -18,6 +18,7 @@ from reversion.admin import VersionAdmin
 from .models import (
     MachineType,
     Nas,
+    SOA,
     Vlan,
 )
 
@@ -34,6 +35,12 @@ class NasAdmin(VersionAdmin):
     list_display = ('nas_type', 'machine_type', 'port_access_mode',
                     'autocapture_mac')
     list_filter = ('port_access_mode', 'autocapture_mac')
+
+
+@admin.register(SOA)
+class SOAAdmin(VersionAdmin):
+    """Admin view of a SOA object"""
+    list_display = ('name', 'mail', 'refresh', 'retry', 'expire', 'ttl')
 
 
 @admin.register(Vlan)

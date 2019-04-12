@@ -41,17 +41,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
     </a>
     {% include 'machines/aff_extension.html' with  extension_list=extension_list %}
 
-    <h2>{% trans "List of SOA records" %}</h2>
-    {% can_create SOA %}
-        <a class="btn btn-primary btn-sm" role="button" href="{% url 'machines:add-soa' %}">
-            <i class="fa fa-plus"></i>{% trans " Add an SOA record" %}
-        </a>
-    {% acl_end %}
-    <a class="btn btn-danger btn-sm" role="button" href="{% url 'machines:del-soa' %}">
-        <i class="fa fa-trash"></i>{% trans " Delete one or several SOA records" %}
-    </a>
-    {% include 'machines/aff_soa.html' with  soa_list=soa_list %}
-
     <h2>{% trans "List of MX records" %}</h2>
     {% can_create Mx %}
         <a class="btn btn-primary btn-sm" role="button" href="{% url 'machines:add-mx' %}">
