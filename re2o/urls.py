@@ -17,7 +17,7 @@ from .views import index, about_page, contact_page
 
 # Admin site configuration
 admin.site.index_title = _('Homepage')
-admin.site.index_template = 'index.html'
+admin.site.index_template = 'admin/custom_index.html'
 
 handler500 = 're2o.views.handler500'
 handler404 = 're2o.views.handler404'

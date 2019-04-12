@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 15:20+0200\n"
+"POT-Creation-Date: 2019-04-12 18:51+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -68,6 +68,46 @@ msgid ""
 msgstr ""
 "Ce logiciel est sous les termes de la licence <a href=\"http://www.gnu.org/"
 "licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a>."
+
+#: templates/admin/custom_index.html:11
+#, fuzzy, python-format
+#| msgid "Welcome to %(site_title)s"
+msgid "Welcome to %(name_website)s"
+msgstr "Bienvenue sur %(site_title)s"
+
+#: templates/admin/custom_index.html:17
+msgid ""
+"You are on the operator interface. Here you will be able to manage the "
+"network and users\n"
+"                from the top left menu. You can also go read the developer "
+"documentation."
+msgstr ""
+"Vous êtes sur l'interface de câblage. Ici vous pourrez gérer le réseau et "
+"ses utilisateurs\n"
+"                à partir du menu en haut à gauche. Vous pouvez aussi lire la "
+"documentation développeur."
+
+#: templates/admin/custom_index.html:21
+msgid ""
+"To go back to the main site, click \"View site\" button in top right menu."
+msgstr ""
+"Pour retournez sur le site principal, cliquez sur « Voir le site » dans le menu en haut à droite."
+
+#: templates/admin/custom_index.html:29
+msgid "My account"
+msgstr "Mon compte"
+
+#: templates/admin/custom_index.html:30
+msgid "My recent actions"
+msgstr "Mes actions récentes"
+
+#: templates/admin/custom_index.html:34
+msgid "None available"
+msgstr ""
+
+#: templates/admin/custom_index.html:49
+msgid "Unknown content"
+msgstr ""
 
 #: templates/base.html:43 templates/errors/404.html:35
 msgid "Networking managing website endorsed by FedeRez."
@@ -135,12 +175,12 @@ msgstr "À propos"
 msgid "Contact"
 msgstr "Contact"
 
-#: templates/base.html:144 templates/index.html:31
+#: templates/base.html:144
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: templates/base.html:150 templates/index.html:38
-#: templates/registration/login.html:11 templates/registration/login.html:57
+#: templates/base.html:150 templates/registration/login.html:11
+#: templates/registration/login.html:57
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -148,7 +188,7 @@ msgstr "Se connecter"
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/base.html:172 templates/index.html:41
+#: templates/base.html:172
 msgid "My profile"
 msgstr "Mon profil"
 
@@ -327,65 +367,6 @@ msgstr "Si vous n'avez aucune idée de ce que vous avez fait :"
 #: templates/errors/500.html:55
 msgid "Go back to a safe page"
 msgstr "Retourner à une page sécurisée"
-
-#: templates/index.html:20
-#, python-format
-msgid "Welcome to %(site_title)s"
-msgstr "Bienvenue sur %(site_title)s"
-
-#: templates/index.html:27
-msgid "Registration"
-msgstr "Création de compte"
-
-#: templates/index.html:28
-msgid ""
-"If you don't have an account yet and you want to access the Internet and the "
-"organisation's services, create your own personal account."
-msgstr ""
-
-#: templates/index.html:34
-msgid "Logging in"
-msgstr "Se connecter"
-
-#: templates/index.html:35
-msgid ""
-"If you already have an account, log in. You can manage your subscriptions to "
-"the organisation, your machines and all your services."
-msgstr ""
-
-#: templates/index.html:42
-msgid ""
-"To manage your subscriptions, your machines and all your services, access "
-"your profile."
-msgstr ""
-
-#: templates/index.html:44
-msgid "Access my profile"
-msgstr "Voir mon profil"
-
-#: templates/index.html:47
-msgid "Services of the organisation"
-msgstr ""
-
-#: templates/index.html:56
-msgid "Go there"
-msgstr ""
-
-#: templates/index.html:65
-msgid "My account"
-msgstr "Mon compte"
-
-#: templates/index.html:66
-msgid "My recent actions"
-msgstr "Mes actions récentes"
-
-#: templates/index.html:70
-msgid "None available"
-msgstr ""
-
-#: templates/index.html:85
-msgid "Unknown content"
-msgstr ""
 
 #: templates/pagination.html:34
 msgid "First"

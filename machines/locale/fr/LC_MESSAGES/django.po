@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 15:20+0200\n"
+"POT-Creation-Date: 2019-04-12 18:51+0200\n"
 "PO-Revision-Date: 2018-06-23 16:35+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -901,7 +901,7 @@ msgstr "Voir le profil"
 msgid "Deactivated"
 msgstr "Désactivée"
 
-#: machines/templates/machines/aff_machines.html:67 machines/views.py:338
+#: machines/templates/machines/aff_machines.html:67 machines/views.py:334
 msgid "Create an interface"
 msgstr "Créer une interface"
 
@@ -1188,89 +1188,89 @@ msgstr "Rôles de serveur"
 msgid "Ports openings"
 msgstr "Ouvertures de ports"
 
-#: machines/views.py:119
+#: machines/views.py:115
 msgid "Select a machine type first."
 msgstr "Sélectionnez un type de machine d'abord."
 
-#: machines/views.py:221
+#: machines/views.py:217
 msgid "The machine was created."
 msgstr "La machine a été créée."
 
-#: machines/views.py:233
+#: machines/views.py:229
 msgid "Create a machine"
 msgstr "Créer une machine"
 
-#: machines/views.py:273
+#: machines/views.py:269
 msgid "The machine was edited."
 msgstr "La machine a été modifiée."
 
-#: machines/views.py:285 machines/views.py:409 machines/views.py:475
-#: machines/views.py:531 machines/views.py:592 machines/views.py:665
-#: machines/views.py:728 machines/views.py:785
+#: machines/views.py:281 machines/views.py:405 machines/views.py:471
+#: machines/views.py:527 machines/views.py:588 machines/views.py:661
+#: machines/views.py:724 machines/views.py:781
 msgid "Edit"
 msgstr "Modifier"
 
-#: machines/views.py:298
+#: machines/views.py:294
 msgid "The machine was deleted."
 msgstr "La machine a été supprimée."
 
-#: machines/views.py:327
+#: machines/views.py:323
 msgid "The interface was created."
 msgstr "L'interface a été créée."
 
-#: machines/views.py:354
+#: machines/views.py:350
 msgid "The interface was deleted."
 msgstr "L'interface a été supprimée."
 
-#: machines/views.py:379
+#: machines/views.py:375
 msgid "The IPv6 addresses list was created."
 msgstr "La liste d'adresses IPv6 a été créée."
 
-#: machines/views.py:385
+#: machines/views.py:381
 msgid "Create an IPv6 addresses list"
 msgstr "Créer une liste d'adresses IPv6"
 
-#: machines/views.py:403
+#: machines/views.py:399
 msgid "The IPv6 addresses list was edited."
 msgstr "La liste d'adresses IPv6 a été modifiée."
 
-#: machines/views.py:422
+#: machines/views.py:418
 msgid "The IPv6 addresses list was deleted."
 msgstr "La liste d'adresses IPv6 a été supprimée."
 
-#: machines/views.py:446
+#: machines/views.py:442
 msgid "The SSHFP record was created."
 msgstr "L'enregistrement SSHFP a été créé."
 
-#: machines/views.py:452
+#: machines/views.py:448
 msgid "Create a SSHFP record"
 msgstr "Créer un enregistrement SSHFP"
 
-#: machines/views.py:469
+#: machines/views.py:465
 msgid "The SSHFP record was edited."
 msgstr "L'enregistrement SSHFP a été modifié."
 
-#: machines/views.py:488
+#: machines/views.py:484
 msgid "The SSHFP record was deleted."
 msgstr "L'enregistrement SSHFP a été supprimé."
 
-#: machines/views.py:509
+#: machines/views.py:505
 msgid "The IP type was created."
 msgstr "Le type d'IP a été créé."
 
-#: machines/views.py:512
+#: machines/views.py:508
 msgid "Create an IP type"
 msgstr "Créer un type d'IP"
 
-#: machines/views.py:528
+#: machines/views.py:524
 msgid "The IP type was edited."
 msgstr "Le type d'IP a été modifié."
 
-#: machines/views.py:547
+#: machines/views.py:543
 msgid "The IP type was deleted."
 msgstr "Le type d'IP a été supprimé."
 
-#: machines/views.py:551
+#: machines/views.py:547
 #, python-format
 msgid ""
 "The IP type %s is assigned to at least one machine, you can't delete it."
@@ -1278,28 +1278,28 @@ msgstr ""
 "Le type d'IP %s est assigné à au moins une machine, vous ne pouvez pas le "
 "supprimer."
 
-#: machines/views.py:556 machines/views.py:617 machines/views.py:695
-#: machines/views.py:752 machines/views.py:809
+#: machines/views.py:552 machines/views.py:613 machines/views.py:691
+#: machines/views.py:748 machines/views.py:805
 msgid "Delete"
 msgstr "Supprimer"
 
-#: machines/views.py:569
+#: machines/views.py:565
 msgid "The extension was created."
 msgstr "L'extension a été créée."
 
-#: machines/views.py:572
+#: machines/views.py:568
 msgid "Create an extension"
 msgstr "Créer une extension"
 
-#: machines/views.py:589
+#: machines/views.py:585
 msgid "The extension was edited."
 msgstr "L'extension a été modifiée."
 
-#: machines/views.py:608
+#: machines/views.py:604
 msgid "The extension was deleted."
 msgstr "L'extension a été supprimée."
 
-#: machines/views.py:612
+#: machines/views.py:608
 #, python-format
 msgid ""
 "The extension %s is assigned to at least one machine type, you can't delete "
@@ -1308,92 +1308,92 @@ msgstr ""
 "L'extension %s est assignée à au moins un type de machine, vous ne pouvez "
 "pas le supprimer."
 
-#: machines/views.py:633
+#: machines/views.py:629
 msgid "The alias was created."
 msgstr "L'alias a été créé."
 
-#: machines/views.py:639
+#: machines/views.py:635
 msgid "Create an alias"
 msgstr "Créer un alias"
 
-#: machines/views.py:657
+#: machines/views.py:653
 msgid "The alias was edited."
 msgstr "L'alias a été modifié."
 
-#: machines/views.py:683
+#: machines/views.py:679
 #, python-format
 msgid "The alias %s was deleted."
 msgstr "L'alias %s a été supprimé."
 
-#: machines/views.py:688
+#: machines/views.py:684
 #, python-format
 msgid "Error: the alias %s can't be deleted."
 msgstr "Erreur : l'alias %s ne peut pas être supprimé."
 
-#: machines/views.py:708
+#: machines/views.py:704
 msgid "The role was created."
 msgstr "Le rôle a été créé."
 
-#: machines/views.py:711
+#: machines/views.py:707
 msgid "Create a role"
 msgstr "Créer un rôle"
 
-#: machines/views.py:725
+#: machines/views.py:721
 msgid "The role was edited."
 msgstr "Le rôle a été modifié."
 
-#: machines/views.py:744
+#: machines/views.py:740
 msgid "The role was deleted."
 msgstr "Le rôle a été supprimé."
 
-#: machines/views.py:748
+#: machines/views.py:744
 #, python-format
 msgid "Error: the role %s can't be deleted."
 msgstr "Erreur : le rôle %s ne peut pas être supprimé."
 
-#: machines/views.py:765
+#: machines/views.py:761
 msgid "The service was created."
 msgstr "Le service a été créé."
 
-#: machines/views.py:768
+#: machines/views.py:764
 msgid "Create a service"
 msgstr "Créer un service"
 
-#: machines/views.py:782
+#: machines/views.py:778
 msgid "The service was edited."
 msgstr "Le service a été modifié."
 
-#: machines/views.py:801
+#: machines/views.py:797
 msgid "The service was deleted."
 msgstr "Le service a été supprimé."
 
-#: machines/views.py:805
+#: machines/views.py:801
 #, python-format
 msgid "Error: the service %s can't be deleted."
 msgstr "Erreur : le service %s ne peut pas être supprimé."
 
-#: machines/views.py:1033
+#: machines/views.py:1029
 msgid "The ports list was edited."
 msgstr "La liste de ports a été modifiée."
 
-#: machines/views.py:1047
+#: machines/views.py:1043
 msgid "The ports list was deleted."
 msgstr "La liste de ports a été supprimée."
 
-#: machines/views.py:1072
+#: machines/views.py:1068
 msgid "The ports list was created."
 msgstr "La liste de ports a été créée."
 
-#: machines/views.py:1090
+#: machines/views.py:1086
 msgid "Warning: the IPv4 isn't public, the opening won't have effect in v4."
 msgstr ""
 "Attention : l'adresse IPv4 n'est pas publique, l'ouverture n'aura pas "
 "d'effet en v4."
 
-#: machines/views.py:1100
+#: machines/views.py:1096
 msgid "The ports configuration was edited."
 msgstr "La configuration de ports a été modifiée."
 
-#: machines/views.py:1103
+#: machines/views.py:1099
 msgid "Edit the configuration"
 msgstr "Modifier la configuration"
