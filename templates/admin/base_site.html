@@ -12,7 +12,7 @@ Copyright © 2019  Alexandre Iooss
 {% block branding %}
     <h1 id="site-name">
         <a href="{% url 'index' %}">
-            <img class="banding-logo" src="{% static 'images/logo_navbar.svg' %}" alt="Aube"/>
+            <img class="banding-logo" src="{% static 'images/logo_navbar.svg' %}" alt=""/>
         </a>
         <a href="{% url 'index' %}">
             {{ name_website }}
@@ -78,6 +78,9 @@ Copyright © 2019  Alexandre Iooss
                     </option>
                 {% endfor %}
             </select>
+            <noscript>
+                <input type="submit">
+            </noscript>
         </form>
     </div>
 {% endblock %}
