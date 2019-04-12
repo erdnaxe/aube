@@ -33,14 +33,8 @@ from .models import (
     IpList,
     MachineType,
     Extension,
-    SOA,
-    Mx,
-    Txt,
-    DName,
-    Ns,
     Role,
     Service,
-    Srv,
     SshFp,
     IpType,
     OuverturePortList,
@@ -255,64 +249,6 @@ class Ipv6ListForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
     def __init__(self, *args, **kwargs):
         prefix = kwargs.pop('prefix', self.Meta.model.__name__)
         super(Ipv6ListForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class DNameForm(FormRevMixin, ModelForm):
-    """Add a DNAME entry for a zone"""
-
-    class Meta:
-        model = DName
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(DNameForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class DelDNameForm(FormRevMixin, Form):
-    """Delete a set of DNAME entries"""
-    dnames = forms.ModelMultipleChoiceField(
-        queryset=Txt.objects.none(),
-        label=_("Current DNAME records"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelDNameForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['dnames'].queryset = instances
-        else:
-            self.fields['dnames'].queryset = DName.objects.all()
-
-
-class SrvForm(FormRevMixin, ModelForm):
-    """Ajout d'un srv pour une zone"""
-
-    class Meta:
-        model = Srv
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(SrvForm, self).__init__(*args, prefix=prefix, **kwargs)
-
-
-class DelSrvForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs Srv"""
-    srv = forms.ModelMultipleChoiceField(
-        queryset=Srv.objects.none(),
-        label=_("Current SRV records"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelSrvForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['srv'].queryset = instances
-        else:
-            self.fields['srv'].queryset = Srv.objects.all()
 
 
 class RoleForm(FormRevMixin, ModelForm):

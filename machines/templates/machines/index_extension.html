@@ -40,26 +40,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
         <i class="fa fa-trash"></i>{% trans " Delete one or several extensions" %}
     </a>
     {% include 'machines/aff_extension.html' with  extension_list=extension_list %}
-
-    <h2>{% trans "List of DNAME records" %}</h2>
-    {% can_create DName %}
-        <a class="btn btn-primary btn-sm" role="button" href="{% url 'machines:add-dname' %}">
-            <i class="fa fa-plus"></i> {% trans " Add a DNAME record" %}
-        </a>
-    {% acl_end %}
-    <a class="btn btn-danger btn-sm" role="button" href="{% url 'machines:del-dname' %}">
-        <i class="fa fa-trash"></i> {% trans " Delete one or several DNAME records" %}
-    </a>
-    {% include 'machines/aff_dname.html' with  dname_list=dname_list %}
-
-    <h2>{% trans "List of SRV records" %}</h2>
-    {% can_create Srv %}
-        <a class="btn btn-primary btn-sm" role="button" href="{% url 'machines:add-srv' %}">
-            <i class="fa fa-plus"></i>{% trans " Add an SRV record" %}
-        </a>
-    {% acl_end %}
-    <a class="btn btn-danger btn-sm" role="button" href="{% url 'machines:del-srv' %}">
-        <i class="fa fa-trash"></i>{% trans " Delete one or several SRV records" %}
-    </a>
-    {% include 'machines/aff_srv.html' with  srv_list=srv_list %}
 {% endblock %}

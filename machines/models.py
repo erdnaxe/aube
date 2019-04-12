@@ -893,8 +893,15 @@ class Txt(RevMixin, AclMixin, models.Model):
 
 class DName(RevMixin, AclMixin, models.Model):
     """A DNAME entry for the DNS."""
-    zone = models.ForeignKey('Extension', on_delete=models.PROTECT)
-    alias = models.CharField(max_length=255)
+    zone = models.ForeignKey(
+        'Extension',
+        on_delete=models.PROTECT,
+        verbose_name=_('zone'),
+    )
+    alias = models.CharField(
+        max_length=255,
+        verbose_name=_('record'),
+    )
 
     class Meta:
         verbose_name = _("DNAME record")
@@ -914,7 +921,10 @@ class Srv(RevMixin, AclMixin, models.Model):
     TCP = 'TCP'
     UDP = 'UDP'
 
-    service = models.CharField(max_length=31)
+    service = models.CharField(
+        max_length=31,
+        verbose_name=_('service'),
+    )
     protocole = models.CharField(
         max_length=3,
         choices=(
@@ -922,33 +932,40 @@ class Srv(RevMixin, AclMixin, models.Model):
             (UDP, 'UDP'),
         ),
         default=TCP,
+        verbose_name=_('protocole'),
     )
-    extension = models.ForeignKey('Extension', on_delete=models.PROTECT)
+    extension = models.ForeignKey(
+        'Extension',
+        on_delete=models.PROTECT,
+        verbose_name=_('extension'),
+    )
     ttl = models.PositiveIntegerField(
         default=172800,  # 2 days
-        help_text=_("Time to Live")
+        verbose_name=_('time to live'),
     )
     priority = models.PositiveIntegerField(
         default=0,
         validators=[MaxValueValidator(65535)],
+        verbose_name=_('priority'),
         help_text=_("Priority of the target server (positive integer value,"
                     " the lower it is, the more the server will be used if"
-                    " available)")
+                    " available)."),
     )
     weight = models.PositiveIntegerField(
         default=0,
         validators=[MaxValueValidator(65535)],
+        verbose_name=_('weight'),
         help_text=_("Relative weight for records with the same priority"
-                    " (integer value between 0 and 65535)")
+                    " (integer value between 0 and 65535)."),
     )
     port = models.PositiveIntegerField(
         validators=[MaxValueValidator(65535)],
-        help_text=_("TCP/UDP port")
+        verbose_name=_("TCP/UDP port"),
     )
     target = models.ForeignKey(
         'Domain',
         on_delete=models.PROTECT,
-        help_text=_("Target server")
+        verbose_name=_("target server"),
     )
 
     class Meta:

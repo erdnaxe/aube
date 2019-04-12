@@ -10,20 +10,26 @@
 The objects, fields and datastructures visible in the Django admin view
 """
 
-from __future__ import unicode_literals
-
 from django.contrib import admin
 from reversion.admin import VersionAdmin
 
 from .models import (
+    DName,
     MachineType,
     Mx,
     Nas,
     Ns,
     SOA,
+    Srv,
     Txt,
     Vlan,
 )
+
+
+@admin.register(DName)
+class DNameAdmin(VersionAdmin):
+    """Admin view of a DName object"""
+    list_display = ('zone', 'alias')
 
 
 @admin.register(MachineType)
@@ -50,6 +56,13 @@ class NasAdmin(VersionAdmin):
 class NsAdmin(VersionAdmin):
     """Admin view of a Ns object"""
     list_display = ('zone', 'ns')
+
+
+@admin.register(Srv)
+class SrvAdmin(VersionAdmin):
+    """Admin view of a Srv object"""
+    list_display = ('service', 'protocole', 'extension', 'ttl', 'priority',
+                    'weight', 'port', 'target')
 
 
 @admin.register(SOA)

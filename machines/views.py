@@ -56,15 +56,11 @@ from .forms import (
     DomainForm,
     AliasForm,
     DelAliasForm,
-    DNameForm,
-    DelDNameForm,
     RoleForm,
     DelRoleForm,
     ServiceForm,
     DelServiceForm,
     SshFpForm,
-    SrvForm,
-    DelSrvForm,
     Ipv6ListForm,
     EditOuverturePortListForm,
     EditOuverturePortConfigForm,
@@ -615,121 +611,6 @@ def del_extension(request, instances):
         return redirect(reverse('machines:index-extension'))
     return form(
         {'extensionform': extension, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_create(DName)
-def add_dname(request):
-    """ View used to add a DName object """
-    dname = DNameForm(request.POST or None)
-    if dname.is_valid():
-        dname.save()
-        messages.success(request, _("The DNAME record was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'dnameform': dname, 'action_name': _("Create a DNAME record")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(DName)
-def edit_dname(request, dname_instance, **_kwargs):
-    """ View used to edit a DName object """
-    dname = DNameForm(request.POST or None, instance=dname_instance)
-    if dname.is_valid():
-        if dname.changed_data:
-            dname.save()
-            messages.success(request, _("The DNAME record was edited."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'dnameform': dname, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(DName)
-def del_dname(request, instances):
-    """ View used to delete a DName object """
-    dname = DelDNameForm(request.POST or None, instances=instances)
-    if dname.is_valid():
-        dname_dels = dname.cleaned_data['dname']
-        for dname_del in dname_dels:
-            try:
-                dname_del.delete()
-                messages.success(request, _("The DNAME record was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    _("Error: the DNAME record %s can't be deleted.")
-                    % dname_del
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'dnameform': dname, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_create(Srv)
-def add_srv(request):
-    """ View used to add a SRV object """
-    srv = SrvForm(request.POST or None)
-    if srv.is_valid():
-        srv.save()
-        messages.success(request, _("The SRV record was created."))
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'srvform': srv, 'action_name': _("Create an SRV record")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Srv)
-def edit_srv(request, srv_instance, **_kwargs):
-    """ View used to edit a SRV object """
-    srv = SrvForm(request.POST or None, instance=srv_instance)
-    if srv.is_valid():
-        if srv.changed_data:
-            srv.save()
-            messages.success(request, _("The SRV record was edited."))
-        return redirect(reverse('machines:1index-extension'))
-    return form(
-        {'srvform': srv, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Srv)
-def del_srv(request, instances):
-    """ View used to delete a SRV object """
-    srv = DelSrvForm(request.POST or None, instances=instances)
-    if srv.is_valid():
-        srv_dels = srv.cleaned_data['srv']
-        for srv_del in srv_dels:
-            try:
-                srv_del.delete()
-                messages.success(request, _("The SRV record was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the SRV record %s can't be deleted.") % srv_del)
-                )
-        return redirect(reverse('machines:index-extension'))
-    return form(
-        {'srvform': srv, 'action_name': _("Delete")},
         'machines/machine.html',
         request
     )
