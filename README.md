@@ -32,6 +32,8 @@ What have been done so far in Aube that is not in Re2o :
   * Create Docker container configuration ;
   * Dynamic menu, automatically populated depending on permissions and activated apps ;
   * Add automatic documentation with Django AdminDocs ;
+  * New login form ;
+  * Drop custom password reset mechanics in favor of Django Contrib Auth. Now users can also ask a mail to recall their username ;
   * More coming soon…
 
 ## How to migrate from Re2o to Aube
