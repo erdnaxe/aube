@@ -159,48 +159,6 @@ class DelAliasForm(FormRevMixin, Form):
         )
 
 
-class IpTypeForm(FormRevMixin, ModelForm):
-    """Formulaire d'ajout d'un iptype. Pas d'edition de l'ip de start et de
-    stop après creation"""
-
-    class Meta:
-        model = IpType
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(IpTypeForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['name'].label = _("IP type to add")
-
-
-class EditIpTypeForm(IpTypeForm):
-    """Edition d'un iptype. Pas d'edition du rangev4 possible, car il faudrait
-    synchroniser les objets iplist"""
-
-    class Meta(IpTypeForm.Meta):
-        fields = ['extension', 'name', 'need_infra', 'domaine_ip_network', 'domaine_ip_netmask',
-                  'prefix_v6', 'prefix_v6_length',
-                  'vlan', 'reverse_v4', 'reverse_v6',
-                  'ouverture_ports']
-
-
-class DelIpTypeForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs iptype"""
-    iptypes = forms.ModelMultipleChoiceField(
-        queryset=IpType.objects.none(),
-        label=_("Current IP types"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelIpTypeForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['iptypes'].queryset = instances
-        else:
-            self.fields['iptypes'].queryset = IpType.objects.all()
-
-
 class Ipv6ListForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
     """Gestion des ipv6 d'une machine"""
 

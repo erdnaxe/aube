@@ -47,9 +47,6 @@ from .forms import (
     EditMachineForm,
     EditInterfaceForm,
     AddInterfaceForm,
-    EditIpTypeForm,
-    IpTypeForm,
-    DelIpTypeForm,
     DomainForm,
     AliasForm,
     DelAliasForm,
@@ -480,68 +477,6 @@ def del_sshfp(request, sshfp, **_kwargs):
     return form(
         {'objet': sshfp, 'objet_name': 'sshfp'},
         'machines/delete.html',
-        request
-    )
-
-
-@login_required
-@can_create(IpType)
-def add_iptype(request):
-    """ Ajoute un range d'ip. Intelligence dans le models, fonction views
-    minimaliste"""
-
-    iptype = IpTypeForm(request.POST or None)
-    if iptype.is_valid():
-        iptype.save()
-        messages.success(request, _("The IP type was created."))
-        return redirect(reverse('machines:index-iptype'))
-    return form(
-        {'iptypeform': iptype, 'action_name': _("Create an IP type")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(IpType)
-def edit_iptype(request, iptype_instance, **_kwargs):
-    """ Edition d'un range. Ne permet pas de le redimensionner pour éviter
-    l'incohérence"""
-
-    iptype = EditIpTypeForm(request.POST or None, instance=iptype_instance)
-    if iptype.is_valid():
-        if iptype.changed_data:
-            iptype.save()
-            messages.success(request, _("The IP type was edited."))
-        return redirect(reverse('machines:index-iptype'))
-    return form(
-        {'iptypeform': iptype, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(IpType)
-def del_iptype(request, instances):
-    """ Suppression d'un range ip. Supprime les objets ip associés"""
-    iptype = DelIpTypeForm(request.POST or None, instances=instances)
-    if iptype.is_valid():
-        iptype_dels = iptype.cleaned_data['iptypes']
-        for iptype_del in iptype_dels:
-            try:
-                iptype_del.delete()
-                messages.success(request, _("The IP type was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("The IP type %s is assigned to at least one machine,"
-                       " you can't delete it.") % iptype_del)
-                )
-        return redirect(reverse('machines:index-iptype'))
-    return form(
-        {'iptypeform': iptype, 'action_name': _("Delete")},
-        'machines/machine.html',
         request
     )
 

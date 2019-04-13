@@ -50,6 +50,7 @@ class IpTypeAdmin(VersionAdmin):
         'name', 'extension', 'need_infra', 'prefix_v6', 'vlan',
         'ouverture_ports')
     list_filter = ('need_infra',)
+    # TODO(erdnaxe): block range edit after creation
 
 
 @admin.register(MachineType)

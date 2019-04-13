@@ -40,7 +40,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
             <th>{% trans "DNSSEC reverse v4/v6" %}</th>
             <th>{% trans "On VLAN(s)" %}</th>
             <th>{% trans "Default ports opening" %}</th>
-            <th></th>
         </tr>
         </thead>
         {% for type in iptype_list %}
@@ -54,12 +53,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                 <td>{{ type.reverse_v4|tick }}/{{ type.reverse_v6|tick }}</td>
                 <td>{{ type.vlan }}</td>
                 <td>{{ type.ouverture_ports }}</td>
-                <td class="text-right">
-                    {% can_edit type %}
-                    {% include 'buttons/edit.html' with href='machines:edit-iptype' id=type.id %}
-                    {% acl_end %}
-                    {% history_button type %}
-                </td>
             </tr>
         {% endfor %}
     </table>
