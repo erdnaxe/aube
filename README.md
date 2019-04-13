@@ -34,6 +34,7 @@ What have been done so far in Aube that is not in Re2o :
   * Add automatic documentation with Django AdminDocs ;
   * New login form ;
   * Drop custom password reset mechanics in favor of Django Contrib Auth. Now users can also ask a mail to recall their username ;
+  * Filter interfaces with port opening profile rather than listing all machine per profile ;
   * More coming soon…
 
 ## How to migrate from Re2o to Aube

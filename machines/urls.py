@@ -94,7 +94,6 @@ urlpatterns = [
     url(r'^rest/ouverture_ports/$',
         views.ouverture_ports,
         name='ouverture-ports'),
-    url(r'index_portlist/$', views.index_portlist, name='index-portlist'),
     url(r'^port_config/(?P<interfaceid>[0-9]+)$',
         views.configure_ports,
         name='port-config'),

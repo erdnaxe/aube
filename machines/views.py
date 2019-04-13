@@ -733,22 +733,6 @@ def index_service(request):
 
 
 @login_required
-@can_view_all(OuverturePortList)
-def index_portlist(request):
-    """ View used to display the list of existing port policies """
-    port_list = (OuverturePortList.objects
-                 .prefetch_related('ouvertureport_set')
-                 .prefetch_related('interface_set__domain__extension')
-                 .prefetch_related('interface_set__machine__user')
-                 .order_by('name'))
-    return render(
-        request,
-        "machines/index_portlist.html",
-        {'port_list': port_list}
-    )
-
-
-@login_required
 @can_create(OuverturePort)
 @can_edit(Interface)
 def configure_ports(request, interface_instance, **_kwargs):

@@ -74,6 +74,7 @@ class Ipv6ListInline(admin.TabularInline):
 class InterfaceAdmin(VersionAdmin):
     """Admin view of a Interface object"""
     list_display = ('domain', 'machine', 'machine_type', 'mac_address', 'ipv4')
+    list_filter = ('port_lists',)
     inlines = (DomainInline, Ipv6ListInline)
 
 
@@ -133,22 +134,15 @@ class OuverturePortInline(admin.TabularInline):
 @admin.register(OuverturePortList)
 class OuverturePortListAdmin(VersionAdmin):
     """Admin view of a OuverturePortList object"""
-    list_display = ('name', 'tcp_in', 'tcp_out', 'udp_in', 'udp_out')
+    list_display = ('name', 'open_ports')
     inlines = (OuverturePortInline,)
 
-    # TODO(erdnaxe): add machines list
+    @staticmethod
+    def open_ports(obj):
+        """All ports refering to a profile"""
+        return ", ".join(port.show_port() for port in obj.ouvertureport_set.all())
 
-    def tcp_in(self, obj):
-        return None
-
-    def tcp_out(self, obj):
-        return None
-
-    def udp_in(self, obj):
-        return None
-
-    def udp_out(self, obj):
-        return None
+    open_ports.short_description = "open ports"
 
 
 @admin.register(Role)

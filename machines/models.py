@@ -1114,7 +1114,11 @@ class Interface(RevMixin, AclMixin, FieldPermissionModelMixin, models.Model):
     machine = models.ForeignKey('Machine', on_delete=models.CASCADE)
     machine_type = models.ForeignKey('MachineType', on_delete=models.PROTECT)
     details = models.CharField(max_length=255, blank=True)
-    port_lists = models.ManyToManyField('OuverturePortList', blank=True)
+    port_lists = models.ManyToManyField(
+        'OuverturePortList',
+        blank=True,
+        verbose_name=_('open ports profile'),
+    )
 
     class Meta:
         permissions = (
@@ -1901,14 +1905,13 @@ class OuverturePortList(RevMixin, AclMixin, models.Model):
     """Liste des ports ouverts sur une interface."""
 
     name = models.CharField(
+        max_length=255,
         verbose_name=_('name'),
-        help_text=_("Name of the ports configuration"),
-        max_length=255
     )
 
     class Meta:
-        verbose_name = _("ports opening profile")
-        verbose_name_plural = _("ports opening profiles")
+        verbose_name = _("open ports profile")
+        verbose_name_plural = _("open ports profiles")
 
     def can_delete(self, user_request, *_args, **_kwargs):
         """Verifie que l'user a les bons droits bureau pour delete
@@ -2010,8 +2013,10 @@ class OuverturePort(RevMixin, AclMixin, models.Model):
         return ':'.join([str(self.begin), str(self.end)])
 
     def show_port(self):
-        """Formatage plus joli, alias pour str"""
-        return str(self)
+        """Format all information"""
+        protocole = 'TCP' if self.protocole == 'T' else 'UDP'
+        in_out = 'IN' if self.io == 'I' else 'OUT'
+        return '{} ({} {})'.format(self, protocole, in_out)
 
 
 @receiver(post_save, sender=Machine)
