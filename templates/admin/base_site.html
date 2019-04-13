@@ -59,7 +59,10 @@ Copyright © 2019  Alexandre Iooss
 
 {% block footer %}
     <div id="footer">
-        <p>{{ name_website }} {% trans "powered by" %} Aube 2016&ndash;2019</p>
+        <p>
+            {{ name_website }} {% trans "powered by" %}
+            <a href="{% url 'about' %}">Aube 2016&ndash;2019</a>.
+        </p>
         <p>
             {% blocktrans trimmed %}
                 This software is under the terms of the

@@ -95,7 +95,7 @@ img.banding-logo {
 
 /* Pull footer to bottom */
 #content {
-    min-height: 70vh;
+    min-height: calc(100vh - 310px);
 }
 
 .login #content {
