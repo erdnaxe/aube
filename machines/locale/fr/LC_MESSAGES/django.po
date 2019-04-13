@@ -213,7 +213,7 @@ msgstr "VLAN"
 
 #: machines/models.py:364
 msgid "default open port profile"
-msgstr "profile d'ouverture de ports par défaut"
+msgstr "profil d'ouverture de ports par défaut"
 
 #: machines/models.py:369
 msgid "Can use all IP types"
@@ -595,7 +595,7 @@ msgstr "enregistrements SSHFP"
 
 #: machines/models.py:1120 machines/models.py:1913
 msgid "open ports profile"
-msgstr "profile d'ouverture de ports"
+msgstr "profil d'ouverture de ports"
 
 #: machines/models.py:1126
 msgid "Can change the owner of an interface"
@@ -860,7 +860,7 @@ msgstr "liens entre service et serveur"
 
 #: machines/models.py:1914
 msgid "open ports profiles"
-msgstr "profile d'ouverture de ports"
+msgstr "profil d'ouverture de ports"
 
 #: machines/models.py:1923
 msgid "You don't have the right to delete a ports opening list."
