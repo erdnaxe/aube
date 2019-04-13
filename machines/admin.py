@@ -9,14 +9,18 @@
 """machines.admin
 The objects, fields and datastructures visible in the Django admin view
 """
-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from reversion.admin import VersionAdmin
 
 from .models import (
     DName,
+    Domain,
     Extension,
+    Interface,
     IpType,
+    Ipv6List,
+    Machine,
     MachineType,
     Mx,
     Nas,
@@ -26,6 +30,7 @@ from .models import (
     Role,
     SOA,
     Srv,
+    SshFp,
     Txt,
     Vlan,
 )
@@ -53,6 +58,46 @@ class IpTypeAdmin(VersionAdmin):
     # TODO(erdnaxe): block range edit after creation
 
 
+class DomainInline(admin.TabularInline):
+    """A inline for Interface, represents one domain"""
+    model = Domain
+    extra = 1
+
+
+class Ipv6ListInline(admin.TabularInline):
+    """A inline for Interface, represents one ipv6"""
+    model = Ipv6List
+    extra = 1
+
+
+@admin.register(Interface)
+class InterfaceAdmin(VersionAdmin):
+    """Admin view of a Interface object"""
+    list_display = ('domain', 'machine', 'machine_type', 'mac_address', 'ipv4')
+    inlines = (DomainInline, Ipv6ListInline)
+
+
+class InterfaceInline(admin.StackedInline):
+    """A inline for Machine, represents one interface"""
+    model = Interface
+    extra = 1
+
+
+class SshFpInline(admin.TabularInline):
+    """A inline for Machine, represents one SSH FingerPrint"""
+    model = SshFp
+    extra = 1
+
+
+@admin.register(Machine)
+class MachineAdmin(VersionAdmin):
+    """Admin view of a Machine object"""
+    list_display = ('name', 'user', 'active')
+    list_filter = ('active',)
+    inlines = (InterfaceInline, SshFpInline)
+    empty_value_display = _('- no name -')
+
+
 @admin.register(MachineType)
 class MachineTypeAdmin(VersionAdmin):
     """Admin view of a MachineType object"""
@@ -77,13 +122,6 @@ class NasAdmin(VersionAdmin):
 class NsAdmin(VersionAdmin):
     """Admin view of a Ns object"""
     list_display = ('zone', 'ns')
-
-
-@admin.register(Srv)
-class SrvAdmin(VersionAdmin):
-    """Admin view of a Srv object"""
-    list_display = ('service', 'protocole', 'extension', 'ttl', 'priority',
-                    'weight', 'port', 'target')
 
 
 class OuverturePortInline(admin.TabularInline):
@@ -123,6 +161,13 @@ class RoleAdmin(VersionAdmin):
     #                  .prefetch_related(
     #         'servers__domain__extension'
     #     ).all())
+
+
+@admin.register(Srv)
+class SrvAdmin(VersionAdmin):
+    """Admin view of a Srv object"""
+    list_display = ('service', 'protocole', 'extension', 'ttl', 'priority',
+                    'weight', 'port', 'target')
 
 
 @admin.register(SOA)

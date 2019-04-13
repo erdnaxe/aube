@@ -42,19 +42,25 @@ from re2o.mixins import AclMixin, RevMixin
 class Machine(RevMixin, FieldPermissionModelMixin, models.Model):
     """ Class définissant une machine, object parent user, objets fils
     interfaces"""
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        'users.User',
+        on_delete=models.CASCADE,
+        verbose_name=_('user'),
+    )
     name = models.CharField(
         max_length=255,
-        help_text=_("Optional"),
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_('name'),
     )
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(
+        default=True,
+        verbose_name=_('active'),
+    )
 
     class Meta:
         permissions = (
-            ("change_machine_user",
-             _("Can change the user of a machine")),
+            ("change_machine_user", _("Can change the user of a machine")),
         )
         verbose_name = _("machine")
         verbose_name_plural = _("machines")
@@ -1034,20 +1040,24 @@ class SshFp(RevMixin, AclMixin, models.Model):
         ("ecdsa-sha2-nistp521", "ecdsa-sha2-nistp521"),
     )
 
-    machine = models.ForeignKey('Machine', on_delete=models.CASCADE)
+    machine = models.ForeignKey(
+        'Machine',
+        on_delete=models.CASCADE,
+    )
     pub_key_entry = models.TextField(
-        help_text=_("SSH public key"),
-        max_length=2048
+        max_length=2048,
+        verbose_name=_("SSH public key"),
     )
     algo = models.CharField(
         choices=ALGO,
-        max_length=32
+        max_length=32,
+        verbose_name=_('algorithm'),
     )
     comment = models.CharField(
-        help_text=_("Comment"),
         max_length=255,
         null=True,
-        blank=True
+        blank=True,
+        verbose_name=_("comment"),
     )
 
     @cached_property
