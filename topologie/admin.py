@@ -12,19 +12,10 @@ from django.contrib import admin
 from reversion.admin import VersionAdmin
 
 from .models import (
-    Room,
     Building,
     Dormitory,
+    Room,
 )
-
-
-@admin.register(Room)
-class RoomAdmin(VersionAdmin):
-    """Register Room object in admin"""
-    list_display = ('name', 'building', 'details')
-    list_filter = ('building', 'building__dormitory')
-    search_fields = ('name', 'building__name', 'building__dormitory__name',
-                     'details')
 
 
 @admin.register(Building)
@@ -40,3 +31,12 @@ class DormitoryAdmin(VersionAdmin):
     """Register Dormitory object in admin"""
     list_display = ('name',)
     search_fields = ('name',)
+
+
+@admin.register(Room)
+class RoomAdmin(VersionAdmin):
+    """Register Room object in admin"""
+    list_display = ('name', 'building', 'details')
+    list_filter = ('building', 'building__dormitory')
+    search_fields = ('name', 'building__name', 'building__dormitory__name',
+                     'details')

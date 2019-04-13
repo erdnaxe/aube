@@ -416,7 +416,6 @@ class ModuleSwitch(AclMixin, RevMixin, models.Model):
         verbose_name = _("switch module")
         verbose_name_plural = _("switch modules")
 
-
     def __str__(self):
         return str(self.reference)
 
@@ -447,7 +446,7 @@ class ConstructorSwitch(AclMixin, RevMixin, models.Model):
 
     class Meta:
         verbose_name = _("switch constructor")
-        verbose_name_plural = ("switch constructors")
+        verbose_name_plural = _("switch constructors")
 
     def __str__(self):
         return self.name
@@ -871,40 +870,12 @@ def stack_post_delete(**_kwargs):
 
 
 @receiver(post_save, sender=Port)
-def port_post_save(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_delete, sender=Port)
-def port_post_delete(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_save, sender=ModelSwitch)
-def modelswitch_post_save(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_delete, sender=ModelSwitch)
-def modelswitch_post_delete(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_save, sender=Building)
-def building_post_save(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_delete, sender=Building)
-def building_post_delete(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_save, sender=Switch)
-def switch_post_save(**_kwargs):
-    regen("graph_topo")
-
-
 @receiver(post_delete, sender=Switch)
 def switch_post_delete(**_kwargs):
     regen("graph_topo")
