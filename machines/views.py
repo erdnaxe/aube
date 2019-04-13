@@ -16,7 +16,6 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import ProtectedError, F
-from django.forms import modelformset_factory
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -54,13 +53,10 @@ from .forms import (
     DomainForm,
     AliasForm,
     DelAliasForm,
-    RoleForm,
-    DelRoleForm,
     ServiceForm,
     DelServiceForm,
     SshFpForm,
     Ipv6ListForm,
-    EditOuverturePortListForm,
     EditOuverturePortConfigForm,
 )
 from .models import (
@@ -68,16 +64,13 @@ from .models import (
     Machine,
     Interface,
     Extension,
-    SOA,
     Mx,
     Ns,
     Domain,
-    Role,
     Service,
     Service_link,
     regen,
     Txt,
-    DName,
     Srv,
     SshFp,
     OuverturePortList,
@@ -632,63 +625,6 @@ def del_alias(request, interface, interfaceid):
 
 
 @login_required
-@can_create(Role)
-def add_role(request):
-    """ View used to add a Role object """
-    role = RoleForm(request.POST or None)
-    if role.is_valid():
-        role.save()
-        messages.success(request, _("The role was created."))
-        return redirect(reverse('machines:index-role'))
-    return form(
-        {'roleform': role, 'action_name': _("Create a role")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Role)
-def edit_role(request, role_instance, **_kwargs):
-    """ View used to edit a Role object """
-    role = RoleForm(request.POST or None, instance=role_instance)
-    if role.is_valid():
-        if role.changed_data:
-            role.save()
-            messages.success(request, _("The role was edited."))
-        return redirect(reverse('machines:index-role'))
-    return form(
-        {'roleform': role, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Role)
-def del_role(request, instances):
-    """ View used to delete a Service object """
-    role = DelRoleForm(request.POST or None, instances=instances)
-    if role.is_valid():
-        role_dels = role.cleaned_data['role']
-        for role_del in role_dels:
-            try:
-                role_del.delete()
-                messages.success(request, _("The role was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the role %s can't be deleted.") % role_del)
-                )
-        return redirect(reverse('machines:index-role'))
-    return form(
-        {'roleform': role, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
 @can_create(Service)
 def add_service(request):
     """ View used to add a Service object """
@@ -843,21 +779,6 @@ def index_ipv6(request, interface, interfaceid):
 
 
 @login_required
-@can_view_all(Role)
-def index_role(request):
-    """ View used to display the list of existing roles """
-    role_list = (Role.objects
-                 .prefetch_related(
-        'servers__domain__extension'
-    ).all())
-    return render(
-        request,
-        'machines/index_role.html',
-        {'role_list': role_list}
-    )
-
-
-@login_required
 @can_view_all(Service)
 def index_service(request):
     """ View used to display the list of existing services """
@@ -889,84 +810,6 @@ def index_portlist(request):
         request,
         "machines/index_portlist.html",
         {'port_list': port_list}
-    )
-
-
-@login_required
-@can_edit(OuverturePortList)
-def edit_portlist(request, ouvertureportlist_instance, **_kwargs):
-    """ View used to edit a port policy """
-    port_list = EditOuverturePortListForm(
-        request.POST or None,
-        instance=ouvertureportlist_instance
-    )
-    port_formset = modelformset_factory(
-        OuverturePort,
-        fields=('begin', 'end', 'protocole', 'io'),
-        extra=0,
-        can_delete=True,
-        min_num=1,
-        validate_min=True,
-    )(
-        request.POST or None,
-        queryset=ouvertureportlist_instance.ouvertureport_set.all()
-    )
-    if port_list.is_valid() and port_formset.is_valid():
-        if port_list.changed_data:
-            pl = port_list.save()
-        else:
-            pl = ouvertureportlist_instance
-        instances = port_formset.save(commit=False)
-        for to_delete in port_formset.deleted_objects:
-            to_delete.delete()
-        for port in instances:
-            port.port_list = pl
-            port.save()
-        messages.success(request, _("The ports list was edited."))
-        return redirect(reverse('machines:index-portlist'))
-    return form(
-        {'port_list': port_list, 'ports': port_formset},
-        'machines/edit_portlist.html',
-        request
-    )
-
-
-@login_required
-@can_delete(OuverturePortList)
-def del_portlist(request, port_list_instance, **_kwargs):
-    """ View used to delete a port policy """
-    port_list_instance.delete()
-    messages.success(request, _("The ports list was deleted."))
-    return redirect(reverse('machines:index-portlist'))
-
-
-@login_required
-@can_create(OuverturePortList)
-def add_portlist(request):
-    """ View used to add a port policy """
-    port_list = EditOuverturePortListForm(request.POST or None)
-    port_formset = modelformset_factory(
-        OuverturePort,
-        fields=('begin', 'end', 'protocole', 'io'),
-        extra=0,
-        can_delete=True,
-        min_num=1,
-        validate_min=True,
-    )(request.POST or None, queryset=OuverturePort.objects.none())
-    if port_list.is_valid() and port_formset.is_valid():
-        pl = port_list.save()
-        instances = port_formset.save(commit=False)
-        for to_delete in port_formset.deleted_objects:
-            to_delete.delete()
-        for port in instances:
-            port.port_list = pl
-            port.save()
-        messages.success(request, _("The ports list was created."))
-        return redirect(reverse('machines:index-portlist'))
-    return form(
-        {'port_list': port_list, 'ports': port_formset},
-        'machines/edit_portlist.html',
-        request
     )
 
 

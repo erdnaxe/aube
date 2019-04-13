@@ -14,17 +14,27 @@ from django.contrib import admin
 from reversion.admin import VersionAdmin
 
 from .models import (
-    Extension,
     DName,
+    Extension,
+    IpType,
     MachineType,
     Mx,
     Nas,
     Ns,
+    OuverturePort,
+    OuverturePortList,
+    Role,
     SOA,
     Srv,
     Txt,
     Vlan,
 )
+
+
+@admin.register(DName)
+class DNameAdmin(VersionAdmin):
+    """Admin view of a DName object"""
+    list_display = ('zone', 'alias')
 
 
 @admin.register(Extension)
@@ -33,10 +43,13 @@ class ExtensionAdmin(VersionAdmin):
     list_display = ('name', 'need_infra', 'origin', 'soa', 'dnssec')
 
 
-@admin.register(DName)
-class DNameAdmin(VersionAdmin):
-    """Admin view of a DName object"""
-    list_display = ('zone', 'alias')
+@admin.register(IpType)
+class IpTypeAdmin(VersionAdmin):
+    """Admin view of a IpType object"""
+    list_display = (
+        'name', 'extension', 'need_infra', 'prefix_v6', 'vlan',
+        'ouverture_ports')
+    list_filter = ('need_infra',)
 
 
 @admin.register(MachineType)
@@ -70,6 +83,45 @@ class SrvAdmin(VersionAdmin):
     """Admin view of a Srv object"""
     list_display = ('service', 'protocole', 'extension', 'ttl', 'priority',
                     'weight', 'port', 'target')
+
+
+class OuverturePortInline(admin.TabularInline):
+    """A inline for OuverturePortListAdmin, represents one range of ports"""
+    model = OuverturePort
+    extra = 1
+
+
+@admin.register(OuverturePortList)
+class OuverturePortListAdmin(VersionAdmin):
+    """Admin view of a OuverturePortList object"""
+    list_display = ('name', 'tcp_in', 'tcp_out', 'udp_in', 'udp_out')
+    inlines = (OuverturePortInline,)
+
+    # TODO(erdnaxe): add machines list
+
+    def tcp_in(self, obj):
+        return None
+
+    def tcp_out(self, obj):
+        return None
+
+    def udp_in(self, obj):
+        return None
+
+    def udp_out(self, obj):
+        return None
+
+
+@admin.register(Role)
+class RoleAdmin(VersionAdmin):
+    """Admin view of a Role object"""
+    list_display = ('role_type', 'specific_role', 'servers')
+    # TODO(erdnaxe): investigate why it was buggy before switching to admin
+    # TODO(erdnaxe): print machines on change list like in edit mode
+    #     role_list = (Role.objects
+    #                  .prefetch_related(
+    #         'servers__domain__extension'
+    #     ).all())
 
 
 @admin.register(SOA)

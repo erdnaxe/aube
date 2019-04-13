@@ -282,17 +282,36 @@ class MachineType(RevMixin, AclMixin, models.Model):
 
 
 class IpType(RevMixin, AclMixin, models.Model):
-    """ Type d'ip, définissant un range d'ip, affecté aux machine types"""
-    name = models.CharField(max_length=255)
-    extension = models.ForeignKey('Extension', on_delete=models.PROTECT)
-    need_infra = models.BooleanField(default=False)
-    domaine_ip_start = models.GenericIPAddressField(protocol='IPv4')
-    domaine_ip_stop = models.GenericIPAddressField(protocol='IPv4')
+    """IP range"""
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_('name'),
+    )
+    extension = models.ForeignKey(
+        'Extension',
+        on_delete=models.PROTECT,
+        verbose_name=_('extension'),
+    )
+    need_infra = models.BooleanField(
+        default=False,
+        verbose_name=_("need infra role"),
+        help_text=_("When active, only users with the \"use_all_iptype\" "
+                    "permission will be able to use this type of IP."),
+    )
+    domaine_ip_start = models.GenericIPAddressField(
+        protocol='IPv4',
+        verbose_name=_('IPv4 range start'),
+    )
+    domaine_ip_stop = models.GenericIPAddressField(
+        protocol='IPv4',
+        verbose_name=_('IPv4 range stop'),
+    )
     domaine_ip_network = models.GenericIPAddressField(
         protocol='IPv4',
         null=True,
         blank=True,
-        help_text=_("Network containing the domain's IPv4 range (optional)")
+        verbose_name=_('IPv4 network'),
+        help_text=_("Network containing the domain's IPv4 range (optional)."),
     )
     domaine_ip_netmask = models.IntegerField(
         default=24,
@@ -300,46 +319,51 @@ class IpType(RevMixin, AclMixin, models.Model):
             MaxValueValidator(31),
             MinValueValidator(8)
         ],
-        help_text=_("Netmask for the domain's IPv4 range")
+        verbose_name=_('IPv4 netmask'),
+        help_text=_("Netmask for this IPv4 range."),
     )
     reverse_v4 = models.BooleanField(
         default=False,
-        help_text=_("Enable reverse DNS for IPv4"),
+        verbose_name=_("reverse DNS for IPv4"),
     )
     prefix_v6 = models.GenericIPAddressField(
         protocol='IPv6',
         null=True,
-        blank=True
+        blank=True,
+        verbose_name=_("IPv6 prefix"),
     )
     prefix_v6_length = models.IntegerField(
         default=64,
         validators=[
             MaxValueValidator(128),
             MinValueValidator(0)
-        ]
+        ],
+        verbose_name=_("IPv6 prefix lenght"),
     )
     reverse_v6 = models.BooleanField(
         default=False,
-        help_text=_("Enable reverse DNS for IPv6"),
+        verbose_name=_("reverse DNS for IPv6"),
     )
     vlan = models.ForeignKey(
         'Vlan',
         on_delete=models.PROTECT,
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_("VLAN"),
     )
     ouverture_ports = models.ForeignKey(
         'OuverturePortList',
         blank=True,
-        null=True
+        null=True,
+        verbose_name=_("default open port profile"),
     )
 
     class Meta:
         permissions = (
             ("use_all_iptype", _("Can use all IP types")),
         )
-        verbose_name = _("IP type")
-        verbose_name_plural = _("IP types")
+        verbose_name = _("IP range")
+        verbose_name_plural = _("IP ranges")
 
     @cached_property
     def ip_range(self):
@@ -1724,25 +1748,26 @@ class Role(RevMixin, AclMixin, models.Model):
         ('gateway', _("Gateway")),
     )
 
-    role_type = models.CharField(max_length=255, unique=True)
-    servers = models.ManyToManyField('Interface')
+    role_type = models.CharField(
+        max_length=255,
+        unique=True,
+        verbose_name=_('name'),
+    )
+    servers = models.ManyToManyField(
+        'Interface',
+        verbose_name=_('servers'),
+    )
     specific_role = models.CharField(
         choices=ROLE,
         null=True,
         blank=True,
         max_length=32,
+        verbose_name=_('specific role'),
     )
 
     class Meta:
         verbose_name = _("server role")
         verbose_name_plural = _("server roles")
-
-    @classmethod
-    def interface_for_roletype(cls, roletype):
-        """Return interfaces for a roletype"""
-        return Interface.objects.filter(
-            role=cls.objects.filter(specific_role=roletype)
-        )
 
     @classmethod
     def all_interfaces_for_roletype(cls, roletype):
@@ -1754,10 +1779,9 @@ class Role(RevMixin, AclMixin, models.Model):
     @classmethod
     def interface_for_roletype(cls, roletype):
         """Return interfaces for a roletype"""
-        return Interface.objects.filter(role=cls.objects.filter(specific_role=roletype))
-
-    def save(self, *args, **kwargs):
-        super(Role, self).save(*args, **kwargs)
+        return Interface.objects.filter(
+            role=cls.objects.filter(specific_role=roletype)
+        )
 
     def __str__(self):
         return str(self.role_type)
@@ -1867,13 +1891,14 @@ class OuverturePortList(RevMixin, AclMixin, models.Model):
     """Liste des ports ouverts sur une interface."""
 
     name = models.CharField(
+        verbose_name=_('name'),
         help_text=_("Name of the ports configuration"),
         max_length=255
     )
 
     class Meta:
-        verbose_name = _("ports opening list")
-        verbose_name_plural = _("ports opening lists")
+        verbose_name = _("ports opening profile")
+        verbose_name_plural = _("ports opening profiles")
 
     def can_delete(self, user_request, *_args, **_kwargs):
         """Verifie que l'user a les bons droits bureau pour delete
@@ -1934,8 +1959,14 @@ class OuverturePort(RevMixin, AclMixin, models.Model):
     UDP = 'U'
     IN = 'I'
     OUT = 'O'
-    begin = models.PositiveIntegerField(validators=[MaxValueValidator(65535)])
-    end = models.PositiveIntegerField(validators=[MaxValueValidator(65535)])
+    begin = models.PositiveIntegerField(
+        validators=[MaxValueValidator(65535)],
+        verbose_name=_('begins at'),
+    )
+    end = models.PositiveIntegerField(
+        validators=[MaxValueValidator(65535)],
+        verbose_name=_('ends at'),
+    )
     port_list = models.ForeignKey(
         'OuverturePortList',
         on_delete=models.CASCADE
@@ -1947,6 +1978,7 @@ class OuverturePort(RevMixin, AclMixin, models.Model):
             (UDP, 'UDP'),
         ),
         default=TCP,
+        verbose_name=_('protocole'),
     )
     io = models.CharField(
         max_length=1,
@@ -1955,6 +1987,7 @@ class OuverturePort(RevMixin, AclMixin, models.Model):
             (OUT, 'OUT'),
         ),
         default=OUT,
+        verbose_name=_('i/o'),
     )
 
     class Meta:
@@ -2032,96 +2065,21 @@ def machinetype_post_save(**kwargs):
 
 
 @receiver(post_save, sender=Domain)
-def domain_post_save(**_kwargs):
-    """Regeneration dns après modification d'un domain object"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=Domain)
-def domain_post_delete(**_kwargs):
-    """Regeneration dns après suppression d'un domain object"""
-    regen('dns')
-
-
 @receiver(post_save, sender=Extension)
-def extension_post_save(**_kwargs):
-    """Regeneration dns après modification d'une extension"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=Extension)
-def extension_post_selete(**_kwargs):
-    """Regeneration dns après suppression d'une extension"""
-    regen('dns')
-
-
 @receiver(post_save, sender=SOA)
-def soa_post_save(**_kwargs):
-    """Regeneration dns après modification d'un SOA"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=SOA)
-def soa_post_delete(**_kwargs):
-    """Regeneration dns après suppresson d'un SOA"""
-    regen('dns')
-
-
 @receiver(post_save, sender=Mx)
-def mx_post_save(**_kwargs):
-    """Regeneration dns après modification d'un MX"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=Mx)
-def mx_post_delete(**_kwargs):
-    """Regeneration dns après suppresson d'un MX"""
-    regen('dns')
-
-
 @receiver(post_save, sender=Ns)
-def ns_post_save(**_kwargs):
-    """Regeneration dns après modification d'un NS"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=Ns)
-def ns_post_delete(**_kwargs):
-    """Regeneration dns après modification d'un NS"""
-    regen('dns')
-
-
 @receiver(post_save, sender=Txt)
-def text_post_save(**_kwargs):
-    """Regeneration dns après modification d'un TXT"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=Txt)
-def text_post_delete(**_kwargs):
-    """Regeneration dns après modification d'un TX"""
-    regen('dns')
-
-
 @receiver(post_save, sender=DName)
-def dname_post_save(**_kwargs):
-    """Updates the DNS regen after modification of a DName object."""
-    regen('dns')
-
-
 @receiver(post_delete, sender=DName)
-def dname_post_delete(**_kwargs):
-    """Updates the DNS regen after deletion of a DName object."""
-    regen('dns')
-
-
 @receiver(post_save, sender=Srv)
-def srv_post_save(**_kwargs):
-    """Regeneration dns après modification d'un SRV"""
-    regen('dns')
-
-
 @receiver(post_delete, sender=Srv)
-def srv_post_delete(**_kwargs):
-    """Regeneration dns après modification d'un SRV"""
+def regen_dns_receiver(**_kwargs):
+    """Regen DNS when configuration changes"""
     regen('dns')

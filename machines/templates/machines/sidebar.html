@@ -45,12 +45,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
         {% trans "Services (DHCP, DNS, ...)" %}
     </a>
     {% acl_end %}
-    {% can_view_all Role %}
-    <a class="list-group-item list-group-item-info" href="{% url 'machines:index-role' %}">
-        <i class="fa fa-list-ul"></i>
-        {% trans "Server roles" %}
-    </a>
-    {% acl_end %}
     {% can_view_all OuverturePortList %}
     <a class="list-group-item list-group-item-info" href="{% url 'machines:index-portlist' %}">
         <i class="fa fa-list-ul"></i>

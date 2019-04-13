@@ -18,8 +18,6 @@ Formulaires d'ajout, edition et suppressions de :
     - ports ouverts et profils d'ouverture par interface
 """
 
-from __future__ import unicode_literals
-
 from django import forms
 from django.forms import ModelForm, Form
 from django.utils.translation import ugettext_lazy as _
@@ -33,11 +31,9 @@ from .models import (
     IpList,
     MachineType,
     Extension,
-    Role,
     Service,
     SshFp,
     IpType,
-    OuverturePortList,
     Ipv6List,
 )
 
@@ -217,39 +213,6 @@ class Ipv6ListForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
         super(Ipv6ListForm, self).__init__(*args, prefix=prefix, **kwargs)
 
 
-class RoleForm(FormRevMixin, ModelForm):
-    """Add and edit role."""
-
-    class Meta:
-        model = Role
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(RoleForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['servers'].queryset = (Interface.objects.all()
-            .select_related(
-            'domain__extension'
-        ))
-
-
-class DelRoleForm(FormRevMixin, Form):
-    """Deletion of one or several roles."""
-    role = forms.ModelMultipleChoiceField(
-        queryset=Role.objects.none(),
-        label=_("Current roles"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelRoleForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['role'].queryset = instances
-        else:
-            self.fields['role'].queryset = Role.objects.all()
-
-
 class ServiceForm(FormRevMixin, ModelForm):
     """Ajout et edition d'une classe de service : dns, dhcp, etc"""
 
@@ -303,23 +266,6 @@ class EditOuverturePortConfigForm(FormRevMixin, ModelForm):
     def __init__(self, *args, **kwargs):
         prefix = kwargs.pop('prefix', self.Meta.model.__name__)
         super(EditOuverturePortConfigForm, self).__init__(
-            *args,
-            prefix=prefix,
-            **kwargs
-        )
-
-
-class EditOuverturePortListForm(FormRevMixin, ModelForm):
-    """Edition de la liste des ports et profils d'ouverture
-    des ports"""
-
-    class Meta:
-        model = OuverturePortList
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(EditOuverturePortListForm, self).__init__(
             *args,
             prefix=prefix,
             **kwargs
