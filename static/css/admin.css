@@ -10,6 +10,11 @@
 #header {
     background-color: #222;
     border-bottom: solid 3px #f9a01b;
+    overflow: visible;
+}
+
+.login #header {
+    overflow: hidden;
 }
 
 .module h2, .module caption, .inline-group h2 {
@@ -69,12 +74,45 @@ img.banding-logo {
     border-bottom: none;
     font-weight: bold;
     display: inline-block;
-    margin: 0 6px;
 }
 
-#nav a:hover, #nav a:focus {
+#nav div.dropdown:hover > a, #nav div.dropdown:focus > a {
     text-decoration: none;
     color: #79aec8;
+}
+
+#nav a.activated {
+    text-decoration: underline;
+}
+
+#nav div.dropdown {
+    position: relative; /* needed to position the dropdown content */
+    display: inline-block;
+}
+
+#nav div.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444444;
+    min-width: 220px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+#nav div.dropdown-content a {
+    color: #fff;
+    padding: 7px 8px;
+    text-decoration: none;
+    display: block;
+    line-height: 16px;
+}
+
+#nav div.dropdown-content a:hover {
+    background-color: #636363;
+}
+
+#nav div.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 /* Footer */

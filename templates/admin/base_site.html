@@ -24,18 +24,20 @@ Copyright © 2019  Alexandre Iooss
     <div id="nav">
         {% if available_apps %}
             {% for app in available_apps %}
-                {% if app_list|length == 1 and app.name == app_list.0.name %}
-                    <a href="{{ app.app_url }}" style="text-decoration:underline">{{ app.name }}</a>
-                {% else %}
-                    <a href="{{ app.app_url }}">{{ app.name }}</a>
-                {% endif %}
-                {% comment %}
-                    {% for model in app.models %}
-                        {% if model.admin_url %}
-                            <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
-                        {% endif %}
-                    {% endfor %}
-                {% endcomment %}
+                <div class="dropdown">
+                    {% if app_list|length == 1 and app.name == app_list.0.name %}
+                        <a href="{{ app.app_url }}" class="activated">{{ app.name }}</a>
+                    {% else %}
+                        <a href="{{ app.app_url }}">{{ app.name }}</a>
+                    {% endif %}
+                    <div class="dropdown-content">
+                        {% for model in app.models %}
+                            {% if model.admin_url %}
+                                <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
                 {% if not forloop.last %}/{% endif %}
             {% endfor %}
         {% endif %}

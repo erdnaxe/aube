@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-13 08:40+0200\n"
+"POT-Creation-Date: 2019-04-14 08:03+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -57,11 +57,11 @@ msgid ""
 "\">this form</a>."
 msgstr ""
 
-#: templates/admin/base_site.html:64 templates/base.html:269
+#: templates/admin/base_site.html:65 templates/base.html:269
 msgid "powered by"
 msgstr "propulsé par"
 
-#: templates/admin/base_site.html:68 templates/base.html:273
+#: templates/admin/base_site.html:69 templates/base.html:273
 msgid ""
 "This software is under the terms of the <a href=\"http://www.gnu.org/"
 "licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a> License."
@@ -434,15 +434,3 @@ msgstr ""
 #, python-format
 msgid "The %(site_name)s team"
 msgstr ""
-
-#~ msgid "Back to top"
-#~ msgstr "Retour en haut"
-
-#~ msgid "Brought to you with <i class=\"fa fa-heart text-danger\"></i>."
-#~ msgstr "Codé avec <i class=\"fa fa-heart text-danger\"></i>."
-
-#~ msgid "About this website"
-#~ msgstr "À propos de ce site"
-
-#~ msgid "Translation in development"
-#~ msgstr "Traduction en développement"
