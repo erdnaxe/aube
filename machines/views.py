@@ -30,7 +30,6 @@ from re2o.acl import (
     can_view,
     can_delete,
     can_view_all,
-    can_delete_set,
 )
 from re2o.utils import (
     all_active_assigned_interfaces,
@@ -50,8 +49,6 @@ from .forms import (
     DomainForm,
     AliasForm,
     DelAliasForm,
-    ServiceForm,
-    DelServiceForm,
     SshFpForm,
     Ipv6ListForm,
     EditOuverturePortConfigForm,
@@ -554,63 +551,6 @@ def del_alias(request, interface, interfaceid):
         ))
     return form(
         {'aliasform': alias, 'action_name': _("Delete")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_create(Service)
-def add_service(request):
-    """ View used to add a Service object """
-    service = ServiceForm(request.POST or None)
-    if service.is_valid():
-        service.save()
-        messages.success(request, _("The service was created."))
-        return redirect(reverse('machines:index-service'))
-    return form(
-        {'serviceform': service, 'action_name': _("Create a service")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_edit(Service)
-def edit_service(request, service_instance, **_kwargs):
-    """ View used to edit a Service object """
-    service = ServiceForm(request.POST or None, instance=service_instance)
-    if service.is_valid():
-        if service.changed_data:
-            service.save()
-            messages.success(request, _("The service was edited."))
-        return redirect(reverse('machines:index-service'))
-    return form(
-        {'serviceform': service, 'action_name': _("Edit")},
-        'machines/machine.html',
-        request
-    )
-
-
-@login_required
-@can_delete_set(Service)
-def del_service(request, instances):
-    """ View used to delete a Service object """
-    service = DelServiceForm(request.POST or None, instances=instances)
-    if service.is_valid():
-        service_dels = service.cleaned_data['service']
-        for service_del in service_dels:
-            try:
-                service_del.delete()
-                messages.success(request, _("The service was deleted."))
-            except ProtectedError:
-                messages.error(
-                    request,
-                    (_("Error: the service %s can't be deleted.") % service_del)
-                )
-        return redirect(reverse('machines:index-service'))
-    return form(
-        {'serviceform': service, 'action_name': _("Delete")},
         'machines/machine.html',
         request
     )

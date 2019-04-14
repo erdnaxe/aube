@@ -1804,20 +1804,29 @@ class Role(RevMixin, AclMixin, models.Model):
 class Service(RevMixin, AclMixin, models.Model):
     """ Definition d'un service (dhcp, dns, etc)"""
 
-    service_type = models.CharField(max_length=255, blank=True, unique=True)
+    service_type = models.CharField(
+        max_length=255,
+        blank=True,
+        unique=True,
+        verbose_name=_('name'),
+    )
     min_time_regen = models.DurationField(
         default=timedelta(minutes=1),
-        help_text=_("Minimal time before regeneration of the service.")
+        verbose_name=_('minimum time before regeneration'),
     )
     regular_time_regen = models.DurationField(
         default=timedelta(hours=1),
-        help_text=_("Maximal time before regeneration of the service.")
+        verbose_name=_("maximum time before regeneration"),
     )
-    servers = models.ManyToManyField('Interface', through='Service_link')
+    servers = models.ManyToManyField(
+        'Interface',
+        through='Service_link',
+        verbose_name=_('servers'),
+    )
 
     class Meta:
-        verbose_name = _("service to generate (DHCP, DNS, ...)")
-        verbose_name_plural = _("services to generate (DHCP, DNS, ...)")
+        verbose_name = _("service to generate")
+        verbose_name_plural = _("services to generate")
 
     def ask_regen(self):
         """ Marque à True la demande de régénération pour un service x """

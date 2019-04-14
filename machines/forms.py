@@ -171,48 +171,6 @@ class Ipv6ListForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
         super(Ipv6ListForm, self).__init__(*args, prefix=prefix, **kwargs)
 
 
-class ServiceForm(FormRevMixin, ModelForm):
-    """Ajout et edition d'une classe de service : dns, dhcp, etc"""
-
-    class Meta:
-        model = Service
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(ServiceForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['servers'].queryset = (Interface.objects.all()
-            .select_related(
-            'domain__extension'
-        ))
-
-    def save(self, commit=True):
-        # TODO : None of the parents of ServiceForm use the commit
-        # parameter in .save()
-        instance = super(ServiceForm, self).save(commit=False)
-        if commit:
-            instance.save()
-        instance.process_link(self.cleaned_data.get('servers'))
-        return instance
-
-
-class DelServiceForm(FormRevMixin, Form):
-    """Suppression d'un ou plusieurs service"""
-    service = forms.ModelMultipleChoiceField(
-        queryset=Service.objects.none(),
-        label=_("Current services"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelServiceForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['service'].queryset = instances
-        else:
-            self.fields['service'].queryset = Service.objects.all()
-
-
 class EditOuverturePortConfigForm(FormRevMixin, ModelForm):
     """Edition de la liste des profils d'ouverture de ports
     pour l'interface"""

@@ -28,6 +28,8 @@ from .models import (
     OuverturePort,
     OuverturePortList,
     Role,
+    Service,
+    Service_link,
     SOA,
     Srv,
     SshFp,
@@ -76,11 +78,14 @@ class InterfaceAdmin(VersionAdmin):
     list_display = ('domain', 'machine', 'machine_type', 'mac_address', 'ipv4')
     list_filter = ('port_lists',)
     inlines = (DomainInline, Ipv6ListInline)
+    filter_horizontal = ('port_lists',)
+    # TODO(erdnaxe): we need to split alias and domain
 
 
 class InterfaceInline(admin.StackedInline):
     """A inline for Machine, represents one interface"""
     model = Interface
+    filter_horizontal = ('port_lists',)
     extra = 1
 
 
@@ -140,7 +145,8 @@ class OuverturePortListAdmin(VersionAdmin):
     @staticmethod
     def open_ports(obj):
         """All ports refering to a profile"""
-        return ", ".join(port.show_port() for port in obj.ouvertureport_set.all())
+        return ", ".join(
+            port.show_port() for port in obj.ouvertureport_set.all())
 
     open_ports.short_description = "open ports"
 
@@ -149,12 +155,9 @@ class OuverturePortListAdmin(VersionAdmin):
 class RoleAdmin(VersionAdmin):
     """Admin view of a Role object"""
     list_display = ('role_type', 'specific_role', 'servers')
+    filter_horizontal = ('servers',)
     # TODO(erdnaxe): investigate why it was buggy before switching to admin
     # TODO(erdnaxe): print machines on change list like in edit mode
-    #     role_list = (Role.objects
-    #                  .prefetch_related(
-    #         'servers__domain__extension'
-    #     ).all())
 
 
 @admin.register(Srv)
@@ -162,6 +165,21 @@ class SrvAdmin(VersionAdmin):
     """Admin view of a Srv object"""
     list_display = ('service', 'protocole', 'extension', 'ttl', 'priority',
                     'weight', 'port', 'target')
+
+
+class ServiceLinkInline(admin.TabularInline):
+    """A inline for ServiceAdmin, represents one association"""
+    model = Service_link
+    extra = 1
+
+
+@admin.register(Service)
+class ServiceAdmin(VersionAdmin):
+    """Admin view of a Service object"""
+    list_display = ('service_type', 'min_time_regen', 'regular_time_regen',
+                    'servers')
+    inlines = (ServiceLinkInline,)
+    # TODO(erdnaxe): print machines on change list like in edit mode
 
 
 @admin.register(SOA)

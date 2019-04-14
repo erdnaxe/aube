@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-13 18:11+0200\n"
+"POT-Creation-Date: 2019-04-14 08:49+0200\n"
 "PO-Revision-Date: 2018-06-23 16:35+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "You don't have the right to view this application."
 msgstr "Vous n'avez pas le droit de voir cette application."
 
-#: machines/admin.py:99
+#: machines/admin.py:104
 msgid "- no name -"
 msgstr "- sans nom -"
 
@@ -47,17 +47,13 @@ msgstr "Assignation automatique IPv4"
 msgid "Current aliases"
 msgstr "Alias actuels"
 
-#: machines/forms.py:203
-msgid "Current services"
-msgstr "Services actuels"
-
 #: machines/models.py:48
 msgid "user"
 msgstr ""
 
 #: machines/models.py:54 machines/models.py:247 machines/models.py:294
 #: machines/models.py:564 machines/models.py:617 machines/models.py:662
-#: machines/models.py:1768 machines/models.py:1909
+#: machines/models.py:1768 machines/models.py:1811 machines/models.py:1918
 msgid "name"
 msgstr "nom"
 
@@ -537,7 +533,7 @@ msgstr "enregistrements DNAME"
 msgid "service"
 msgstr "service"
 
-#: machines/models.py:978 machines/models.py:1994
+#: machines/models.py:978 machines/models.py:2003
 msgid "protocole"
 msgstr "protocole"
 
@@ -593,7 +589,7 @@ msgstr "enregistrement SSHFP"
 msgid "SSHFP records"
 msgstr "enregistrements SSHFP"
 
-#: machines/models.py:1120 machines/models.py:1913
+#: machines/models.py:1120 machines/models.py:1922
 msgid "open ports profile"
 msgstr "profil d'ouverture de ports"
 
@@ -818,7 +814,7 @@ msgstr "Client SQL"
 msgid "Gateway"
 msgstr "Passerelle"
 
-#: machines/models.py:1772
+#: machines/models.py:1772 machines/models.py:1824
 msgid "servers"
 msgstr "serveurs"
 
@@ -834,59 +830,59 @@ msgstr "rôle de serveur"
 msgid "server roles"
 msgstr "rôles de serveur"
 
-#: machines/models.py:1810
-msgid "Minimal time before regeneration of the service."
-msgstr "Temps minimal avant régénération du service."
-
-#: machines/models.py:1814
-msgid "Maximal time before regeneration of the service."
-msgstr "Temps maximal avant régénération du service."
+#: machines/models.py:1815
+msgid "minimum time before regeneration"
+msgstr "temps minimal avant régénération"
 
 #: machines/models.py:1819
-msgid "service to generate (DHCP, DNS, ...)"
-msgstr "service à générer (DHCP, DNS, ...)"
+msgid "maximum time before regeneration"
+msgstr "temps maximal avant régénération"
 
-#: machines/models.py:1820
-msgid "services to generate (DHCP, DNS, ...)"
-msgstr "services à générer (DHCP, DNS, ...)"
+#: machines/models.py:1828
+msgid "service to generate"
+msgstr "service à générer"
 
-#: machines/models.py:1865
+#: machines/models.py:1829
+msgid "services to generate"
+msgstr "services à générer"
+
+#: machines/models.py:1874
 msgid "link between service and server"
 msgstr "lien entre service et serveur"
 
-#: machines/models.py:1866
+#: machines/models.py:1875
 msgid "links between service and server"
 msgstr "liens entre service et serveur"
 
-#: machines/models.py:1914
+#: machines/models.py:1923
 msgid "open ports profiles"
 msgstr "profil d'ouverture de ports"
 
-#: machines/models.py:1923
+#: machines/models.py:1932
 msgid "You don't have the right to delete a ports opening list."
 msgstr "Vous n'avez pas le droit de supprimer une liste d'ouverture de ports."
 
-#: machines/models.py:1926
+#: machines/models.py:1935
 msgid "This ports opening list is used."
 msgstr "Cette liste d'ouverture de ports est utilisée."
 
-#: machines/models.py:1977
+#: machines/models.py:1986
 msgid "begins at"
 msgstr "commence à"
 
-#: machines/models.py:1981
+#: machines/models.py:1990
 msgid "ends at"
 msgstr "finit à"
 
-#: machines/models.py:2003
+#: machines/models.py:2012
 msgid "i/o"
 msgstr "e/s"
 
-#: machines/models.py:2007
+#: machines/models.py:2016
 msgid "ports opening"
 msgstr "ouverture de ports"
 
-#: machines/models.py:2008
+#: machines/models.py:2017
 msgid "ports openings"
 msgstr "ouvertures de ports"
 
@@ -955,7 +951,7 @@ msgstr "Voir le profil"
 msgid "Deactivated"
 msgstr "Désactivée"
 
-#: machines/templates/machines/aff_machines.html:67 machines/views.py:322
+#: machines/templates/machines/aff_machines.html:67 machines/views.py:319
 msgid "Create an interface"
 msgstr "Créer une interface"
 
@@ -1058,7 +1054,7 @@ msgstr "Confirmer"
 #: machines/templates/machines/index_alias.html:29
 #: machines/templates/machines/index_iptype.html:30
 #: machines/templates/machines/index_ipv6.html:30
-#: machines/templates/machines/index_service.html:30
+#: machines/templates/machines/index_service.html:28
 #: machines/templates/machines/index_sshfp.html:28
 #: machines/templates/machines/machine.html:31
 #: machines/templates/machines/sidebar.html:33
@@ -1089,19 +1085,11 @@ msgstr "Liste des adresses IPv6 de l'interface"
 msgid " Add an IPv6 address"
 msgstr " Ajouter une adresse IPv6"
 
-#: machines/templates/machines/index_service.html:33
+#: machines/templates/machines/index_service.html:31
 msgid "List of services"
 msgstr "Liste des services"
 
-#: machines/templates/machines/index_service.html:36
-msgid " Add a service"
-msgstr " Ajouter un service"
-
-#: machines/templates/machines/index_service.html:39
-msgid " Delete one or several services"
-msgstr " Supprimer un ou plusieurs services"
-
-#: machines/templates/machines/index_service.html:42
+#: machines/templates/machines/index_service.html:34
 msgid "States of servers"
 msgstr "États des serveurs"
 
@@ -1145,128 +1133,107 @@ msgstr "Adresse IPv6"
 msgid "Services (DHCP, DNS, ...)"
 msgstr "Services (DHCP, DNS, ...)"
 
-#: machines/views.py:103
+#: machines/views.py:100
 msgid "Select a machine type first."
 msgstr "Sélectionnez un type de machine d'abord."
 
-#: machines/views.py:205
+#: machines/views.py:202
 msgid "The machine was created."
 msgstr "La machine a été créée."
 
-#: machines/views.py:217
+#: machines/views.py:214
 msgid "Create a machine"
 msgstr "Créer une machine"
 
-#: machines/views.py:257
+#: machines/views.py:254
 msgid "The machine was edited."
 msgstr "La machine a été modifiée."
 
-#: machines/views.py:269 machines/views.py:393 machines/views.py:459
-#: machines/views.py:526 machines/views.py:589
+#: machines/views.py:266 machines/views.py:390 machines/views.py:456
+#: machines/views.py:523
 msgid "Edit"
 msgstr "Modifier"
 
-#: machines/views.py:282
+#: machines/views.py:279
 msgid "The machine was deleted."
 msgstr "La machine a été supprimée."
 
-#: machines/views.py:311
+#: machines/views.py:308
 msgid "The interface was created."
 msgstr "L'interface a été créée."
 
-#: machines/views.py:338
+#: machines/views.py:335
 msgid "The interface was deleted."
 msgstr "L'interface a été supprimée."
 
-#: machines/views.py:363
+#: machines/views.py:360
 msgid "The IPv6 addresses list was created."
 msgstr "La liste d'adresses IPv6 a été créée."
 
-#: machines/views.py:369
+#: machines/views.py:366
 msgid "Create an IPv6 addresses list"
 msgstr "Créer une liste d'adresses IPv6"
 
-#: machines/views.py:387
+#: machines/views.py:384
 msgid "The IPv6 addresses list was edited."
 msgstr "La liste d'adresses IPv6 a été modifiée."
 
-#: machines/views.py:406
+#: machines/views.py:403
 msgid "The IPv6 addresses list was deleted."
 msgstr "La liste d'adresses IPv6 a été supprimée."
 
-#: machines/views.py:430
+#: machines/views.py:427
 msgid "The SSHFP record was created."
 msgstr "L'enregistrement SSHFP a été créé."
 
-#: machines/views.py:436
+#: machines/views.py:433
 msgid "Create a SSHFP record"
 msgstr "Créer un enregistrement SSHFP"
 
-#: machines/views.py:453
+#: machines/views.py:450
 msgid "The SSHFP record was edited."
 msgstr "L'enregistrement SSHFP a été modifié."
 
-#: machines/views.py:472
+#: machines/views.py:469
 msgid "The SSHFP record was deleted."
 msgstr "L'enregistrement SSHFP a été supprimé."
 
-#: machines/views.py:494
+#: machines/views.py:491
 msgid "The alias was created."
 msgstr "L'alias a été créé."
 
-#: machines/views.py:500
+#: machines/views.py:497
 msgid "Create an alias"
 msgstr "Créer un alias"
 
-#: machines/views.py:518
+#: machines/views.py:515
 msgid "The alias was edited."
 msgstr "L'alias a été modifié."
 
-#: machines/views.py:544
+#: machines/views.py:541
 #, python-format
 msgid "The alias %s was deleted."
 msgstr "L'alias %s a été supprimé."
 
-#: machines/views.py:549
+#: machines/views.py:546
 #, python-format
 msgid "Error: the alias %s can't be deleted."
 msgstr "Erreur : l'alias %s ne peut pas être supprimé."
 
-#: machines/views.py:556 machines/views.py:613
+#: machines/views.py:553
 msgid "Delete"
 msgstr "Supprimer"
 
-#: machines/views.py:569
-msgid "The service was created."
-msgstr "Le service a été créé."
-
-#: machines/views.py:572
-msgid "Create a service"
-msgstr "Créer un service"
-
-#: machines/views.py:586
-msgid "The service was edited."
-msgstr "Le service a été modifié."
-
-#: machines/views.py:605
-msgid "The service was deleted."
-msgstr "Le service a été supprimé."
-
-#: machines/views.py:609
-#, python-format
-msgid "Error: the service %s can't be deleted."
-msgstr "Erreur : le service %s ne peut pas être supprimé."
-
-#: machines/views.py:744
+#: machines/views.py:684
 msgid "Warning: the IPv4 isn't public, the opening won't have effect in v4."
 msgstr ""
 "Attention : l'adresse IPv4 n'est pas publique, l'ouverture n'aura pas "
 "d'effet en v4."
 
-#: machines/views.py:754
+#: machines/views.py:694
 msgid "The ports configuration was edited."
 msgstr "La configuration de ports a été modifiée."
 
-#: machines/views.py:757
+#: machines/views.py:697
 msgid "Edit the configuration"
 msgstr "Modifier la configuration"
