@@ -33,7 +33,7 @@ What have been done so far in Aube that is not in Re2o :
   * Dynamic menu, automatically populated depending on permissions and activated apps ;
   * Add automatic documentation with Django AdminDocs ;
   * New login form ;
-  * Drop custom password reset mechanics in favor of Django Contrib Auth. Now users can also ask a mail to recall their username ;
+  * Drop custom password reset mechanics in favor of Django Contrib Auth ;
   * Filter interfaces with port opening profile rather than listing all machine per profile ;
   * More coming soon…
 

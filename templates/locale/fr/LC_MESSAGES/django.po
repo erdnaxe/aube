@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-14 08:03+0200\n"
+"POT-Creation-Date: 2019-04-15 09:06+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -393,8 +393,8 @@ msgid ""
 msgstr ""
 
 #: templates/registration/login.html:53
-msgid "Forgotten your password or username?"
-msgstr ""
+msgid "Forgotten your password?"
+msgstr "Mot de passe oublié ?"
 
 #: templates/registration/password_change_done.html:11
 #: templates/registration/password_change_form.html:11
@@ -422,15 +422,11 @@ msgstr ""
 msgid "Please go to the following page and choose a new password:"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:8
-msgid "Your username, in case you've forgotten:"
-msgstr ""
-
-#: templates/registration/password_reset_email.html:10
+#: templates/registration/password_reset_email.html:9
 msgid "Thanks for using our site!"
 msgstr ""
 
-#: templates/registration/password_reset_email.html:12
+#: templates/registration/password_reset_email.html:11
 #, python-format
 msgid "The %(site_name)s team"
 msgstr ""
