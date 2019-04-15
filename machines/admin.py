@@ -79,6 +79,9 @@ class InterfaceAdmin(VersionAdmin):
     list_filter = ('port_lists',)
     inlines = (DomainInline, Ipv6ListInline)
     filter_horizontal = ('port_lists',)
+    search_fields = ('domain__name', 'mac_address', 'ipv4__ipv4',
+                     'machine__name', 'machine__user__pseudo',
+                     'machine__user__surname')
     # TODO(erdnaxe): we need to split alias and domain
 
 
@@ -102,6 +105,7 @@ class MachineAdmin(VersionAdmin):
     list_filter = ('active',)
     inlines = (InterfaceInline, SshFpInline)
     empty_value_display = _('- no name -')
+    search_fields = ('name', 'user__pseudo', 'user__surname')
 
 
 @admin.register(MachineType)
