@@ -10,11 +10,6 @@
 #header {
     background-color: #222;
     border-bottom: solid 3px #f9a01b;
-    overflow: visible;
-}
-
-.login #header {
-    overflow: hidden;
 }
 
 .module h2, .module caption, .inline-group h2 {
@@ -115,11 +110,23 @@ img.banding-logo {
     display: block;
 }
 
+/* Fix navigation hidden */
+#header {
+    overflow: visible;
+}
+
+.login #header {
+    overflow: hidden;
+}
+
 /* Footer */
 #footer {
-    margin: auto;
-    max-width: 80em;
+    padding: 20px 40px;
     color: #999;
+}
+
+.login #footer {
+    padding: 10px;
 }
 
 #footer a {
@@ -138,4 +145,14 @@ img.banding-logo {
 
 .login #content {
     min-height: 0;
+}
+
+/* Recenter login button */
+.login .submit-row {
+    padding: 1em 0 0 8.5em !important;
+}
+
+/* Dashboard should take all page */
+.dashboard #content {
+    width: auto;
 }
