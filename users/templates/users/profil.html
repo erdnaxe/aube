@@ -433,7 +433,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
         <div id="bans" class="panel-collapse collapse">
              <div class="panel-body">
              	{% can_create Ban %}
-              	<a class="btn btn-primary btn-sm" role="button" href=""> {# TODO To admin #}
+             	<a class="btn btn-primary btn-sm" role="button" href="{%  url 'admin:users_ban_add' %}">
                  	<i class="fa fa-ban"></i>
 			{% trans "Add a ban" %}
                 </a>
@@ -458,7 +458,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
         <div id="whitelists" class="panel-collapse collapse">
             <div class="panel-body">
                 {% can_create Whitelist %}
-				<a class="btn btn-primary btn-sm" role="button" href=""> {# TODO To admin #}
+				<a class="btn btn-primary btn-sm" role="button" href="{%  url 'admin:users_whitelist_add' %}">
 					<i class="fa fa-check-circle"></i>
 					{% trans "Grant a whitelist" %}
 				</a>
