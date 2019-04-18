@@ -35,37 +35,7 @@ from .models import (
     Ban,
     Whitelist,
     Request,
-    LdapUser,
-    LdapServiceUser,
-    LdapServiceUserGroup,
-    LdapUserGroup
 )
-
-
-class LdapUserAdmin(admin.ModelAdmin):
-    """Administration du ldapuser"""
-    list_display = ('name', 'uidNumber', 'login_shell')
-    exclude = ('user_password', 'sambat_nt_password')
-    search_fields = ('name',)
-
-
-class LdapServiceUserAdmin(admin.ModelAdmin):
-    """Administration du ldapserviceuser"""
-    list_display = ('name',)
-    exclude = ('user_password',)
-    search_fields = ('name',)
-
-
-class LdapUserGroupAdmin(admin.ModelAdmin):
-    """Administration du ldapusergroupe"""
-    list_display = ('name', 'members', 'gid')
-    search_fields = ('name',)
-
-
-class LdapServiceUserGroupAdmin(admin.ModelAdmin):
-    """Administration du ldap serviceusergroup"""
-    list_display = ('name',)
-    search_fields = ('name',)
 
 
 @admin.register(School)
@@ -204,10 +174,6 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Adherent, UserAdmin)
 admin.site.register(Club, UserAdmin)
 admin.site.register(ServiceUser, ServiceUserAdmin)
-admin.site.register(LdapUser, LdapUserAdmin)
-admin.site.register(LdapUserGroup, LdapUserGroupAdmin)
-admin.site.register(LdapServiceUser, LdapServiceUserAdmin)
-admin.site.register(LdapServiceUserGroup, LdapServiceUserGroupAdmin)
 admin.site.register(ListRight, ListRightAdmin)
 admin.site.register(EMailAddress, EMailAddressAdmin)
 admin.site.register(Request, RequestAdmin)
