@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 15:20+0200\n"
+"POT-Creation-Date: 2019-04-18 22:55+0200\n"
 "PO-Revision-Date: 2018-06-25 14:53+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -137,104 +137,110 @@ msgstr "module de commutateur réseau"
 msgid "switch modules"
 msgstr "modules de commutateur réseau"
 
-#: topologie/models.py:430
+#: topologie/models.py:429
 msgid "Slot on switch"
 msgstr "Emplacement sur le commutateur réseau"
 
-#: topologie/models.py:431 topologie/templates/topologie/aff_modules.html:48
+#: topologie/models.py:430 topologie/templates/topologie/aff_modules.html:48
 #: topologie/templates/topologie/aff_modules.html:82
 msgid "Slot"
 msgstr "Emplacement"
 
-#: topologie/models.py:435
+#: topologie/models.py:434
 msgid "link between switch and module"
 msgstr "lien entre commutateur réseau et module"
 
-#: topologie/models.py:436
+#: topologie/models.py:435
 msgid "links between switch and module"
 msgstr "liens entre commutateur réseau et module"
 
-#: topologie/models.py:440
+#: topologie/models.py:439
 msgid "On slot "
 msgstr "Sur l'emplacement "
 
-#: topologie/models.py:440
+#: topologie/models.py:439
 msgid " of "
 msgstr " de "
 
-#: topologie/models.py:449
+#: topologie/models.py:448
 msgid "switch constructor"
 msgstr "constructeur de commutateur réseau"
 
-#: topologie/models.py:471
+#: topologie/models.py:449
+#, fuzzy
+#| msgid "switch constructor"
+msgid "switch constructors"
+msgstr "constructeur de commutateur réseau"
+
+#: topologie/models.py:470
 msgid "switch bay"
 msgstr "baie de brassage"
 
-#: topologie/models.py:472
+#: topologie/models.py:471
 msgid "switch bays"
 msgstr "baies de brassage"
 
-#: topologie/models.py:481 topologie/models.py:500 topologie/models.py:692
+#: topologie/models.py:480 topologie/models.py:499 topologie/models.py:691
 msgid "name"
 msgstr "nom"
 
-#: topologie/models.py:486 topologie/models.py:506
+#: topologie/models.py:485 topologie/models.py:505
 msgid "dormitory"
 msgstr "résidence"
 
-#: topologie/models.py:487
+#: topologie/models.py:486
 msgid "dormitories"
 msgstr "résidences"
 
-#: topologie/models.py:510 topologie/models.py:703
+#: topologie/models.py:509 topologie/models.py:702
 msgid "building"
 msgstr "bâtiment"
 
-#: topologie/models.py:511
+#: topologie/models.py:510
 msgid "buildings"
 msgstr "bâtiments"
 
-#: topologie/models.py:577 topologie/models.py:578
+#: topologie/models.py:576 topologie/models.py:577
 msgid "Port state Active"
 msgstr "État du port Actif"
 
-#: topologie/models.py:584
+#: topologie/models.py:583
 msgid "port"
 msgstr "port"
 
-#: topologie/models.py:585
+#: topologie/models.py:584
 msgid "ports"
 msgstr "ports"
 
-#: topologie/models.py:591
+#: topologie/models.py:590
 msgid "Uplink: "
 msgstr "Liaison montante : "
 
-#: topologie/models.py:593
+#: topologie/models.py:592
 msgid "Machine: "
 msgstr "Machine : "
 
-#: topologie/models.py:595
+#: topologie/models.py:594
 msgid "Room: "
 msgstr "Chambre : "
 
-#: topologie/models.py:597
+#: topologie/models.py:596
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: topologie/models.py:664
+#: topologie/models.py:663
 msgid "The port can't exist, its number is too great."
 msgstr "Le port ne peut pas exister, son numéro est trop grand."
 
-#: topologie/models.py:670
+#: topologie/models.py:669
 msgid "Room, interface and related port are mutually exclusive."
 msgstr "Chambre, interface et port relié sont mutuellement exclusifs."
 
-#: topologie/models.py:673
+#: topologie/models.py:672
 msgid "A port can't be related to itself."
 msgstr "Un port ne peut être relié à lui-même."
 
-#: topologie/models.py:677
+#: topologie/models.py:676
 msgid ""
 "The related port is already used, please clear it before creating the "
 "relation."
@@ -242,139 +248,139 @@ msgstr ""
 "Le port relié est déjà utilisé, veuillez le modifier avant de créer la "
 "relation."
 
-#: topologie/models.py:696
+#: topologie/models.py:695
 msgid "details"
 msgstr "détails"
 
-#: topologie/models.py:708
+#: topologie/models.py:707
 msgid "room"
 msgstr "chambre"
 
-#: topologie/models.py:709
+#: topologie/models.py:708
 msgid "rooms"
 msgstr "chambres"
 
-#: topologie/models.py:721
+#: topologie/models.py:720
 msgid "MAC-RADIUS"
 msgstr "MAC-RADIUS"
 
-#: topologie/models.py:738 topologie/templates/topologie/aff_chambres.html:36
+#: topologie/models.py:737 topologie/templates/topologie/aff_chambres.html:36
 #: topologie/templates/topologie/aff_port.html:38
 msgid "Room"
 msgstr "Chambre"
 
-#: topologie/models.py:739 topologie/templates/topologie/aff_ap.html:36
+#: topologie/models.py:738 topologie/templates/topologie/aff_ap.html:36
 msgid "Access point"
 msgstr "Point d'accès sans fil"
 
-#: topologie/models.py:740
+#: topologie/models.py:739
 msgid "Uplink"
 msgstr "Liaison montante"
 
-#: topologie/models.py:741
+#: topologie/models.py:740
 msgid "Organisation machine"
 msgstr "Machine d'association"
 
-#: topologie/models.py:742
+#: topologie/models.py:741
 msgid "Nothing"
 msgstr "Rien"
 
-#: topologie/models.py:744
+#: topologie/models.py:743
 #: topologie/templates/topologie/aff_port_profile.html:37
 msgid "Name"
 msgstr "Nom"
 
-#: topologie/models.py:751
+#: topologie/models.py:750
 msgid "Default profile"
 msgstr "Profil par défaut"
 
-#: topologie/models.py:759
+#: topologie/models.py:758
 msgid "VLAN untagged"
 msgstr "VLAN untagged"
 
-#: topologie/models.py:765
+#: topologie/models.py:764
 msgid "VLAN(s) tagged"
 msgstr "VLAN(s) tagged"
 
-#: topologie/models.py:770
+#: topologie/models.py:769
 msgid "Type of RADIUS authentication : inactive, MAC-address or 802.1X"
 msgstr "Type d'authentification RADIUS : inactive, MAC-address ou 802.1X"
 
-#: topologie/models.py:772
+#: topologie/models.py:771
 msgid "RADIUS type"
 msgstr "Type de RADIUS"
 
-#: topologie/models.py:778
+#: topologie/models.py:777
 msgid "In case of MAC-authentication : mode COMMON or STRICT on this port"
 msgstr ""
 "Dans le cas d'authentification par adresse MAC : mode COMMON ou STRICT sur "
 "ce port"
 
-#: topologie/models.py:780
+#: topologie/models.py:779
 msgid "RADIUS mode"
 msgstr "Mode de RADIUS"
 
-#: topologie/models.py:786
+#: topologie/models.py:785
 msgid "Port speed limit"
 msgstr "Limite de vitesse du port"
 
-#: topologie/models.py:791
+#: topologie/models.py:790
 msgid "Limit of MAC-address on this port"
 msgstr "Limite de MAC-address sur ce port"
 
-#: topologie/models.py:792
+#: topologie/models.py:791
 msgid "MAC limit"
 msgstr "Limite MAC"
 
-#: topologie/models.py:796
+#: topologie/models.py:795
 msgid "Flow control"
 msgstr "Contrôle du flux"
 
-#: topologie/models.py:800
+#: topologie/models.py:799
 msgid "Protect against rogue DHCP"
 msgstr "Protège contre les DHCP pirates"
 
-#: topologie/models.py:801
+#: topologie/models.py:800
 msgid "DHCP snooping"
 msgstr "DHCP snooping"
 
-#: topologie/models.py:805
+#: topologie/models.py:804
 msgid "Protect against rogue DHCPv6"
 msgstr "Protège contre les DHCPv6 pirates"
 
-#: topologie/models.py:806
+#: topologie/models.py:805
 msgid "DHCPv6 snooping"
 msgstr "DHCPv6 snooping"
 
-#: topologie/models.py:810
+#: topologie/models.py:809
 msgid "Check if IP adress is DHCP assigned"
 msgstr "Vérifie si l'adresse IP est attribuée par DHCP"
 
-#: topologie/models.py:811
+#: topologie/models.py:810
 msgid "ARP protection"
 msgstr "Protection ARP"
 
-#: topologie/models.py:815
+#: topologie/models.py:814
 msgid "Protect against rogue RA"
 msgstr "Protège contre les RA pirates"
 
-#: topologie/models.py:816
+#: topologie/models.py:815
 msgid "RA guard"
 msgstr "RA guard"
 
-#: topologie/models.py:820
+#: topologie/models.py:819
 msgid "Protect against loop"
 msgstr "Protège contre une boucle"
 
-#: topologie/models.py:821
+#: topologie/models.py:820
 msgid "Loop protection"
 msgstr "Protection contre une boucle"
 
-#: topologie/models.py:825
+#: topologie/models.py:824
 msgid "port profile"
 msgstr "profil de port"
 
-#: topologie/models.py:826
+#: topologie/models.py:825
 msgid "port profiles"
 msgstr "profils de port"
 
