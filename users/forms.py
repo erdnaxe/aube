@@ -10,9 +10,7 @@ Definition des forms pour l'application users.
 
 Modification, creation de :
     - un user (informations personnelles)
-    - un bannissement
     - le mot de passe d'un user
-    - une whiteliste
     - un user de service
 """
 
@@ -25,29 +23,21 @@ from django.core.validators import MinLengthValidator
 from django.utils import timezone
 from django.contrib.auth.models import Group, Permission
 from django.utils.translation import ugettext_lazy as _
-from django.utils.safestring import mark_safe
 
-from machines.models import Interface, Machine, Nas
+from machines.models import Interface, Nas
 from topologie.models import Port
 from preferences.models import OptionalUser
 from re2o.utils import remove_user_room
-from re2o.base import get_input_formats_help_text
 from re2o.mixins import FormRevMixin
 from re2o.field_permissions import FieldPermissionFormMixin
-
-from preferences.models import GeneralOption
 
 from .widgets import DateTimePicker
 
 from .models import (
     User,
     ServiceUser,
-    School,
     ListRight,
-    Whitelist,
     EMailAddress,
-    ListShell,
-    Ban,
     Adherent,
     Club
 )
@@ -270,13 +260,6 @@ class ServiceUserChangeForm(FormRevMixin, forms.ModelForm):
         return self.initial["password"]
 
 
-class ResetPasswordForm(forms.Form):
-    """Formulaire de demande de reinitialisation de mot de passe,
-    mdp oublié"""
-    pseudo = forms.CharField(label=_("Username"), max_length=255)
-    email = forms.EmailField(max_length=255)
-
-
 class MassArchiveForm(forms.Form):
     """Formulaire d'archivage des users inactif. Prend en argument
     du formulaire la date de depart avant laquelle archiver les
@@ -395,6 +378,7 @@ class AdherentCreationForm(AdherentForm):
     def __init__(self, *args, **kwargs):
         super(AdherentCreationForm, self).__init__(*args, **kwargs)
 
+
 class AdherentEditForm(AdherentForm):
     """Formulaire d'édition d'un user.
     AdherentForm incluant la modification des champs gpg et shell"""
@@ -418,6 +402,7 @@ class AdherentEditForm(AdherentForm):
             'shell',
             'gpg_fingerprint'
         ]
+
 
 class ClubForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
     """Formulaire de base d'edition d'un user. Formulaire de base, utilisé
@@ -549,6 +534,7 @@ class StateForm(FormRevMixin, ModelForm):
             user.state_sync()
         user.save()
 
+
 class GroupForm(FieldPermissionFormMixin, FormRevMixin, ModelForm):
     """ Gestion des groupes d'un user"""
     groups = forms.ModelMultipleChoiceField(
@@ -566,30 +552,6 @@ class GroupForm(FieldPermissionFormMixin, FormRevMixin, ModelForm):
         super(GroupForm, self).__init__(*args, prefix=prefix, **kwargs)
         if 'is_superuser' in self.fields:
             self.fields['is_superuser'].label = _("Superuser")
-
-
-class SchoolForm(FormRevMixin, ModelForm):
-    """Edition, creation d'un école"""
-    class Meta:
-        model = School
-        fields = ['name']
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(SchoolForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['name'].label = _("School")
-
-
-class ShellForm(FormRevMixin, ModelForm):
-    """Edition, creation d'un école"""
-    class Meta:
-        model = ListShell
-        fields = ['shell']
-
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(ShellForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['shell'].label = _("Shell name")
 
 
 class ListRightForm(FormRevMixin, ModelForm):
@@ -638,51 +600,6 @@ class DelListRightForm(Form):
             self.fields['listrights'].queryset = instances
         else:
             self.fields['listrights'].queryset = ListRight.objects.all()
-
-
-class DelSchoolForm(Form):
-    """Suppression d'une ou plusieurs écoles"""
-    schools = forms.ModelMultipleChoiceField(
-        queryset=School.objects.none(),
-        label=_("Current schools"),
-        widget=forms.CheckboxSelectMultiple
-    )
-
-    def __init__(self, *args, **kwargs):
-        instances = kwargs.pop('instances', None)
-        super(DelSchoolForm, self).__init__(*args, **kwargs)
-        if instances:
-            self.fields['schools'].queryset = instances
-        else:
-            self.fields['schools'].queryset = School.objects.all()
-
-
-class BanForm(FormRevMixin, ModelForm):
-    """Creation, edition d'un objet bannissement"""
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(BanForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['date_end'].label = _("End date")
-        self.fields['date_end'].localize = False
-
-    class Meta:
-        model = Ban
-        exclude = ['user']
-        widgets = {'date_end':DateTimePicker}
-
-
-class WhitelistForm(FormRevMixin, ModelForm):
-    """Creation, edition d'un objet whitelist"""
-    def __init__(self, *args, **kwargs):
-        prefix = kwargs.pop('prefix', self.Meta.model.__name__)
-        super(WhitelistForm, self).__init__(*args, prefix=prefix, **kwargs)
-        self.fields['date_end'].label = _("End date")
-        self.fields['date_end'].localize = False
-
-    class Meta:
-        model = Whitelist
-        exclude = ['user']
-        widgets = {'date_end':DateTimePicker}
 
 
 class EMailAddressForm(FormRevMixin, ModelForm):

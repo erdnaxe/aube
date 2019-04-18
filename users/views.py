@@ -19,19 +19,16 @@ des whitelist, des services users et des écoles
 from __future__ import unicode_literals
 
 from django.urls import reverse
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import ProtectedError, Count, Max
-from django.utils import timezone
-from django.db import transaction
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.translation import ugettext as _
 
 from rest_framework.renderers import JSONRenderer
-from reversion import revisions as reversion
 
 from cotisations.models import Facture, Paiement
 from machines.models import Machine
@@ -60,26 +57,18 @@ from .models import (
     User,
     Ban,
     Whitelist,
-    School,
     ListRight,
-    Request,
     ServiceUser,
     Adherent,
     Club,
-    ListShell,
     EMailAddress,
 )
 from .forms import (
-    BanForm,
-    WhitelistForm,
     EMailAddressForm,
     EmailSettingsForm,
-    DelSchoolForm,
     DelListRightForm,
     NewListRightForm,
     StateForm,
-    SchoolForm,
-    ShellForm,
     EditServiceUserForm,
     ServiceUserForm,
     ListRightForm,
@@ -88,7 +77,6 @@ from .forms import (
     ClubForm,
     MassArchiveForm,
     PassForm,
-    ResetPasswordForm,
     ClubAdminandMembersForm,
     GroupForm,
     InitialRegisterForm

@@ -1628,35 +1628,6 @@ def whitelist_post_delete(**kwargs):
     regen('mac_ip_list')
 
 
-class Request(models.Model):
-    """ Objet request, générant une url unique de validation.
-    Utilisé par exemple pour la generation du mot de passe et
-    sa réinitialisation"""
-    PASSWD = 'PW'
-    EMAIL = 'EM'
-    TYPE_CHOICES = (
-        (PASSWD, _("Password")),
-        (EMAIL, _("Email address")),
-    )
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES)
-    token = models.CharField(max_length=32)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    expires_at = models.DateTimeField()
-
-    def save(self):
-        if not self.expires_at:
-            self.expires_at = (timezone.now() +
-                               datetime.timedelta(
-                                   hours=GeneralOption.get_cached_value(
-                                       'req_expire_hrs'
-                                   )
-            ))
-        if not self.token:
-            self.token = str(uuid.uuid4()).replace('-', '')  # remove hyphens
-        super(Request, self).save()
-
-
 class LdapUser(ldapdb.models.Model):
     """
     Class for representing an LDAP user entry.

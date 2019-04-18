@@ -34,7 +34,6 @@ from .models import (
     Club,
     Ban,
     Whitelist,
-    Request,
 )
 
 
@@ -56,11 +55,6 @@ class ListShellAdmin(VersionAdmin):
     """Manage available shells in admin"""
     list_display = ('shell',)
     search_fields = ('shell',)
-
-
-class RequestAdmin(admin.ModelAdmin):
-    """Gestion des request objet, ticket pour lien de reinit mot de passe"""
-    list_display = ('user', 'type', 'created_at', 'expires_at')
 
 
 @admin.register(Ban)
@@ -176,7 +170,6 @@ admin.site.register(Club, UserAdmin)
 admin.site.register(ServiceUser, ServiceUserAdmin)
 admin.site.register(ListRight, ListRightAdmin)
 admin.site.register(EMailAddress, EMailAddressAdmin)
-admin.site.register(Request, RequestAdmin)
 # Now register the new UserAdmin...
 admin.site.unregister(User)
 admin.site.unregister(ServiceUser)
