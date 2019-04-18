@@ -23,7 +23,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load acl %}
 {% load i18n %}
 
@@ -37,7 +36,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
         </a>
     {% acl_end %}
     {% include 'machines/aff_ipv6.html' with  ipv6_list=ipv6_list %}
-    <br/>
-    <br/>
-    <br/>
 {% endblock %}

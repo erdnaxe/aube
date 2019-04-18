@@ -23,7 +23,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load i18n %}
 
 {% block title %}{% trans "Users" %}{% endblock %}
@@ -31,8 +30,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 {% block content %}
   <h2>{% trans "Rights" %}</h2>
   {%  include 'users/aff_rights.html' %}
-  <br />
-  <br />
-  <br />
 {% endblock %}
-

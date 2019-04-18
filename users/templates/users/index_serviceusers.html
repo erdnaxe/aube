@@ -23,7 +23,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load acl %}
 {% load i18n %}
 
@@ -36,8 +35,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
   <a class="btn btn-primary btn-sm" role="button" href="{% url 'users:new-serviceuser'  %}"><i class="fa fa-plus"></i>{% trans " Add a service user" %}</a>
   {% acl_end %}
   {%  include 'users/aff_serviceusers.html' with  serviceusers_list=serviceusers_list %}
-  <br />
-  <br />
-  <br />
 {% endblock %}
-

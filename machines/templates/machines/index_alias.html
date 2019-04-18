@@ -23,7 +23,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load i18n %}
 
 {% block title %}{% trans "Machines" %}{% endblock %}
@@ -35,7 +34,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
     <a class="btn btn-danger btn-sm" role="button" href="{% url 'machines:del-alias'  interface_id %}"><i
             class="fa fa-trash"></i>{% trans " Delete one or several aliases" %}</a>
     {% include 'machines/aff_alias.html' with  alias_list=alias_list %}
-    <br/>
-    <br/>
-    <br/>
 {% endblock %}

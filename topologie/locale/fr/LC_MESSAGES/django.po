@@ -167,10 +167,8 @@ msgid "switch constructor"
 msgstr "constructeur de commutateur réseau"
 
 #: topologie/models.py:449
-#, fuzzy
-#| msgid "switch constructor"
 msgid "switch constructors"
-msgstr "constructeur de commutateur réseau"
+msgstr "constructeurs de commutateur réseau"
 
 #: topologie/models.py:470
 msgid "switch bay"

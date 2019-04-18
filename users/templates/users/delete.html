@@ -23,7 +23,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load i18n %}
 
 {% block title %}{% trans "Deletion of users" %}{% endblock %}
@@ -33,11 +32,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <form class="form" method="post">
     {% csrf_token %}
     <h4>{% blocktrans %}Warning: are you sure you want to delete this {{ objet_name }} object ( {{ objet }} )?{% endblocktrans %}</h4>
-    {% trans "Confirm" as tr_confirm %}
-    {% bootstrap_button tr_confirm button_type="submit" icon="trash" button_class='btn-danger' %}
+    <button class="btn btn-default btn-danger" type="submit">
+        <span class="glyphicon glyphicon-trash"></span> {% trans "Confirm" %}
+    </button>
 </form>
-<br />
-<br />
-<br />
 {% endblock %}
-

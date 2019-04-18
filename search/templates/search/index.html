@@ -23,7 +23,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load i18n %}
 
 {% block title %}{% trans "Search results" %}{% endblock %}
@@ -70,8 +69,5 @@ with this program; if not, write to the Free Software Foundation, Inc.,
     {% else %}
         <h6>{% blocktrans %}(Only the first {{ max_result }} results are displayed in each category){% endblocktrans %}</h6>
     {% endif %}
-    <br />
-    <br />
-    <br />
 {% endblock %}
 

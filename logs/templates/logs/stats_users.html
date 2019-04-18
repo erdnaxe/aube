@@ -23,16 +23,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {% endcomment %}
 
-{% load bootstrap3 %}
 {% load i18n %}
 
 {% block title %}{% trans "Statistics" %}{% endblock %}
 
 {% block content %}
-<h2>{% trans "Statistics about users" %}</h2>
-    {%  include 'logs/aff_stats_users.html' with stats_list=stats_list %}
-    <br />
-    <br />
-    <br />
+    <h2>{% trans "Statistics about users" %}</h2>
+    {% include 'logs/aff_stats_users.html' with stats_list=stats_list %}
 {% endblock %}
-
