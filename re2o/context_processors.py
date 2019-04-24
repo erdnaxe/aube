@@ -37,9 +37,6 @@ def context_user(request):
     return {
         'request_user': user,
         'interfaces': interfaces,
-        # Must takes a different name because djang.auth.contrib.views.login()
-        # overrides 'site_name' context variable.
-        'name_website': GeneralOption.get_cached_value('site_name'),
         'ipv6_enabled': OptionalMachine.get_cached_value('ipv6'),
     }
 

@@ -7,7 +7,7 @@ Copyright © 2019  Alexandre Iooss
 
 {% load i18n staticfiles %}
 
-{% block title %}{{ title }} | {{ name_website }}{% endblock %}
+{% block title %}{{ title }} | {{ request.site.name }}{% endblock %}
 
 {% block branding %}
     <h1 id="site-name">
@@ -15,7 +15,7 @@ Copyright © 2019  Alexandre Iooss
             <img class="banding-logo" src="{% static 'images/logo_navbar.svg' %}" alt=""/>
         </a>
         <a href="{% url 'index' %}">
-            {{ name_website }}
+            {{ request.site.name }}
         </a>
     </h1>
 {% endblock %}
@@ -62,7 +62,7 @@ Copyright © 2019  Alexandre Iooss
 {% block footer %}
     <div id="footer">
         <p>
-            {{ name_website }} {% trans "powered by" %}
+            {{ request.site.name }} {% trans "powered by" %}
             <a href="{% url 'about' %}">Aube 2016&ndash;2019</a>.
         </p>
         <p>
