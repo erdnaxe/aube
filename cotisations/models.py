@@ -778,7 +778,7 @@ class Paiement(RevMixin, AclMixin, models.Model):
                 request,
                 _("The subscription of %(member_name)s was extended to"
                   " %(end_date)s.") % {
-                    'member_name': invoice.user.pseudo,
+                    'member_name': invoice.user.username,
                     'end_date': invoice.user.end_adhesion()
                 }
             )

@@ -583,7 +583,7 @@ class UserSerializer(NamespacedHMSerializer):
 
     class Meta:
         model = users.User
-        fields = ('surname', 'pseudo', 'email', 'local_email_redirect',
+        fields = ('surname', 'username', 'email', 'local_email_redirect',
                   'local_email_enabled', 'school', 'shell', 'comment',
                   'state', 'registered', 'telephone', 'solde', 'access',
                   'end_access', 'uid', 'class_name', 'api_url')
@@ -601,7 +601,7 @@ class ClubSerializer(NamespacedHMSerializer):
 
     class Meta:
         model = users.Club
-        fields = ('name', 'pseudo', 'email', 'local_email_redirect',
+        fields = ('name', 'username', 'email', 'local_email_redirect',
                   'local_email_enabled', 'school', 'shell', 'comment',
                   'state', 'registered', 'telephone', 'solde', 'room',
                   'access', 'end_access', 'administrators', 'members',
@@ -619,7 +619,7 @@ class AdherentSerializer(NamespacedHMSerializer):
 
     class Meta:
         model = users.Adherent
-        fields = ('name', 'surname', 'pseudo', 'email', 'local_email_redirect',
+        fields = ('name', 'surname', 'username', 'email', 'local_email_redirect',
                   'local_email_enabled', 'school', 'shell', 'comment',
                   'state', 'registered', 'telephone', 'room', 'solde',
                   'access', 'end_access', 'uid', 'api_url', 'gid')
@@ -635,7 +635,7 @@ class BasicUserSerializer(NamespacedHMSerializer):
 
     class Meta:
         model = users.User
-        fields = ('pseudo', 'uid', 'gid')
+        fields = ('username', 'uid', 'gid')
 
 
 class ServiceUserSerializer(NamespacedHMSerializer):
@@ -644,7 +644,7 @@ class ServiceUserSerializer(NamespacedHMSerializer):
 
     class Meta:
         model = users.ServiceUser
-        fields = ('pseudo', 'access_group', 'comment', 'api_url')
+        fields = ('username', 'access_group', 'comment', 'api_url')
 
 
 class SchoolSerializer(NamespacedHMSerializer):
@@ -701,7 +701,7 @@ class WhitelistSerializer(NamespacedHMSerializer):
 class EMailAddressSerializer(NamespacedHMSerializer):
     """Serialize `users.models.EMailAddress` objects.
     """
-    user = serializers.CharField(source='user.pseudo', read_only=True)
+    user = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = users.EMailAddress
@@ -1077,7 +1077,7 @@ class MailingMemberSerializer(UserSerializer):
     """
 
     class Meta(UserSerializer.Meta):
-        fields = ('name', 'pseudo', 'get_mail')
+        fields = ('name', 'username', 'get_mail')
 
 
 class MailingSerializer(ClubSerializer):

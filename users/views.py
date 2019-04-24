@@ -94,7 +94,7 @@ def new_user(request):
         user = user.save()
         user.reset_passwd_mail(request)
         messages.success(request, _("The user %s was created, an email to set"
-                                    " the password was sent.") % user.pseudo)
+                                    " the password was sent.") % user.username)
         return redirect(reverse(
             'users:profil',
             kwargs={'userid': str(user.id)}
@@ -123,7 +123,7 @@ def new_club(request):
         club.save()
         club.reset_passwd_mail(request)
         messages.success(request, _("The club %s was created, an email to set"
-                                    " the password was sent.") % club.pseudo)
+                                    " the password was sent.") % club.username)
         return redirect(reverse(
             'users:profil',
             kwargs={'userid': str(club.id)}
@@ -596,7 +596,7 @@ def index_listright(request):
 @can_view_all(ServiceUser)
 def index_serviceusers(request):
     """ Affiche les users de services (pour les accès ldap)"""
-    serviceusers_list = ServiceUser.objects.order_by('pseudo')
+    serviceusers_list = ServiceUser.objects.order_by('username')
     return render(
         request,
         'users/index_serviceusers.html',
@@ -754,7 +754,7 @@ def ml_std_members(request, ml_name):
 @permission_required('machines.serveur')
 def ml_club_list(_request):
     """ API view sending all the available club mailings"""
-    clubs = Club.objects.filter(mailing=True).values('pseudo')
+    clubs = Club.objects.filter(mailing=True).values('username')
     seria = MailingSerializer(clubs, many=True)
     return JSONResponse(seria.data)
 
@@ -765,7 +765,7 @@ def ml_club_list(_request):
 def ml_club_admins(request, ml_name):
     """ API view sending all the administrators for a specific club mailing"""
     try:
-        club = Club.objects.get(mailing=True, pseudo=ml_name)
+        club = Club.objects.get(mailing=True, username=ml_name)
     except Club.DoesNotExist:
         messages.error(request, _("The mailing list doesn't exist."))
         return redirect(reverse('index'))
@@ -780,7 +780,7 @@ def ml_club_admins(request, ml_name):
 def ml_club_members(request, ml_name):
     """ API view sending all the members for a specific club mailing"""
     try:
-        club = Club.objects.get(mailing=True, pseudo=ml_name)
+        club = Club.objects.get(mailing=True, username=ml_name)
     except Club.DoesNotExist:
         messages.error(request, _("The mailing list doesn't exist."))
         return redirect(reverse('index'))

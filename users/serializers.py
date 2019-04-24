@@ -17,7 +17,7 @@ from users.models import Club, Adherent
 class MailingSerializer(serializers.ModelSerializer):
     """ Serializer to build Mailing objects """
 
-    name = serializers.CharField(source='pseudo')
+    name = serializers.CharField(source='username')
 
     class Meta:
         model = Club

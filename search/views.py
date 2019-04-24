@@ -123,7 +123,7 @@ def search_single_word(word, filters, user,
             Q(
                 surname__icontains=word
             ) | Q(
-                pseudo__icontains=word
+                username__icontains=word
             ) | Q(
                 room__name__icontains=word
             ) | Q(
@@ -145,7 +145,7 @@ def search_single_word(word, filters, user,
             name__icontains=word
         ) | (
             Q(
-                user__pseudo__icontains=word
+                user__username__icontains=word
             ) & Q(
                 user__state__in=user_state
             )
@@ -170,7 +170,7 @@ def search_single_word(word, filters, user,
     # Factures
     if '2' in aff:
         filter_factures = Q(
-            user__pseudo__icontains=word
+            user__username__icontains=word
         ) & Q(
             user__state__in=user_state
         )
@@ -184,7 +184,7 @@ def search_single_word(word, filters, user,
     if '3' in aff:
         filter_bans = (
             Q(
-                user__pseudo__icontains=word
+                user__username__icontains=word
             ) & Q(
                 user__state__in=user_state
             )
@@ -213,7 +213,7 @@ def search_single_word(word, filters, user,
     if '4' in aff:
         filter_whitelists = (
             Q(
-                user__pseudo__icontains=word
+                user__username__icontains=word
             ) & Q(
                 user__state__in=user_state
             )

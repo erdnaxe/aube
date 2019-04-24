@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 15:20+0200\n"
+"POT-Creation-Date: 2019-04-24 09:44+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language: fr_FR\n"
@@ -566,7 +566,7 @@ msgid "no"
 msgstr "non"
 
 #: cotisations/payment_methods/note_kfet/forms.py:17
-msgid "pseudo note"
+msgid "username note"
 msgstr "pseudo note"
 
 #: cotisations/payment_methods/note_kfet/forms.py:20
@@ -743,7 +743,7 @@ msgstr "Modifier la facture"
 
 #: cotisations/templates/cotisations/edit_facture.html:45
 #: cotisations/templates/cotisations/facture.html:62
-#: cotisations/templates/cotisations/index_article.html:30
+#: cotisations/templates/cotisations/index_article.html:29
 msgid "Articles"
 msgstr "Articles"
 
@@ -769,41 +769,41 @@ msgstr "Ajouter un article supplémentaire"
 msgid "Total price: <span id=\"total_price\">0,00</span> €"
 msgstr "Prix total : <span id=\"total_price\">0,00</span> €"
 
-#: cotisations/templates/cotisations/index.html:29
+#: cotisations/templates/cotisations/index.html:28
 #: cotisations/templates/cotisations/sidebar.html:40
 msgid "Invoices"
 msgstr "Factures"
 
-#: cotisations/templates/cotisations/index.html:32
+#: cotisations/templates/cotisations/index.html:31
 msgid "Subscriptions"
 msgstr "Cotisations"
 
-#: cotisations/templates/cotisations/index_article.html:33
+#: cotisations/templates/cotisations/index_article.html:32
 msgid "List of article types"
 msgstr "Liste des types d'article"
 
-#: cotisations/templates/cotisations/index_article.html:36
+#: cotisations/templates/cotisations/index_article.html:35
 msgid "Add an article type"
 msgstr "Ajouter un type d'article"
 
-#: cotisations/templates/cotisations/index_article.html:40
+#: cotisations/templates/cotisations/index_article.html:39
 msgid "Delete one or several article types"
 msgstr "Supprimer un ou plusieurs types d'article"
 
-#: cotisations/templates/cotisations/index_banque.html:30
+#: cotisations/templates/cotisations/index_banque.html:29
 #: cotisations/templates/cotisations/sidebar.html:60
 msgid "Banks"
 msgstr "Banques"
 
-#: cotisations/templates/cotisations/index_banque.html:33
+#: cotisations/templates/cotisations/index_banque.html:32
 msgid "List of banks"
 msgstr "Liste des banques"
 
-#: cotisations/templates/cotisations/index_banque.html:36
+#: cotisations/templates/cotisations/index_banque.html:35
 msgid "Add a bank"
 msgstr "Ajouter une banque"
 
-#: cotisations/templates/cotisations/index_banque.html:40
+#: cotisations/templates/cotisations/index_banque.html:39
 msgid "Delete one or several banks"
 msgstr "Supprimer une ou plusieurs banques"
 
@@ -825,20 +825,20 @@ msgstr "Factures personnalisées"
 msgid "List of custom invoices"
 msgstr "Liste des factures personnalisées"
 
-#: cotisations/templates/cotisations/index_paiement.html:30
+#: cotisations/templates/cotisations/index_paiement.html:29
 #: cotisations/templates/cotisations/sidebar.html:65
 msgid "Payment methods"
 msgstr "Moyens de paiement"
 
-#: cotisations/templates/cotisations/index_paiement.html:33
+#: cotisations/templates/cotisations/index_paiement.html:32
 msgid "List of payment methods"
 msgstr "Liste des moyens de paiement"
 
-#: cotisations/templates/cotisations/index_paiement.html:36
+#: cotisations/templates/cotisations/index_paiement.html:35
 msgid "Add a payment method"
 msgstr "Ajouter un moyen de paiement"
 
-#: cotisations/templates/cotisations/index_paiement.html:40
+#: cotisations/templates/cotisations/index_paiement.html:39
 msgid "Delete one or several payment methods"
 msgstr "Supprimer un ou plusieurs moyens de paiement"
 

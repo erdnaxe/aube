@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 22:55+0200\n"
+"POT-Creation-Date: 2019-04-24 09:44+0200\n"
 "PO-Revision-Date: 2018-06-27 23:35+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -742,14 +742,14 @@ msgstr[0] "Total: %(perm_count)s permission"
 msgstr[1] "Total: %(perm_count)s permissions"
 
 #: users/templates/users/aff_listright.html:150
-#: users/templates/users/index.html:29 users/templates/users/index.html:32
-#: users/templates/users/index_ban.html:29
-#: users/templates/users/index_clubs.html:29
-#: users/templates/users/index_emailaddress.html:29
-#: users/templates/users/index_listright.html:30
-#: users/templates/users/index_rights.html:29
-#: users/templates/users/index_serviceusers.html:30
-#: users/templates/users/plugin_out.html:31
+#: users/templates/users/index.html:28 users/templates/users/index.html:31
+#: users/templates/users/index_ban.html:28
+#: users/templates/users/index_clubs.html:28
+#: users/templates/users/index_emailaddress.html:28
+#: users/templates/users/index_listright.html:29
+#: users/templates/users/index_rights.html:28
+#: users/templates/users/index_serviceusers.html:29
+#: users/templates/users/plugin_out.html:30
 #: users/templates/users/sidebar.html:52 users/templates/users/user.html:30
 #: users/templates/users/user_autocapture.html:30
 msgid "Users"
@@ -768,11 +768,11 @@ msgstr "Rôle"
 msgid "Firt name"
 msgstr "Prénom"
 
-#: users/templates/users/delete.html:29
+#: users/templates/users/delete.html:28
 msgid "Deletion of users"
 msgstr "Suppression d'utilisateurs"
 
-#: users/templates/users/delete.html:35
+#: users/templates/users/delete.html:34
 #, python-format
 msgid ""
 "Warning: are you sure you want to delete this %(objet_name)s object "
@@ -786,40 +786,40 @@ msgstr ""
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: users/templates/users/index_ban.html:32
+#: users/templates/users/index_ban.html:31
 #: users/templates/users/profil.html:430
 msgid "Bans"
 msgstr "Bannissements"
 
-#: users/templates/users/index_clubs.html:32
+#: users/templates/users/index_clubs.html:31
 msgid "Clubs"
 msgstr "Clubs"
 
-#: users/templates/users/index_emailaddress.html:32
+#: users/templates/users/index_emailaddress.html:31
 msgid "Local email accounts"
 msgstr "Comptes mail locaux"
 
-#: users/templates/users/index_listright.html:33
+#: users/templates/users/index_listright.html:32
 msgid "List of groups of rights"
 msgstr "Liste des groupes de droits"
 
-#: users/templates/users/index_listright.html:35
+#: users/templates/users/index_listright.html:34
 msgid " Add a group of rights"
 msgstr " Ajouter un groupe de droits"
 
-#: users/templates/users/index_listright.html:37
+#: users/templates/users/index_listright.html:36
 msgid " Delete one or several groups of rights"
 msgstr " Supprimer un ou plusieurs groupes de droits"
 
-#: users/templates/users/index_rights.html:32
+#: users/templates/users/index_rights.html:31
 msgid "Rights"
 msgstr "Droits"
 
-#: users/templates/users/index_serviceusers.html:33
+#: users/templates/users/index_serviceusers.html:32
 msgid "List of LDAP service users"
 msgstr "Liste des utilisateurs service LDAP"
 
-#: users/templates/users/index_serviceusers.html:34
+#: users/templates/users/index_serviceusers.html:33
 msgid ""
 "The LDAP service users are special users having access only to the LDAP for "
 "authentication operations. It is recommended to create a service user with a "
@@ -829,7 +829,7 @@ msgstr ""
 "seulement au LDAP pour des opérations d'authentification. Il est recommandé "
 "de créer un service utilisateur avec un indentifiant et un mot de passe."
 
-#: users/templates/users/index_serviceusers.html:36
+#: users/templates/users/index_serviceusers.html:35
 msgid " Add a service user"
 msgstr " Ajouter un utilisateur"
 
@@ -847,7 +847,7 @@ msgid "The following users will be archived (%(to_archive_list|length)s):"
 msgstr ""
 "Les utilisateus suivants vont être archivés (%(to_archive_list|length)s) :"
 
-#: users/templates/users/plugin_out.html:35
+#: users/templates/users/plugin_out.html:33
 msgid ""
 "Your machine and your room were successfully registered. Please disconnect "
 "and reconnect your Ethernet cable to benefit from a wired connection."

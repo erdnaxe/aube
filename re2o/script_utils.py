@@ -31,9 +31,9 @@ os.chdir(proj_path)
 application = get_wsgi_application()
 
 
-def get_user(pseudo):
-    """Cherche un utilisateur re2o à partir de son pseudo"""
-    user = User.objects.filter(pseudo=pseudo)
+def get_user(username):
+    """Cherche un utilisateur re2o à partir de son username"""
+    user = User.objects.filter(username=username)
     if len(user) == 0:
         raise CommandError("Invalid user.")
     if len(user) > 1:

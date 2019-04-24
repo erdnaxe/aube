@@ -41,7 +41,7 @@ class Command(BaseCommand):
             current_shell = target_user.shell.get_pretty_name()
         self.stdout.write(
             "Choisissez un shell pour l'utilisateur %s (le shell actuel est "
-            "%s) :" % (target_user.pseudo, current_shell)
+            "%s) :" % (target_user.username, current_shell)
         )
         for shell in shells:
             self.stdout.write("%d - %s (%s)" % (

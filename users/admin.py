@@ -86,7 +86,7 @@ class UserAdmin(VersionAdmin, BaseUserAdmin):
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
     list_display = (
-        'pseudo',
+        'username',
         'surname',
         'email',
         'local_email_redirect',
@@ -99,7 +99,7 @@ class UserAdmin(VersionAdmin, BaseUserAdmin):
     # They are using fields we don't use like 'is_staff'
     list_filter = ()
     fieldsets = (
-        (None, {'fields': ('pseudo', 'password')}),
+        (None, {'fields': ('username', 'password')}),
         (
             'Personal info',
             {
@@ -117,7 +117,7 @@ class UserAdmin(VersionAdmin, BaseUserAdmin):
             {
                 'classes': ('wide',),
                 'fields': (
-                    'pseudo',
+                    'username',
                     'surname',
                     'email',
                     'school',
@@ -128,8 +128,8 @@ class UserAdmin(VersionAdmin, BaseUserAdmin):
             }
         ),
     )
-    search_fields = ('pseudo', 'surname')
-    ordering = ('pseudo',)
+    search_fields = ('username', 'surname')
+    ordering = ('username',)
     filter_horizontal = ()
 
 
@@ -143,10 +143,10 @@ class ServiceUserAdmin(VersionAdmin, BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('pseudo', 'access_group')
+    list_display = ('username', 'access_group')
     list_filter = ()
     fieldsets = (
-        (None, {'fields': ('pseudo', 'password', 'access_group')}),
+        (None, {'fields': ('username', 'password', 'access_group')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -155,12 +155,12 @@ class ServiceUserAdmin(VersionAdmin, BaseUserAdmin):
             None,
             {
                 'classes': ('wide',),
-                'fields': ('pseudo', 'password1', 'password2')
+                'fields': ('username', 'password1', 'password2')
             }
         ),
     )
-    search_fields = ('pseudo',)
-    ordering = ('pseudo',)
+    search_fields = ('username',)
+    ordering = ('username',)
     filter_horizontal = ()
 
 

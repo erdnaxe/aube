@@ -108,18 +108,18 @@ class SortTable:
     USERS_INDEX = {
         'user_name': ['name'],
         'user_surname': ['surname'],
-        'user_pseudo': ['pseudo'],
+        'user_username': ['username'],
         'user_room': ['room'],
-        'default': ['state', 'pseudo']
+        'default': ['state', 'username']
     }
     USERS_INDEX_BAN = {
-        'ban_user': ['user__pseudo'],
+        'ban_user': ['user__username'],
         'ban_start': ['date_start'],
         'ban_end': ['date_end'],
         'default': ['-date_end']
     }
     USERS_INDEX_WHITE = {
-        'white_user': ['user__pseudo'],
+        'white_user': ['user__username'],
         'white_start': ['date_start'],
         'white_end': ['date_end'],
         'default': ['-date_end']
@@ -133,7 +133,7 @@ class SortTable:
         'default': ['pk']
     }
     COTISATIONS_INDEX = {
-        'cotis_user': ['user__pseudo'],
+        'cotis_user': ['user__username'],
         'cotis_paiement': ['paiement__moyen'],
         'cotis_date': ['date'],
         'cotis_id': ['id'],

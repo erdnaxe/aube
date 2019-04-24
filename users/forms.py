@@ -130,7 +130,7 @@ class UserCreationForm(FormRevMixin, forms.ModelForm):
 
     class Meta:
         model = Adherent
-        fields = ('pseudo', 'surname', 'email')
+        fields = ('username', 'surname', 'email')
 
     def clean_password2(self):
         """Verifie que password1 et 2 sont identiques"""
@@ -155,7 +155,7 @@ class ServiceUserCreationForm(FormRevMixin, forms.ModelForm):
     fields, plus a repeated password.
 
     Formulaire pour la creation de nouveaux serviceusers.
-    Requiert seulement un mot de passe; et un pseudo"""
+    Requiert seulement un mot de passe; et un username"""
     password1 = forms.CharField(
         label=_("Password"),
         widget=forms.PasswordInput,
@@ -179,7 +179,7 @@ class ServiceUserCreationForm(FormRevMixin, forms.ModelForm):
 
     class Meta:
         model = ServiceUser
-        fields = ('pseudo',)
+        fields = ('username',)
 
     def clean_password2(self):
         """Verifie que password1 et 2 sont indentiques"""
@@ -210,7 +210,7 @@ class UserChangeForm(FormRevMixin, forms.ModelForm):
 
     class Meta:
         model = Adherent
-        fields = ('pseudo', 'password', 'surname', 'email')
+        fields = ('username', 'password', 'surname', 'email')
 
     def __init__(self, *args, **kwargs):
         prefix = kwargs.pop('prefix', self.Meta.model.__name__)
@@ -253,7 +253,7 @@ class ServiceUserChangeForm(FormRevMixin, forms.ModelForm):
 
     class Meta:
         model = ServiceUser
-        fields = ('pseudo',)
+        fields = ('username',)
 
     def clean_password(self):
         """Dummy fun"""
@@ -303,7 +303,7 @@ class AdherentForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
         fields = [
             'name',
             'surname',
-            'pseudo',
+            'username',
             'email',
             'school',
             'comment',
@@ -366,7 +366,7 @@ class AdherentCreationForm(AdherentForm):
         fields = [
             'name',
             'surname',
-            'pseudo',
+            'username',
             'email',
             'school',
             'comment',
@@ -393,7 +393,7 @@ class AdherentEditForm(AdherentForm):
         fields = [
             'name',
             'surname',
-            'pseudo',
+            'username',
             'email',
             'school',
             'comment',
@@ -425,7 +425,7 @@ class ClubForm(FormRevMixin, FieldPermissionFormMixin, ModelForm):
         model = Club
         fields = [
             'surname',
-            'pseudo',
+            'username',
             'school',
             'comment',
             'room',
@@ -488,7 +488,7 @@ class ServiceUserForm(FormRevMixin, ModelForm):
 
     class Meta:
         model = ServiceUser
-        fields = ('pseudo', 'access_group','comment')
+        fields = ('username', 'access_group','comment')
 
     def __init__(self, *args, **kwargs):
         prefix = kwargs.pop('prefix', self.Meta.model.__name__)

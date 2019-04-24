@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 22:55+0200\n"
+"POT-Creation-Date: 2019-04-24 09:44+0200\n"
 "PO-Revision-Date: 2018-06-25 14:53+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -56,7 +56,7 @@ msgid "Number of ports"
 msgstr "Nombre de ports"
 
 #: topologie/models.py:207 topologie/templates/topologie/aff_switch.html:48
-#: topologie/templates/topologie/index_p.html:38 topologie/views.py:726
+#: topologie/templates/topologie/index_p.html:37 topologie/views.py:726
 msgid "Switch model"
 msgstr "Modèle de commutateur réseau"
 
@@ -427,7 +427,7 @@ msgstr "Nom commercial"
 
 #: topologie/templates/topologie/aff_model_switch.html:42
 #: topologie/templates/topologie/aff_modules.html:38
-#: topologie/templates/topologie/index.html:66
+#: topologie/templates/topologie/index.html:65
 #: topologie/templates/topologie/sidebar.html:31
 msgid "Switches"
 msgstr "Commutateurs réseau"
@@ -525,7 +525,7 @@ msgstr "Vide"
 #: topologie/templates/topologie/aff_stacks.html:32
 #: topologie/templates/topologie/aff_switch.html:45
 #: topologie/templates/topologie/edit_stack_sw.html:32
-#: topologie/templates/topologie/index_p.html:39
+#: topologie/templates/topologie/index_p.html:38
 msgid "Stack"
 msgstr "Pile"
 
@@ -544,7 +544,7 @@ msgstr "Nom DNS"
 
 #: topologie/templates/topologie/aff_switch.html:41
 #: topologie/templates/topologie/aff_switch_bay.html:36
-#: topologie/templates/topologie/index_p.html:37 topologie/views.py:781
+#: topologie/templates/topologie/index_p.html:36 topologie/views.py:781
 msgid "Switch bay"
 msgstr "Baie de brassage"
 
@@ -570,13 +570,13 @@ msgid "Switches of the bay"
 msgstr "Commutateurs réseau de la baie"
 
 #: topologie/templates/topologie/delete.html:29
-#: topologie/templates/topologie/index.html:30
-#: topologie/templates/topologie/index_ap.html:30
-#: topologie/templates/topologie/index_model_switch.html:30
-#: topologie/templates/topologie/index_module.html:30
-#: topologie/templates/topologie/index_p.html:30
-#: topologie/templates/topologie/index_physical_grouping.html:30
-#: topologie/templates/topologie/index_portprofile.html:29
+#: topologie/templates/topologie/index.html:29
+#: topologie/templates/topologie/index_ap.html:29
+#: topologie/templates/topologie/index_model_switch.html:29
+#: topologie/templates/topologie/index_module.html:29
+#: topologie/templates/topologie/index_p.html:29
+#: topologie/templates/topologie/index_physical_grouping.html:29
+#: topologie/templates/topologie/index_portprofile.html:28
 #: topologie/templates/topologie/switch.html:30
 #: topologie/templates/topologie/topo.html:30
 #: topologie/templates/topologie/topo_more.html:30
@@ -596,74 +596,74 @@ msgstr ""
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: topologie/templates/topologie/index.html:55
+#: topologie/templates/topologie/index.html:54
 msgid "Topology of the switches"
 msgstr "Topologie des commutateurs réseau"
 
-#: topologie/templates/topologie/index.html:68
+#: topologie/templates/topologie/index.html:67
 msgid " Add a switch"
 msgstr " Ajouter un commutateur réseau"
 
-#: topologie/templates/topologie/index_ap.html:33
+#: topologie/templates/topologie/index_ap.html:32
 #: topologie/templates/topologie/sidebar.html:43
 msgid "Access points"
 msgstr "Points d'accès sans fil"
 
-#: topologie/templates/topologie/index_ap.html:35
+#: topologie/templates/topologie/index_ap.html:34
 msgid " Add an access point"
 msgstr " Ajouter un point d'accès sans fil"
 
-#: topologie/templates/topologie/index_model_switch.html:33
+#: topologie/templates/topologie/index_model_switch.html:32
 msgid "Switch models"
 msgstr "Modèles de commutateur réseau"
 
-#: topologie/templates/topologie/index_model_switch.html:36
+#: topologie/templates/topologie/index_model_switch.html:35
 msgid " Add a switch model"
 msgstr " Ajouter un modèle de commutateur réseau"
 
-#: topologie/templates/topologie/index_model_switch.html:42
+#: topologie/templates/topologie/index_model_switch.html:41
 msgid "Switch constructors"
 msgstr "Constructeurs de commutateur réseau"
 
-#: topologie/templates/topologie/index_model_switch.html:45
+#: topologie/templates/topologie/index_model_switch.html:44
 msgid " Add a switch constructor"
 msgstr " Ajouter un constructeur de commutateur réseau"
 
-#: topologie/templates/topologie/index_module.html:33
+#: topologie/templates/topologie/index_module.html:32
 #: topologie/templates/topologie/sidebar.html:35
 msgid "Switch modules"
 msgstr "Modules de commutateur réseau"
 
-#: topologie/templates/topologie/index_module.html:35
+#: topologie/templates/topologie/index_module.html:34
 msgid " Add a module"
 msgstr " Ajouter un module"
 
-#: topologie/templates/topologie/index_p.html:33
+#: topologie/templates/topologie/index_p.html:32
 msgid "Switch:"
 msgstr "Commutateur réseau :"
 
-#: topologie/templates/topologie/index_physical_grouping.html:33
+#: topologie/templates/topologie/index_physical_grouping.html:32
 msgid "Stacks"
 msgstr "Piles"
 
-#: topologie/templates/topologie/index_physical_grouping.html:36
+#: topologie/templates/topologie/index_physical_grouping.html:35
 msgid " Add a stack"
 msgstr " Ajouter une pile"
 
-#: topologie/templates/topologie/index_physical_grouping.html:41
+#: topologie/templates/topologie/index_physical_grouping.html:40
 msgid "Switch bays"
 msgstr "Baies de brassage"
 
-#: topologie/templates/topologie/index_physical_grouping.html:44
+#: topologie/templates/topologie/index_physical_grouping.html:43
 msgid " Add a switch bay"
 msgstr " Ajouter une baie de brassage"
 
-#: topologie/templates/topologie/index_portprofile.html:32
+#: topologie/templates/topologie/index_portprofile.html:31
 #: topologie/templates/topologie/sidebar.html:39
 msgid "Port profiles"
 msgstr "Profils de port"
 
-#: topologie/templates/topologie/index_portprofile.html:34
+#: topologie/templates/topologie/index_portprofile.html:33
 msgid " Add a port profile"
 msgstr " Ajouter un profil de port"
 

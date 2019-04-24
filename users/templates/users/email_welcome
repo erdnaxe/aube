@@ -4,7 +4,7 @@
 
 <p>Pour ce faire, rien de plus simple. Une fois que vous aurez défini votre mot de passe, il vous suffira d'accéder à votre profil et de cliquer sur 'Payer la connexion'</p>
 
-<p>Votre pseudo est : {{pseudo}}</p>
+<p>Votre nom d'utilisateur est : {{username}}</p>
 
 {{welcome_mail_fr|safe}}
 
@@ -19,7 +19,7 @@ L'équipe de {{asso_name}}.</p>
 
 <p>Nothing could be simpler. Once your password is defined, you just need to visit your profile and click on 'Pay for a connexion'.</p>
 
-<p>Your username is : {{pseudo}}<p>
+<p>Your username is : {{username}}<p>
 
 {{welcome_mail_en|safe}}
 

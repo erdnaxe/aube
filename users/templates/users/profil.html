@@ -158,7 +158,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                         {% if users.is_class_club %}
                             <dt>{% trans "Mailing" %}</dt>
                             {% if users.club.mailing %}
-                                <dd>{{ users.pseudo }}(-admin)</dd>
+                                <dd>{{ users.username }}(-admin)</dd>
                             {% else %}
                                 <dd>{% trans "Mailing disabled" %}</dd>
                             {% endif %}
@@ -175,7 +175,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
                     <div class="col-md-6">
                         <dt>{% trans "Username" %}</dt>
-                        <dd>{{ users.pseudo }}</dd>
+                        <dd>{{ users.username }}</dd>
                     </div>
 
                     <div class="col-md-6">
@@ -338,7 +338,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                         <tr>
                             <td>{{ admin.surname }}</td>
                             <td>{{ admin.name }}</td>
-                            <td>{{ admin.pseudo }}</td>
+                            <td>{{ admin.username }}</td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -357,7 +357,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                         <tr>
                             <td>{{ admin.surname }}</td>
                             <td>{{ admin.name }}</td>
-                            <td>{{ admin.pseudo }}</td>
+                            <td>{{ admin.username }}</td>
                         </tr>
                         {% endfor %}
                     </table>

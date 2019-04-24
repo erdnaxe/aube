@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 15:20+0200\n"
+"POT-Creation-Date: 2019-04-24 09:44+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -68,16 +68,16 @@ msgstr "Anglais"
 msgid "French"
 msgstr "Français"
 
-#: re2o/templates/re2o/about.html:29 re2o/templates/re2o/about.html:35
+#: re2o/templates/re2o/about.html:28 re2o/templates/re2o/about.html:34
 msgid "About Re2o"
 msgstr "À propos de Re2o"
 
-#: re2o/templates/re2o/about.html:32
+#: re2o/templates/re2o/about.html:31
 #, python-format
 msgid "About %(AssoName)s"
 msgstr "À propos de %(AssoName)s"
 
-#: re2o/templates/re2o/about.html:36
+#: re2o/templates/re2o/about.html:35
 msgid ""
 "Re2o is an administration tool initiated by <a href=\"https://rezometz.org/"
 "\">Rezo Metz</a> and a few members of other <a href=\"https://federez.net"
@@ -104,35 +104,35 @@ msgstr ""
 "développement, nous serons heureux de vous accueillir donc n'hésitez pas à "
 "nous contacter et à venir nous aider à construire le futur de Re2o."
 
-#: re2o/templates/re2o/about.html:55
+#: re2o/templates/re2o/about.html:54
 msgid "Contributors list"
 msgstr "Liste des contributeurs"
 
-#: re2o/templates/re2o/about.html:64
+#: re2o/templates/re2o/about.html:63
 msgid "Version information"
 msgstr "Informations de versions"
 
-#: re2o/templates/re2o/about.html:66
+#: re2o/templates/re2o/about.html:65
 #, python-format
 msgid "<b>Remote URL</b>: %(git_info_remote)s"
 msgstr "<b>URL distante</b> : %(git_info_remote)s"
 
-#: re2o/templates/re2o/about.html:69
+#: re2o/templates/re2o/about.html:68
 #, python-format
 msgid "<b>Branch</b>: %(git_info_branch)s"
 msgstr "<b>Branche</b> : %(git_info_branch)s"
 
-#: re2o/templates/re2o/about.html:72
+#: re2o/templates/re2o/about.html:71
 #, python-format
 msgid "<b>Commit</b>: %(git_info_commit)s"
 msgstr "<b>Commit</b> : %(git_info_commit)s"
 
-#: re2o/templates/re2o/about.html:75
+#: re2o/templates/re2o/about.html:74
 #, python-format
 msgid "<b>Commit date</b>: %(git_info_commit_date)s"
 msgstr "<b>Date du commit</b> : %(git_info_commit_date)s"
 
-#: re2o/templates/re2o/about.html:80
+#: re2o/templates/re2o/about.html:79
 msgid "Dependencies"
 msgstr "Dépendances"
 
@@ -174,20 +174,20 @@ msgstr "Historique"
 msgid "History of %(object)s"
 msgstr "Historique de %(object)s"
 
-#: re2o/templates/re2o/index.html:30
+#: re2o/templates/re2o/index.html:29
 msgid "Home"
 msgstr "Accueil"
 
-#: re2o/templates/re2o/index.html:34
+#: re2o/templates/re2o/index.html:33
 #, python-format
 msgid "Welcome to %(name_website)s"
 msgstr "Bienvenue sur %(name_website)s"
 
-#: re2o/templates/re2o/index.html:43
+#: re2o/templates/re2o/index.html:42
 msgid "Registration"
 msgstr "Inscription"
 
-#: re2o/templates/re2o/index.html:44
+#: re2o/templates/re2o/index.html:43
 msgid ""
 "If you don't have an account yet and you want to access the Internet and the "
 "organisation's services, create your own personal account."
@@ -195,15 +195,15 @@ msgstr ""
 "Si vous n'avez pas encore de compte et que vous voulez accéder à Internet et "
 "aux services de l'association, créez votre espace personnel."
 
-#: re2o/templates/re2o/index.html:45
+#: re2o/templates/re2o/index.html:44
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: re2o/templates/re2o/index.html:55
+#: re2o/templates/re2o/index.html:54
 msgid "Logging in"
 msgstr "Identification"
 
-#: re2o/templates/re2o/index.html:56
+#: re2o/templates/re2o/index.html:55
 msgid ""
 "If you already have an account, log in. You can manage your subscriptions to "
 "the organisation, your machines and all your services."
@@ -211,15 +211,15 @@ msgstr ""
 "Si vous avez déjà un compte, identifiez-vous. Vous pouvez gérer vos "
 "cotisations à l'association, vos machines et tous vos services."
 
-#: re2o/templates/re2o/index.html:57
+#: re2o/templates/re2o/index.html:56
 msgid "Log in"
 msgstr "Se connecter"
 
-#: re2o/templates/re2o/index.html:68
+#: re2o/templates/re2o/index.html:67
 msgid "My profile"
 msgstr "Mon profil"
 
-#: re2o/templates/re2o/index.html:69
+#: re2o/templates/re2o/index.html:68
 msgid ""
 "To manage your subscriptions, your machines and all your services, access "
 "your profile."
@@ -227,15 +227,15 @@ msgstr ""
 "Pour gérer vos cotisations, vos machines et tous vos services, accéder à "
 "votre profil."
 
-#: re2o/templates/re2o/index.html:70
+#: re2o/templates/re2o/index.html:69
 msgid "Access my profile"
 msgstr "Accéder à mon profil"
 
-#: re2o/templates/re2o/index.html:79
+#: re2o/templates/re2o/index.html:78
 msgid "Services of the organisation"
 msgstr "Services de l'association"
 
-#: re2o/templates/re2o/index.html:93
+#: re2o/templates/re2o/index.html:92
 msgid "Go there"
 msgstr "Accéder"
 

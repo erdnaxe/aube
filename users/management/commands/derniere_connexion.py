@@ -42,7 +42,7 @@ class Command(BaseCommand):
         def parse_logs(logfile):
             """
             Parse les logs sur l'entrée standard et rempli un dictionnaire
-            ayant pour clef le pseudo de l'adherent
+            ayant pour clef le username de l'adherent
             """
             global COMPILED_REGEX, DATE_FORMATS
 
@@ -58,9 +58,9 @@ class Command(BaseCommand):
 
         parsed_log = parse_logs(sys.stdin)
 
-        for pseudo in parsed_log:
-            for user in User.objects.filter(pseudo=pseudo):
-                last_login = parsed_log.get(user.pseudo, user.last_login)
+        for username in parsed_log:
+            for user in User.objects.filter(username=username):
+                last_login = parsed_log.get(user.username, user.last_login)
                 if not user.last_login:
                     user.last_login = last_login
                 elif last_login > user.last_login:

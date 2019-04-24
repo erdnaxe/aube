@@ -80,7 +80,7 @@ class InterfaceAdmin(VersionAdmin):
     inlines = (DomainInline, Ipv6ListInline)
     filter_horizontal = ('port_lists',)
     search_fields = ('domain__name', 'mac_address', 'ipv4__ipv4',
-                     'machine__name', 'machine__user__pseudo',
+                     'machine__name', 'machine__user__username',
                      'machine__user__surname')
     # TODO(erdnaxe): we need to split alias and domain
 
@@ -105,7 +105,7 @@ class MachineAdmin(VersionAdmin):
     list_filter = ('active',)
     inlines = (InterfaceInline, SshFpInline)
     empty_value_display = _('- no name -')
-    search_fields = ('name', 'user__pseudo', 'user__surname')
+    search_fields = ('name', 'user__username', 'user__surname')
 
 
 @admin.register(MachineType)
@@ -158,7 +158,7 @@ class OuverturePortListAdmin(VersionAdmin):
 @admin.register(Role)
 class RoleAdmin(VersionAdmin):
     """Admin view of a Role object"""
-    list_display = ('role_type', 'specific_role', 'servers')
+    list_display = ('role_type', 'specific_role')
     filter_horizontal = ('servers',)
     # TODO(erdnaxe): investigate why it was buggy before switching to admin
     # TODO(erdnaxe): print machines on change list like in edit mode
@@ -180,8 +180,7 @@ class ServiceLinkInline(admin.TabularInline):
 @admin.register(Service)
 class ServiceAdmin(VersionAdmin):
     """Admin view of a Service object"""
-    list_display = ('service_type', 'min_time_regen', 'regular_time_regen',
-                    'servers')
+    list_display = ('service_type', 'min_time_regen', 'regular_time_regen')
     inlines = (ServiceLinkInline,)
     # TODO(erdnaxe): print machines on change list like in edit mode
 

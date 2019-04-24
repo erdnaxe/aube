@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-12 15:20+0200\n"
+"POT-Creation-Date: 2019-04-24 09:44+0200\n"
 "PO-Revision-Date: 2018-06-24 20:10+0200\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -96,51 +96,51 @@ msgstr "Date de début"
 msgid "End date"
 msgstr "Date de fin"
 
-#: search/templates/search/index.html:29
+#: search/templates/search/index.html:28
 msgid "Search results"
 msgstr "Résultats de la recherche"
 
-#: search/templates/search/index.html:33
+#: search/templates/search/index.html:32
 msgid "Results among users:"
 msgstr "Résultats parmi les utilisateurs :"
 
-#: search/templates/search/index.html:37
+#: search/templates/search/index.html:36
 msgid "Results among clubs:"
 msgstr "Résultats parmi les clubs :"
 
-#: search/templates/search/index.html:41
+#: search/templates/search/index.html:40
 msgid "Results among machines:"
 msgstr "Résultats parmi les machines :"
 
-#: search/templates/search/index.html:45
+#: search/templates/search/index.html:44
 msgid "Results among invoices:"
 msgstr "Résultats parmi les factures :"
 
-#: search/templates/search/index.html:49
+#: search/templates/search/index.html:48
 msgid "Results among whitelists:"
 msgstr "Résultats parmi les accès à titre gracieux :"
 
-#: search/templates/search/index.html:53
+#: search/templates/search/index.html:52
 msgid "Results among bans:"
 msgstr "Résultats parmi les bannissements :"
 
-#: search/templates/search/index.html:57
+#: search/templates/search/index.html:56
 msgid "Results among rooms:"
 msgstr "Résultats parmi les chambres :"
 
-#: search/templates/search/index.html:61
+#: search/templates/search/index.html:60
 msgid "Results among ports:"
 msgstr "Résultats parmi les ports :"
 
-#: search/templates/search/index.html:65
+#: search/templates/search/index.html:64
 msgid "Results among switches:"
 msgstr "Résultats parmi les commutateurs réseau :"
 
-#: search/templates/search/index.html:69
+#: search/templates/search/index.html:68
 msgid "No result"
 msgstr "Pas de résultat"
 
-#: search/templates/search/index.html:71
+#: search/templates/search/index.html:70
 #, python-format
 msgid "(Only the first %(max_result)s results are displayed in each category)"
 msgstr ""

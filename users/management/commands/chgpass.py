@@ -29,7 +29,7 @@ class Command(BaseCommand):
             raise CommandError(msg)
 
         self.stdout.write(
-            "Changement du mot de passe de %s" % target_user.pseudo
+            "Changement du mot de passe de %s" % target_user.username
         )
 
         form_cli(

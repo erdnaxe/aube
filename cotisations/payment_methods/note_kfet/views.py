@@ -49,9 +49,9 @@ def note_payment(request, facture, factureid):
          ))
     noteform = NoteCredentialForm(request.POST or None)
     if noteform.is_valid():
-        pseudo = noteform.cleaned_data['login']
+        username = noteform.cleaned_data['login']
         password = noteform.cleaned_data['password']
-        result, sock, err = login(payment_method.server, payment_method.port, pseudo, password)
+        result, sock, err = login(payment_method.server, payment_method.port, username, password)
         if not result:
             messages.error(request, err)
             return form(

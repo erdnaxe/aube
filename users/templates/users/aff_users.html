@@ -37,7 +37,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                 {% trans "Surname" as tr_surname %}
                 <th>{% include 'buttons/sort.html' with prefix='user' col="surname" text=tr_surname %}</th>
                 {% trans "Username" as tr_username %}
-                <th>{% include 'buttons/sort.html' with prefix='user' col="pseudo" text=tr_username %}</th>
+                <th>{% include 'buttons/sort.html' with prefix='user' col="username" text=tr_username %}</th>
                 {% trans "Room" as tr_room %}
                 <th>{% include 'buttons/sort.html' with prefix='user' col="room" text=tr_room %}</th>
                 <th>{% trans "End of subscription on" %}</th>
@@ -49,7 +49,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
             <tr>
                 <td>{{ user.name }}</td>
                 <td>{{ user.surname }}</td>
-                <td>{{ user.pseudo }}</td>
+                <td>{{ user.username }}</td>
                 <td>{{ user.room }}</td>
 	        <td>{% if user.is_adherent %}{{ user.end_adhesion }}{% else %}{% trans "Not a member" %}{% endif %}</td>
                 <td>

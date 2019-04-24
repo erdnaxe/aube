@@ -77,7 +77,7 @@ from preferences.models import OptionalMachine, MailMessageOption
 
 
 def linux_user_check(login):
-    """ Validation du pseudo pour respecter les contraintes unix"""
+    """ Validation du username pour respecter les contraintes unix"""
     UNIX_LOGIN_PATTERN = re.compile("^[a-z][a-z0-9-]*[$]?$")
     return UNIX_LOGIN_PATTERN.match(login)
 
@@ -122,20 +122,20 @@ class UserManager(BaseUserManager):
 
     def _create_user(
             self,
-            pseudo,
+            username,
             surname,
             email,
             password=None,
             su=False
     ):
-        if not pseudo:
+        if not username:
             raise ValueError(_("Users must have an username."))
 
-        if not linux_user_check(pseudo):
+        if not linux_user_check(username):
             raise ValueError(_("Username should only contain [a-z0-9-]."))
 
         user = Adherent(
-            pseudo=pseudo,
+            username=username,
             surname=surname,
             name=surname,
             email=self.normalize_email(email),
@@ -147,25 +147,25 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, pseudo, surname, email, password=None):
+    def create_user(self, username, surname, email, password=None):
         """
-        Creates and saves a User with the given pseudo, name, surname, email,
+        Creates and saves a User with the given username, name, surname, email,
         and password.
         """
-        return self._create_user(pseudo, surname, email, password, False)
+        return self._create_user(username, surname, email, password, False)
 
-    def create_superuser(self, pseudo, surname, email, password):
+    def create_superuser(self, username, surname, email, password):
         """
-        Creates and saves a superuser with the given pseudo, name, surname,
+        Creates and saves a superuser with the given username, name, surname,
         email, and password.
         """
-        return self._create_user(pseudo, surname, email, password, True)
+        return self._create_user(username, surname, email, password, True)
 
 
 class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
            PermissionsMixin, AclMixin):
     """ Definition de l'utilisateur de base.
-    Champs principaux : name, surnname, pseudo, email, room, password
+    Champs principaux : name, surnname, username, email, room, password
     Herite du django BaseUser et du système d'auth django"""
 
     STATE_ACTIVE = 0
@@ -182,7 +182,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
     )
 
     surname = models.CharField(max_length=255)
-    pseudo = models.CharField(
+    username = models.CharField(
         max_length=32,
         unique=True,
         help_text=_("Must only contain letters, numerals or dashes."),
@@ -240,7 +240,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         ),
     )
 
-    USERNAME_FIELD = 'pseudo'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['surname', 'email']
 
     objects = UserManager()
@@ -291,7 +291,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         if not OptionalUser.get_cached_value('local_email_accounts_enabled') or not self.local_email_enabled or self.local_email_redirect:
             return str(self.email)
         else:
-            return str(self.emailaddress_set.get(local_part=self.pseudo.lower()))
+            return str(self.emailaddress_set.get(local_part=self.username.lower()))
 
     @cached_property
     def class_name(self):
@@ -369,7 +369,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
 
     @cached_property
     def home_directory(self):
-        return '/home/' + self.pseudo
+        return '/home/' + self.username
 
     @cached_property
     def get_shadow_expire(self):
@@ -639,8 +639,8 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
                 access_refresh = True
                 mac_refresh = True
             if base:
-                user_ldap.name = self.pseudo
-                user_ldap.sn = self.pseudo
+                user_ldap.name = self.username
+                user_ldap.sn = self.username
                 user_ldap.dialupAccess = str(self.has_access())
                 user_ldap.home_directory = self.home_directory
                 user_ldap.mail = self.get_mail
@@ -681,7 +681,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
     def ldap_del(self):
         """ Supprime la version ldap de l'user"""
         try:
-            user_ldap = LdapUser.objects.get(name=self.pseudo)
+            user_ldap = LdapUser.objects.get(name=self.username)
             user_ldap.delete()
         except LdapUser.DoesNotExist:
             pass
@@ -689,7 +689,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
     @classmethod
     def ldap_delete_users(cls, queryset_users):
         """Delete multiple users in ldap"""
-        LdapUser.objects.filter(name__in=list(queryset_users.values_list('pseudo', flat=True)))
+        LdapUser.objects.filter(name__in=list(queryset_users.values_list('username', flat=True)))
 
     def notif_inscription(self):
         """ Prend en argument un objet user, envoie un mail de bienvenue """
@@ -702,7 +702,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
             'asso_email': AssoOption.get_cached_value('contact'),
             'welcome_mail_fr': mailmessageoptions.welcome_mail_fr,
             'welcome_mail_en': mailmessageoptions.welcome_mail_en,
-            'pseudo': self.pseudo,
+            'username': self.username,
         }
         send_mail(
             'Bienvenue au %(name)s / Welcome to %(name)s' % {
@@ -757,7 +757,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
             'asso_name': AssoOption.get_cached_value('name'),
             'interface_name': interface.domain,
             'asso_email': AssoOption.get_cached_value('contact'),
-            'pseudo': self.pseudo,
+            'username': self.username,
         }
         send_mail(
             "Ajout automatique d'une machine / New machine autoregistered",
@@ -785,24 +785,24 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
 
     def get_next_domain_name(self):
         """Look for an available name for a new interface for
-        this user by trying "pseudo0", "pseudo1", "pseudo2", ...
+        this user by trying "username0", "username1", "username2", ...
 
         Recherche un nom disponible, pour une machine. Doit-être
-        unique, concatène le nom, le pseudo et le numero de machine
+        unique, concatène le nom, le username et le numero de machine
         """
 
-        def simple_pseudo():
-            """Renvoie le pseudo sans underscore (compat dns)"""
-            return self.pseudo.replace('_', '-').lower()
+        def simple_username():
+            """Renvoie le username sans underscore (compat dns)"""
+            return self.username.replace('_', '-').lower()
 
-        def composed_pseudo(name):
-            """Renvoie le resultat de simplepseudo et rajoute le nom"""
-            return simple_pseudo() + str(name)
+        def composed_username(name):
+            """Renvoie le resultat de simpleusername et rajoute le nom"""
+            return simple_username() + str(name)
 
         num = 0
-        while Domain.objects.filter(name=composed_pseudo(num)):
+        while Domain.objects.filter(name=composed_username(num)):
             num += 1
-        return composed_pseudo(num)
+        return composed_username(num)
 
     def can_edit(self, user_request, *_args, **_kwargs):
         """Check if a user can edit a user object.
@@ -1042,10 +1042,10 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         self.__original_state = self.state
 
     def clean(self, *args, **kwargs):
-        """Check if this pseudo is already used by any mailalias.
+        """Check if this username is already used by any mailalias.
         Better than raising an error in post-save and catching it"""
         if (EMailAddress.objects
-            .filter(local_part=self.pseudo.lower()).exclude(user_id=self.id)
+            .filter(local_part=self.username.lower()).exclude(user_id=self.id)
             ):
             raise ValidationError(_("This username is already used."))
         if not self.local_email_enabled and not self.email and not (self.state == self.STATE_FULL_ARCHIVE):
@@ -1063,7 +1063,7 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.pseudo
+        return self.username
 
 
 class Adherent(User):
@@ -1216,12 +1216,12 @@ class Club(User):
 @receiver(post_save, sender=User)
 def user_post_save(**kwargs):
     """ Synchronisation post_save : envoie le mail de bienvenue si creation
-    Synchronise le pseudo, en créant un alias mail correspondant
+    Synchronise le username, en créant un alias mail correspondant
     Synchronise le ldap"""
     is_created = kwargs['created']
     user = kwargs['instance']
     EMailAddress.objects.get_or_create(
-        local_part=user.pseudo.lower(), user=user)
+        local_part=user.username.lower(), user=user)
     if is_created:
         user.notif_inscription()
     user.state_sync()
@@ -1264,7 +1264,7 @@ class ServiceUser(RevMixin, AclMixin, AbstractBaseUser):
         ('usermgmt', 'usermgmt'),
     )
 
-    pseudo = models.CharField(
+    username = models.CharField(
         max_length=32,
         unique=True,
         help_text=_("Must only contain letters, numerals or dashes."),
@@ -1281,7 +1281,7 @@ class ServiceUser(RevMixin, AclMixin, AbstractBaseUser):
         blank=True
     )
 
-    USERNAME_FIELD = 'pseudo'
+    USERNAME_FIELD = 'username'
     objects = UserManager()
 
     class Meta:
@@ -1290,18 +1290,18 @@ class ServiceUser(RevMixin, AclMixin, AbstractBaseUser):
 
     def get_full_name(self):
         """ Renvoie le nom complet du serviceUser formaté nom/prénom"""
-        return _("Service user <{name}>").format(name=self.pseudo)
+        return _("Service user <{name}>").format(name=self.username)
 
     def get_short_name(self):
         """ Renvoie seulement le nom"""
-        return self.pseudo
+        return self.username
 
     def ldap_sync(self):
         """ Synchronisation du ServiceUser dans sa version ldap"""
         try:
-            user_ldap = LdapServiceUser.objects.get(name=self.pseudo)
+            user_ldap = LdapServiceUser.objects.get(name=self.username)
         except LdapServiceUser.DoesNotExist:
-            user_ldap = LdapServiceUser(name=self.pseudo)
+            user_ldap = LdapServiceUser(name=self.username)
         user_ldap.user_password = self.password[:6] + self.password[7:]
         user_ldap.save()
         self.serviceuser_group_sync()
@@ -1309,7 +1309,7 @@ class ServiceUser(RevMixin, AclMixin, AbstractBaseUser):
     def ldap_del(self):
         """Suppression de l'instance ldap d'un service user"""
         try:
-            user_ldap = LdapServiceUser.objects.get(name=self.pseudo)
+            user_ldap = LdapServiceUser.objects.get(name=self.username)
             user_ldap.delete()
         except LdapUser.DoesNotExist:
             pass
@@ -1322,13 +1322,13 @@ class ServiceUser(RevMixin, AclMixin, AbstractBaseUser):
         except:
             group = LdapServiceUserGroup(name=self.access_group)
         group.members = list(LdapServiceUser.objects.filter(
-            name__in=[user.pseudo for user in ServiceUser.objects.filter(
+            name__in=[user.username for user in ServiceUser.objects.filter(
                 access_group=self.access_group
             )]).values_list('dn', flat=True))
         group.save()
 
     def __str__(self):
-        return self.pseudo
+        return self.username
 
 
 @receiver(post_save, sender=ServiceUser)
@@ -1397,7 +1397,7 @@ class ListRight(RevMixin, AclMixin, Group):
         except LdapUserGroup.DoesNotExist:
             group_ldap = LdapUserGroup(gid=self.gid)
         group_ldap.name = self.unix_name
-        group_ldap.members = [user.pseudo for user
+        group_ldap.members = [user.username for user
                               in self.user_set.all()]
         group_ldap.save()
 
@@ -1868,7 +1868,7 @@ class EMailAddress(RevMixin, AclMixin, models.Model):
             a message and a boolean which is True if the user can delete
             the local email account.
         """
-        if self.local_part == self.user.pseudo.lower():
+        if self.local_part == self.user.username.lower():
             return False, _("You can't delete a local email account whose"
                             " local part is the same as the username.")
         if user_request.has_perm('users.delete_emailaddress'):
@@ -1890,7 +1890,7 @@ class EMailAddress(RevMixin, AclMixin, models.Model):
             a message and a boolean which is True if the user can edit
             the local email account.
         """
-        if self.local_part == self.user.pseudo.lower():
+        if self.local_part == self.user.username.lower():
             return False, _("You can't edit a local email account whose local"
                             " part is the same as the username.")
         if user_request.has_perm('users.change_emailaddress'):

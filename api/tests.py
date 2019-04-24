@@ -245,7 +245,7 @@ class APIEndpointsTestCase(APITestCase):
             password="password",
             last_login=datetime.datetime.now(datetime.timezone.utc),
             surname="users_adherent_1",
-            pseudo="usersadherent1",
+            username="usersadherent1",
             email="users_adherent_1@example.net",
             school=cls.users_school_1,  # Dep users.School
             shell=cls.users_listshell_1,  # Dep users.ListShell
@@ -499,7 +499,7 @@ class APIEndpointsTestCase(APITestCase):
             password="password",
             last_login=datetime.datetime.now(datetime.timezone.utc),
             surname="users_club_1",
-            pseudo="usersclub1",
+            username="usersclub1",
             email="users_club_1@example.net",
             school=cls.users_school_1,  # Dep users.School
             shell=cls.users_listshell_1,  # Dep users.ListShell
@@ -522,7 +522,7 @@ class APIEndpointsTestCase(APITestCase):
         cls.users_serviceuser_1 = users.ServiceUser.objects.create(
             password="password",
             last_login=datetime.datetime.now(datetime.timezone.utc),
-            pseudo="usersserviceuser1",
+            username="usersserviceuser1",
             access_group=users.ServiceUser.ACCESS[0][0],
             comment="users ServiceUser 1"
         )

@@ -55,15 +55,15 @@ class Command(BaseCommand):
                     local_email_enabled=False)
             self.stdout.write(self.style.SUCCESS('done ...'))
 
-            self.stdout.write('Supression des noms, prenoms, pseudo, telephone, commentaire...')
+            self.stdout.write('Supression des noms, prenoms, username, telephone, commentaire...')
             a.update(name=Concat(Value('name of '), 'id'))
             self.stdout.write(self.style.SUCCESS('done name'))
 
             a.update(surname=Concat(Value('surname of '), 'id'))
             self.stdout.write(self.style.SUCCESS('done surname'))
 
-            u.update(pseudo=F('id'))
-            self.stdout.write(self.style.SUCCESS('done pseudo'))
+            u.update(username=F('id'))
+            self.stdout.write(self.style.SUCCESS('done username'))
 
             a.update(telephone=Concat(Value('phone of '), 'id'))
             self.stdout.write(self.style.SUCCESS('done phone'))
