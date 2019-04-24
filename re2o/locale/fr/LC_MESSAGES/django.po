@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-24 11:16+0200\n"
+"POT-Creation-Date: 2019-04-24 11:32+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -179,9 +179,8 @@ msgid "Home"
 msgstr "Accueil"
 
 #: re2o/templates/re2o/index.html:33
-#, python-format
-msgid "Welcome to %(request.site.name)s"
-msgstr "Bienvenue sur %(request.site.name)s"
+msgid "Welcome to"
+msgstr "Bienvenue sur"
 
 #: re2o/templates/re2o/index.html:42
 msgid "Registration"

@@ -30,7 +30,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 {% block content %}
 <div class="panel-heading">
-    <h2>{% blocktrans %}Welcome to {{ request.site.name }}{% endblocktrans %}</h2>
+    <h2>{% blocktrans %}Welcome to{% endblocktrans %} {{ request.site.name }}</h2>
 </div>
 {% if not request.user.is_authenticated %}
 <div class="row">
