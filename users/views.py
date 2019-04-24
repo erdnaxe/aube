@@ -22,6 +22,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import PasswordResetForm
 from django.db.models import ProtectedError, Count, Max
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -91,14 +92,21 @@ def new_user(request):
     GTU_sum_up = GeneralOption.get_cached_value('GTU_sum_up')
     GTU = GeneralOption.get_cached_value('GTU')
     if user.is_valid():
-        user = user.save()
-        user.reset_passwd_mail(request)
-        messages.success(request, _("The user %s was created, an email to set"
-                                    " the password was sent.") % user.username)
-        return redirect(reverse(
-            'users:profil',
-            kwargs={'userid': str(user.id)}
-        ))
+        # Virtually fill the password reset form
+        password_reset = PasswordResetForm(data={'email': request.user.email})
+        if password_reset.is_valid():
+            user = user.save()
+            password_reset.save(request=request, use_https=request.is_secure())
+            messages.success(request, _("The user %s was created,"
+                                        " an email to set the password"
+                                        " was sent.") % user.username)
+            return redirect(reverse(
+                'users:profil',
+                kwargs={'userid': str(user.id)}
+            ))
+        else:
+            messages.error(request, _("The email is invalid."))
+
     return form(
         {
             'userform': user,
@@ -119,15 +127,22 @@ def new_club(request):
     envoie un mail pour le mot de passe"""
     club = ClubForm(request.POST or None, user=request.user)
     if club.is_valid():
-        club = club.save(commit=False)
-        club.save()
-        club.reset_passwd_mail(request)
-        messages.success(request, _("The club %s was created, an email to set"
-                                    " the password was sent.") % club.username)
-        return redirect(reverse(
-            'users:profil',
-            kwargs={'userid': str(club.id)}
-        ))
+        # Virtually fill the password reset form
+        password_reset = PasswordResetForm(data={'email': request.user.email})
+        if password_reset.is_valid():
+            club = club.save(commit=False)
+            club.save()
+            password_reset.save(request=request, use_https=request.is_secure())
+            messages.success(request, _("The club %s was created,"
+                                        " an email to set the password"
+                                        " was sent.") % club.username)
+            return redirect(reverse(
+                'users:profil',
+                kwargs={'userid': str(club.id)}
+            ))
+        else:
+            messages.error(request, _("The email is invalid."))
+
     return form(
         {'userform': club, 'showCGU': False, 'action_name': _("Create a club")},
         'users/user.html',

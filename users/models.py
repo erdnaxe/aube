@@ -31,8 +31,6 @@ dupliqués.
 from __future__ import unicode_literals
 
 import re
-import uuid
-import datetime
 import sys
 
 from django.db import models
@@ -42,9 +40,8 @@ from django.forms import ValidationError
 from django.db.models.signals import post_save, post_delete, m2m_changed
 from django.dispatch import receiver
 from django.utils.functional import cached_property
-from django.template import Context, loader
+from django.template import loader
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
 from django.db import transaction
 from django.utils import timezone
 from django.contrib.auth.models import (
