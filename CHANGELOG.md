@@ -12,3 +12,7 @@ from django.contrib.auth.models import Permission
 permissions = Permission.objects.filter(codename__startswith='view')
 permissions.delete()
 ```
+
+## MR 2
+
+With the addition of Django Sites, you will need to change the site name in the management interface (sites menu).

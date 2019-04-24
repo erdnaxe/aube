@@ -48,6 +48,7 @@ DJANGO_CONTRIB_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 )
 EXTERNAL_CONTRIB_APPS = (
     'bootstrap3',
@@ -82,6 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'reversion.middleware.RevisionMiddleware',
 )
 
@@ -173,6 +175,9 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
 # The URL to access the static files
 MEDIA_URL = os.path.join(BASE_DIR,'/media/')
+
+# Django main site
+SITE_ID = 1
 
 # Models to use for graphs
 GRAPH_MODELS = {

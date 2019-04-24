@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-24 09:44+0200\n"
+"POT-Creation-Date: 2019-04-24 11:16+0200\n"
 "PO-Revision-Date: 2018-03-31 16:09+0002\n"
 "Last-Translator: Laouen Fernet <laouen.fernet@supelec.fr>\n"
 "Language-Team: \n"
@@ -57,11 +57,11 @@ msgid ""
 "\">this form</a>."
 msgstr ""
 
-#: templates/admin/base_site.html:65 templates/base.html:269
+#: templates/admin/base_site.html:65 templates/base.html:272
 msgid "powered by"
 msgstr "propulsé par"
 
-#: templates/admin/base_site.html:69 templates/base.html:273
+#: templates/admin/base_site.html:69 templates/base.html:276
 msgid ""
 "This software is under the terms of the <a href=\"http://www.gnu.org/"
 "licenses/gpl-2.0.txt\" target=\"_blank\" rel=\"nofollow\">GPLv2</a> License."
@@ -71,8 +71,8 @@ msgstr ""
 
 #: templates/admin/custom_index.html:11
 #, python-format
-msgid "Welcome to %(name_website)s"
-msgstr "Bienvenue sur %(name_website)s"
+msgid "Welcome to %(request.site.name)s"
+msgstr "Bienvenue sur %(request.site.name)s"
 
 #: templates/admin/custom_index.html:17
 msgid ""
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Networking managing website endorsed by FedeRez."
 msgstr "Site de gestion de réseau soutenu par FedeRez."
 
-#: templates/base.html:70 templates/registration/logged_out.html:11
+#: templates/base.html:73 templates/registration/logged_out.html:11
 #: templates/registration/password_change_done.html:11
 #: templates/registration/password_change_form.html:11
 #: templates/registration/password_reset_complete.html:11
@@ -123,129 +123,129 @@ msgstr "Site de gestion de réseau soutenu par FedeRez."
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/base.html:91
+#: templates/base.html:94
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: templates/base.html:94
+#: templates/base.html:97
 msgid "Manage the users"
 msgstr "Gérer les utilisateurs"
 
-#: templates/base.html:95
+#: templates/base.html:98
 msgid "Manage the clubs"
 msgstr "Gérer les clubs"
 
-#: templates/base.html:98
+#: templates/base.html:101
 msgid "Manage the machines"
 msgstr "Gérer les machines"
 
-#: templates/base.html:101
+#: templates/base.html:104
 msgid "Manage the subscriptions"
 msgstr "Gérer les cotisations"
 
-#: templates/base.html:108
+#: templates/base.html:111
 msgid "Topology"
 msgstr "Topologie"
 
-#: templates/base.html:110
+#: templates/base.html:113
 msgid "Switches"
 msgstr "Commutateurs réseau"
 
-#: templates/base.html:115
+#: templates/base.html:118
 msgid "Statistics"
 msgstr "Statistiques"
 
-#: templates/base.html:120
+#: templates/base.html:123
 msgid "Administration"
 msgstr "Administration"
 
-#: templates/base.html:127
+#: templates/base.html:130
 msgid "Manage"
 msgstr "Câblage"
 
-#: templates/base.html:134
+#: templates/base.html:137
 msgid "More information"
 msgstr "Plus d'informations"
 
-#: templates/base.html:136
+#: templates/base.html:139
 msgid "About"
 msgstr "À propos"
 
-#: templates/base.html:137
+#: templates/base.html:140
 msgid "Contact"
 msgstr "Contact"
 
-#: templates/base.html:144
+#: templates/base.html:147
 msgid "Sign up"
 msgstr "S'inscrire"
 
-#: templates/base.html:150 templates/registration/login.html:11
+#: templates/base.html:153 templates/registration/login.html:11
 #: templates/registration/login.html:57
 msgid "Log in"
 msgstr "Se connecter"
 
-#: templates/base.html:158
+#: templates/base.html:161
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/base.html:172
+#: templates/base.html:175
 msgid "My profile"
 msgstr "Mon profil"
 
-#: templates/base.html:173
+#: templates/base.html:176
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: templates/base.html:205
+#: templates/base.html:208
 msgid "Username"
 msgstr "Pseudo"
 
-#: templates/base.html:209
+#: templates/base.html:212
 msgid "Room"
 msgstr "Chambre"
 
-#: templates/base.html:213
+#: templates/base.html:216
 msgid "Internet access"
 msgstr "Accès Internet"
 
-#: templates/base.html:216
+#: templates/base.html:219
 #, python-format
 msgid "Until %(end_access_date)s"
 msgstr "Jusqu'au %(end_access_date)s"
 
-#: templates/base.html:218
+#: templates/base.html:221
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: templates/base.html:223
+#: templates/base.html:226
 msgid "Membership"
 msgstr "Adhésion"
 
-#: templates/base.html:226
+#: templates/base.html:229
 #, python-format
 msgid "Until %(end_adhesion_date)s"
 msgstr "Jusqu'au %(end_adhesion_date)s"
 
-#: templates/base.html:228
+#: templates/base.html:231
 msgid "Non member"
 msgstr "Non adhérent"
 
-#: templates/base.html:236
+#: templates/base.html:239
 msgid "View my profile"
 msgstr "Voir mon profil"
 
-#: templates/base.html:241
+#: templates/base.html:244
 msgid "You are not logged in."
 msgstr "Vous n'êtes pas connecté."
 
-#: templates/base.html:248
+#: templates/base.html:251
 #, python-format
 msgid "%(nb)s active machine"
 msgid_plural "%(nb)s active machines"
 msgstr[0] "%(nb)s machine active"
 msgstr[1] "%(nb)s machines actives"
 
-#: templates/base.html:257
+#: templates/base.html:260
 msgid "View my machines"
 msgstr "Voir mes machines"
 

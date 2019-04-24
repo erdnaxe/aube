@@ -34,7 +34,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <html lang="fr">
     <head prefix="og: http://ogp.me/ns#">
         {# Open Graph for social media #}
-        <meta property="og:title" content="{{ name_website }}" />
+        <meta property="og:title" content="{{ request.site.name }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}/" />
         <meta property="og:image" content="{% static 'images/logo.svg' %}"/>
@@ -67,7 +67,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
         {# Do not allow zooming on devices #}
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ name_website }} : {% block title %}{% trans "Home" %}{% endblock %}</title>
+        <title>{{ request.site.name }} : {% block title %}{% trans "Home" %}{% endblock %}</title>
     </head>
 
     <body id="main">
@@ -81,7 +81,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
                     </button>
                     <a class="navbar-brand" href="/">
                         <img src="{% static 'images/logo_navbar.svg' %}" height="32">
-                        {{ name_website }}
+                        {{ request.site.name }}
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -266,7 +266,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
         <footer id="footer" class="text-muted container">
             <p>
-                {{ name_website }} {% trans "powered by" %}
+                {{ request.site.name }} {% trans "powered by" %}
                 <a href="{% url 'about' %}">Aube 2016&ndash;2019</a>.
             </p>
             <p>

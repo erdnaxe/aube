@@ -8,7 +8,7 @@ Copyright © 2019  Alexandre Iooss
 {% load i18n static %}
 
 {% block content_title %}
-    <h1>{% blocktrans %}Welcome to {{ name_website }}{% endblocktrans %}</h1>
+    <h1>{% blocktrans %}Welcome to {{ request.site.name }}{% endblocktrans %}</h1>
 {% endblock %}
 
 {% block content %}
