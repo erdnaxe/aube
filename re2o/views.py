@@ -106,14 +106,3 @@ def contact_page(request):
             'asso_name': AssoOption.objects.first().name
         }
     )
-
-
-def handler500(request):
-    """The handler view for a 500 error"""
-    return render(request, 'errors/500.html')
-
-
-def handler404(request):
-    """The handler view for a 404 error"""
-    return render(request, 'errors/404.html')
-

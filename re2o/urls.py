@@ -19,9 +19,6 @@ from .views import index, about_page, contact_page
 admin.site.index_title = _('Homepage')
 admin.site.index_template = 'admin/custom_index.html'
 
-handler500 = 're2o.views.handler500'
-handler404 = 're2o.views.handler404'
-
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^about/$', about_page, name='about'),
