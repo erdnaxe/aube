@@ -96,8 +96,10 @@ class CryptPasswordHasher(hashers.BasePasswordHasher):
         """
         assert encoded.startswith(self.algorithm)
         salt = hash_password_salt(encoded)
-        return constant_time_compare(crypt.crypt(password, salt),
-                                     encoded)
+        return constant_time_compare(
+            self.algorithm + crypt.crypt(password, salt),
+            encoded
+        )
 
     def safe_summary(self, encoded):
         """
