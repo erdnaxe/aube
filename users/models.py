@@ -46,7 +46,7 @@ from django.db import transaction
 from django.utils import timezone
 from django.contrib.auth.models import (
     AbstractBaseUser,
-    BaseUserManager,
+    UserManager as DjangoUserManager,
     PermissionsMixin,
     Group
 )
@@ -114,49 +114,22 @@ def get_fresh_gid():
     return min(free_gids)
 
 
-class UserManager(BaseUserManager):
-    """User manager basique de django"""
+class UserManager(DjangoUserManager):
+    """Custom UserManager"""
 
-    def _create_user(
-            self,
-            username,
-            surname,
-            email,
-            password=None,
-            su=False
-    ):
-        if not username:
-            raise ValueError(_("Users must have an username."))
-
-        if not linux_user_check(username):
-            raise ValueError(_("Username should only contain [a-z0-9-]."))
-
-        user = Adherent(
-            username=username,
-            surname=surname,
-            name=surname,
-            email=self.normalize_email(email),
-        )
-
-        user.set_password(password)
-        if su:
-            user.is_superuser = True
-        user.save(using=self._db)
-        return user
-
-    def create_user(self, username, surname, email, password=None):
+    def _create_user(self, username, email, password, **extra_fields):
         """
-        Creates and saves a User with the given username, name, surname, email,
-        and password.
+        Creates and saves a User with the given username, email and password.
         """
-        return self._create_user(username, surname, email, password, False)
+        # Create a member rather than an user
+        self.model = Adherent
 
-    def create_superuser(self, username, surname, email, password):
-        """
-        Creates and saves a superuser with the given username, name, surname,
-        email, and password.
-        """
-        return self._create_user(username, surname, email, password, True)
+        # Add surname and name
+        if 'surname' not in extra_fields:
+            raise ValueError('User must have a surname.')
+        extra_fields.setdefault('name', extra_fields.get('surname'))
+
+        return super()._create_user(username, email, password, **extra_fields)
 
 
 class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
@@ -228,6 +201,11 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
         unique=True,
         blank=True,
         null=True
+    )
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_('Designates whether the user can log into this admin site.'),
     )
     is_active = models.BooleanField(
         _('active'),
@@ -329,11 +307,6 @@ class User(RevMixin, FieldPermissionModelMixin, AbstractBaseUser,
             self.state = self.STATE_ACTIVE
             self.unarchive()
             self.save()
-
-    @property
-    def is_staff(self):
-        """ Fonction de base django, renvoie si l'user est admin"""
-        return self.is_admin
 
     @property
     def is_admin(self):

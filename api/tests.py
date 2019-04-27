@@ -218,16 +218,16 @@ class APIEndpointsTestCase(APITestCase):
         # A user with no rights
         cls.stduser = users.User.objects.create_user(
             "apistduser",
-            "apistduser",
             "apistduser@example.net",
-            "apistduser"
+            "apistduser",
+            surname="apistduser",
         )
         # A user with all the rights
         cls.superuser = users.User.objects.create_superuser(
             "apisuperuser",
-            "apisuperuser",
             "apisuperuser@example.net",
-            "apisuperuser"
+            "apisuperuser",
+            surname="apistduser",
         )
 
         # Creates 1 instance for each object so the "details" endpoints
@@ -735,9 +735,9 @@ class APIPaginationTestCase(APITestCase):
         # the old users.
         cls.superuser = users.User.objects.create_superuser(
             "apisuperuser2",
-            "apisuperuser2",
             "apisuperuser2@example.net",
-            "apisuperuser2"
+            "apisuperuser2",
+            surname = "apisuperuser2",
         )
 
     @classmethod
